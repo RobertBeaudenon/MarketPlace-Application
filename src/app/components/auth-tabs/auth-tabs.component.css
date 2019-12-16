@@ -5,3 +5,7 @@
 div.bodyContainer {
   margin-top: 50px !important;
 }
+
+.auth-content {
+  height: 505px;
+}

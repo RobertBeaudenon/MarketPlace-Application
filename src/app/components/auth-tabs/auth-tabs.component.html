@@ -6,16 +6,24 @@
         <div class="card">
           <div class="card-tabs">
             <ul class="tabs tabs-fixed-width">
-              <li class="tab col"><a href="#login">Login</a></li>
-              <li class="tab col"><a class="active" href="#signup">Sign Up</a></li>
+              <!-- The active class specify which tab is the default one -->
+              <li class="tab col"><a class="active" href="#login">Login</a></li>
+              <li class="tab col"><a href="#signup">Sign Up</a></li>
             </ul>
           </div>
           <div class="card-content">
-            <p>Welcome</p>
+            <p style="text-align: center; font-size: 20px;">Welcome to HLPR</p>
           </div>
-          <div class="card-content">
-            <div id="login" class="col s12">Login</div>
-            <div id="signup" class="col s12">Sign up</div>
+          <div class="card-content auth-content">
+            <div id="login">
+              <!-- app-login is a tag or 'selector' created because we exported and declared the login component in our auth-module.ts arrays-->
+              <!-- The 'selector' name can be changed in the component.ts -->
+              <app-login></app-login>
+            </div>
+            <div id="signup">
+              <!-- app-signup works exactly the same way as app-login we use the selector to introduce this component -->
+              <app-signup></app-signup>
+            </div>
           </div>
         </div>
       </div>
