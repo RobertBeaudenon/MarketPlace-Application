@@ -2,6 +2,7 @@ const Joi = require('@hapi/joi'); //Will help us validate the data that we are g
 const HttpStatus = require('http-status-codes'); //instead of writing 200 we wirte H ttpStatus.GOOD_REQUEST
 const User = require('../models/userModels');
 const Helpers = require('../helpers/helper');
+const bcrypt = require('bcryptjs'); //to encrypt passwords
 
 module.exports = {
   //the call to the methods comes from Routes/authRoutes.js
@@ -41,5 +42,28 @@ module.exports = {
     if (username) {
       return res.status(HttpStatus.CONFLICT).json({ meassage: 'Username already exist' });
     }
+
+    //Encrypting the password and returns it into 'hash'
+    return bcrypt.hash(value.password, 10, (err, hash) => {
+      if (err) {
+        return res.status(HttpStatus.BAD_REQUEST).json({ meassage: 'Error hashing password' });
+      }
+
+      //creating formated structure object to insert into database
+      const newBody = {
+        username: Helpers.firstUpper(value.username),
+        email: Helpers.lowerCase(value.email),
+        password: hash
+      };
+
+      //We use the mongoose build in method to insert the object in the DB
+      User.create(newBody)
+        .then(user => {
+          res.status(HttpStatus.CREATED).json({ message: 'User created successfully', user });
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured' });
+        });
+    });
   }
 };
