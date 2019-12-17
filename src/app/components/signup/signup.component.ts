@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
   //defining type of our form
   signupForm: FormGroup;
+  errorMessage: string;
 
   //injecting the authService to be able to send data to the backend through it
   constructor(private authService: AuthService, private fb: FormBuilder) {}
@@ -33,8 +34,20 @@ export class SignupComponent implements OnInit {
     this.authService.registerUser(this.signupForm.value).subscribe(
       data => {
         console.log(data);
+        this.signupForm.reset(); //Reset form once signup
       },
-      err => console.log(err)
+      err => {
+        //2 different types of error messages
+        //if doesn't match predefined schema
+        if (err.error.msg) {
+          this.errorMessage = err.error.msg[0].message;
+        }
+
+        //if username/email already exist
+        if (err.error.message) {
+          this.errorMessage = err.error.message;
+        }
+      }
     );
   }
 }

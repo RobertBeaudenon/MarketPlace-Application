@@ -28,7 +28,7 @@ module.exports = {
     //testing body against predefined schema and logging the error
     const { error, value } = schema.validate(req.body);
     if (error && error.details) {
-      return res.status(HttpStatus.BAD_REQUEST).json({ message: error.details });
+      return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details });
     }
     // console.log('after schema validation');
     //verifies if the email already exist
@@ -40,7 +40,7 @@ module.exports = {
     //verifies if username already exist
     const username = await User.findOne({ username: Helpers.firstUpper(req.body.username) });
     if (username) {
-      return res.status(HttpStatus.CONFLICT).json({ meassage: 'Username already exist' });
+      return res.status(HttpStatus.CONFLICT).json({ message: 'Username already exist' });
     }
 
     //Encrypting the password and returns it into 'hash' var with a length of 10
