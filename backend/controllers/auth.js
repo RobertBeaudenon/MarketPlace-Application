@@ -64,6 +64,7 @@ module.exports = {
             expiresIn: 120
           });
 
+          res.cookie('auth', token);
           res.status(HttpStatus.CREATED).json({ message: 'User created successfully', user, token });
         })
         .catch(err => {
