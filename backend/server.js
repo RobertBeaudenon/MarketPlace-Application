@@ -1,18 +1,25 @@
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require('express'); //express framework 'middleware'
+const mongoose = require('mongoose'); //Will allow to handle connection to MongoDB
 const cookieParser = require('cookie-parser'); //to save our token in the cookie
-const logger = require('morgan');
+//const logger = require('morgan'); //will allow us to log REST operation with status
 
 //instance of express
 const app = express();
 
 const dbConfig = require('./config/secret');
 
+app.use(express.json({ limit: '50mb' })); //we specify that we are returning or sending our data in the JSON format with a limit size of data
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
-app.use(logger('dev'));
+//app.use(logger('dev'));
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.url, { useUnifiedTopology: true }, { useNewUrlParser: true });
+mongoose.connect(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true });
+
+const auth = require('./routes/authRoutes');
+
+//default path /api/chatapp
+app.use('/api/chatapp', auth);
 
 //Server running on port 3000
 app.listen(3000, () => {
