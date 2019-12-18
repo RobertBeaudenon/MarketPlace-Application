@@ -15,4 +15,8 @@ export class AuthService {
     //body consist of the complete object(username,email,password) because we use the reactive form module
     return this.http.post(`${BASEURL}/register`, body); //post method takes the route of the backend and the body
   }
+
+  loginUser(body): Observable<any> {
+    return this.http.post(`${BASEURL}/login`, body);
+  }
 }
