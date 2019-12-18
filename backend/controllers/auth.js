@@ -8,6 +8,9 @@ const dbConfig = require('../config/secret');
 
 module.exports = {
   //the call to the methods comes from Routes/authRoutes.js
+
+  /****  REGISTER A USER  ****/
+
   async CreateUser(req, res) {
     //console.log(req.body);
 
@@ -71,5 +74,35 @@ module.exports = {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured' });
         });
     });
+  },
+
+  /****  LOGIN A USER  ****/
+  async LoginUser(req, res) {
+    if (!req.body.username || !req.body.password) {
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'No empty field allowed' });
+    }
+
+    await User.findOne({ username: Helpers.firstUpper(req.body.username) })
+      .then(user => {
+        if (!user) {
+          return res.status(HttpStatus.NOT_FOUND).json({ message: 'Username not found' });
+        }
+
+        //check if password is valid
+        return bcrypt.compare(req.body.password, user.password).then(result => {
+          if (!result) {
+            return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Password is incorrect' });
+          }
+          //if password is valid create token
+          const token = jwt.sign({ data: user }, dbConfig.secret, {
+            expiresIn: 1000
+          });
+          res.cookie('auth', token); //setting the cookie
+          return res.status(HttpStatus.OK).json({ message: 'Login successful', user, token }); //we return message user obj and token
+        });
+      })
+      .catch(err => {
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured' });
+      });
   }
 };
