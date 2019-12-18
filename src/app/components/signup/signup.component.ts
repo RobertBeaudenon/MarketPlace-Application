@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -12,8 +13,8 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMessage: string;
 
-  //injecting the authService to be able to send data to the backend through it
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  //injecting the authService to be able to send data to the backend through it , fb for the formbuilder validations and ROuter to redirect to the desired component when registerd successfully
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.init();
@@ -35,6 +36,7 @@ export class SignupComponent implements OnInit {
       data => {
         console.log(data);
         this.signupForm.reset(); //Reset form once signup
+        this.router.navigate(['streams']); //If signup successfull redirect user to component in path:streams (defined in streams-routing.module.ts)
       },
       err => {
         //2 different types of error messages
