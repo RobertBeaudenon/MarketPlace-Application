@@ -64,7 +64,7 @@ module.exports = {
         .then(user => {
           //creating jwt token once the user is successfully created, (object, signature, options)
           const token = jwt.sign({ data: user }, dbConfig.secret, {
-            expiresIn: 120
+            expiresIn: '1h'
           });
 
           res.cookie('auth', token);
@@ -95,7 +95,7 @@ module.exports = {
           }
           //if password is valid create token
           const token = jwt.sign({ data: user }, dbConfig.secret, {
-            expiresIn: 1000
+            expiresIn: '1h'
           });
           res.cookie('auth', token); //setting the cookie
           return res.status(HttpStatus.OK).json({ message: 'Login successful', user, token }); //we return message user obj and token
