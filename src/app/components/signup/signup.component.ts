@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,12 @@ export class SignupComponent implements OnInit {
   showSpinner = false;
 
   //injecting the authService to be able to send data to the backend through it , fb for the formbuilder validations and ROuter to redirect to the desired component when registerd successfully
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router,
+    private tokenService: TokenService //we import the service to be able to use the methods here to manipulate our tokens
+  ) {}
 
   ngOnInit() {
     this.init();
@@ -36,7 +42,7 @@ export class SignupComponent implements OnInit {
     //registerUser is the method defined in authService
     this.authService.registerUser(this.signupForm.value).subscribe(
       data => {
-        console.log(data);
+        this.tokenService.SetToken(data.token); //if signup succesfull set the new token in the cookie
         this.signupForm.reset(); //Reset form once signup
         setTimeout(() => {
           this.router.navigate(['streams']); //If signup successfull redirect user to component in path:streams (defined in streams-routing.module.ts)
