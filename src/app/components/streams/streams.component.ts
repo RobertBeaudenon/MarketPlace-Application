@@ -15,7 +15,7 @@ export class StreamsComponent implements OnInit {
 
   ngOnInit() {
     //if sign up successfull or login we are going to retreive the token in the streams page
-    this.token = this.tokenService.GetToken();
-    //console.log(this.token);
+    this.token = this.tokenService.GetPayload();
+    console.log(this.token);
   }
 }

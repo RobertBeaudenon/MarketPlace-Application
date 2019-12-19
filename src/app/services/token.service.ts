@@ -22,4 +22,15 @@ export class TokenService {
   DeleteToken() {
     this.cookieService.delete('chat_token');
   }
+
+  GetPayload() {
+    const token = this.GetToken(); //(header.payload.signature)
+    let payload;
+    if (token) {
+      payload = token.split('.')[1];
+      payload = JSON.parse(window.atob(payload)); //atob: decrypt the encoded string in base 64
+    }
+
+    return payload.data;
+  }
 }
