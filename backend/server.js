@@ -29,9 +29,11 @@ mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const auth = require('./routes/authRoutes');
+const posts = require('./routes/postRoutes');
 
 //default path /api/chatapp
 app.use('/api/chatapp', auth);
+app.use('/api/chatapp', posts);
 
 //Server running on port 3000
 app.listen(3000, () => {
