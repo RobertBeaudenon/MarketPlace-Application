@@ -97,7 +97,7 @@ module.exports = {
           const token = jwt.sign({ data: user }, dbConfig.secret, {
             expiresIn: '120'
           });
-          res.cookie('auth', token); //setting the cookie
+          res.cookie('auth', token); //setting the cookie with key auth
           return res.status(HttpStatus.OK).json({ message: 'Login successful', user, token }); //we return message user obj and token
         });
       })
