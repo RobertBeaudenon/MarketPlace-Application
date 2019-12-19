@@ -8,12 +8,21 @@ import { AuthRoutingModule } from './modules/auth-routing.module';
 import { StreamsComponent } from './components/streams/streams.component';
 import { StreamsModule } from './modules/streams.module';
 import { StreamsRoutingModule } from './modules/streams-routing.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './services/token-interceptor';
 
 //This file contains all the modules and components that is contained in the application
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AuthModule, AuthRoutingModule, StreamsModule, StreamsRoutingModule],
-  providers: [CookieService], //to manage cookie in frontend
+  providers: [
+    CookieService, //to manage cookie in frontend
+    {
+      provide: HTTP_INTERCEPTORS, //To be able to use the http interceptor in app
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

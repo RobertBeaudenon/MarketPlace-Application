@@ -6,7 +6,15 @@ const dbConfig = require('../config/secret');
 
 module.exports = {
   VerifyToken: (req, res, next) => {
-    const token = req.cookies.auth; //we verify if token is present in cookie, 'auth' is the name of the cookie containing the token
+    //if headers of request does not contain authorization token then throw an error
+    if (!req.headers.authorization) {
+      return res.status(HttpStatus.UNAUTHORIZED).json({ message: 'No Authorization' });
+    }
+
+    //we verify if token is present in cookie, 'auth' is the key of the cookie containing the token or
+    // if it's not in cookie we search for it in the request header and we split because we add the tag 'beader' before the token
+    const token = req.cookies.auth || req.headers.authorization.split(' ')[1];
+    //console.log(req.headers.authorization.split(' ')[1]);
 
     if (!token) {
       return res.status(HttpStatus.FORBIDDEN).json({ message: 'No token provided' });
