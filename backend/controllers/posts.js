@@ -2,6 +2,7 @@ const Joi = require('@hapi/joi'); //Will help us validate the data that we are g
 const HttpStatus = require('http-status-codes'); //instead of writing 200 we wirte HttpStatus.GOOD_REQUEST
 
 const Post = require('../models/postModels');
+const User = require('../models/userModels');
 module.exports = {
   /****  Add a POST  ****/
   AddPost(req, res) {
@@ -25,11 +26,27 @@ module.exports = {
 
     //We use the mongoose build in method to insert the post in the DB
     Post.create(newBody)
-      .then(post => {
+      .then(async post => {
+        //When we create a new post we get the user related to that post and add that post to the array of posts related to that user, (update is form mongoose)
+
+        await User.update(
+          {
+            _id: req.user._id
+          },
+          {
+            $push: {
+              posts: {
+                postId: post._id,
+                post: req.body.post,
+                created: new Date()
+              }
+            }
+          }
+        );
         res.status(HttpStatus.OK).json({ message: 'Post created', post });
       })
       .catch(err => {
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured' });
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured fromhere' });
       });
   }
 };
