@@ -1,10 +1,9 @@
-<!-- looping on posts array created -->
-<ul class="collection" *ngFor="let post of posts">
+<ul class="collection">
   <li class="collection-item avatar">
     <img src="http://placehold.it/50x50" alt="" class="circle" />
-    <span class="title">{{ post.username }}</span>
+    <span class="title">Username</span>
     <p class="time">
-      {{ post.createdAt }}<br />
+      Date <br />
       Country
     </p>
   </li>
@@ -18,17 +17,17 @@
           />
         </div>
         <div class="card-content">
-          <p>{{ post.post }}</p>
+          <p>This is a post</p>
         </div>
         <div class="card-action">
           <i class="material-icons">thumb_up</i>
           <span class="iconSpan">
-            {{ post.totalLikes }}
+            10
           </span>
 
           <i class="material-icons">chat</i>
           <span class="iconSpan">
-            {{ post.comments.length }}
+            10
           </span>
         </div>
       </div>
