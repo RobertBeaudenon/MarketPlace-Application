@@ -64,5 +64,30 @@ module.exports = {
         .status(HttpStatus.INTERNAL_SERVER_ERROR)
         .json({ message: 'Error occured while populating posts', posts });
     }
+  },
+
+  /**** Like a Post *******/
+  async AddLike(req, res) {
+    const postId = req.body._id;
+    await Post.update(
+      {
+        _id: postId, //we find the post by the id
+        'likes.username': { $ne: req.user.username } //verify that the user didn't already like the post, $ne stand for not equal, so we are searching in array of likes if username is not eqaul to the username of the user that is requesting to add a like
+      },
+      {
+        $push: {
+          likes: {
+            username: req.user.username
+          }
+        },
+        $inc: { totalLikes: 1 }
+      }
+    )
+      .then(() => {
+        res.status(HttpStatus.Ok).json({ message: 'You liked a post' });
+      })
+      .catch(err =>
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when liking the post' })
+      );
   }
 };

@@ -6,5 +6,6 @@ const AuthHelper = require('../Helpers/authHelper');
 
 router.get('/posts', AuthHelper.VerifyToken, PostCtrl.GetAllPosts);
 router.post('/post/add-post', AuthHelper.VerifyToken, PostCtrl.AddPost); //User will only be allowed to post if token is still valid
+router.post('/post/add-like', AuthHelper.VerifyToken, PostCtrl.AddLike);
 
 module.exports = router;
