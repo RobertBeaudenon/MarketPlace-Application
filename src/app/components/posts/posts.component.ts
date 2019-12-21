@@ -1,6 +1,7 @@
 import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import io from 'socket.io-client';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -10,7 +11,7 @@ import io from 'socket.io-client';
 export class PostsComponent implements OnInit {
   socket: any;
   posts = []; //initializing empty array
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private router: Router) {
     this.socket = io('http://localhost:3000');
   }
 
@@ -42,7 +43,15 @@ export class PostsComponent implements OnInit {
     );
   }
 
+  // CheclInLikesArray(arr, username) {
+  //   return _.some(arr, { username: username });
+  // }
+
   // TimeFromNow(time) {
   //   return moment(time).fromNow();
   // }
+
+  OpenCommentBox(post) {
+    this.router.navigate(['post', post._id]);
+  }
 }
