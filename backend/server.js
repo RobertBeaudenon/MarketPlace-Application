@@ -11,6 +11,10 @@ app.use(cors());
 
 const dbConfig = require('./config/secret');
 
+//Creating real time update on website without refreshing the page using socket.io
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
+
 //setting headers for application with allowed operations
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -28,6 +32,8 @@ app.use(cookieParser());
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true });
 
+require('./socket/streams')(io);
+
 const auth = require('./routes/authRoutes');
 const posts = require('./routes/postRoutes');
 
@@ -35,7 +41,7 @@ const posts = require('./routes/postRoutes');
 app.use('/api/chatapp', auth);
 app.use('/api/chatapp', posts);
 
-//Server running on port 3000
-app.listen(3000, () => {
+//Server running on port 3000 , we pass instead of app server to use socket.io
+server.listen(3000, () => {
   console.log('Running on port 3000');
 });
