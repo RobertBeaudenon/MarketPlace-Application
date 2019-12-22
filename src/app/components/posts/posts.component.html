@@ -4,7 +4,7 @@
     <img src="http://placehold.it/50x50" alt="" class="circle" />
     <span class="title">{{ post.username }}</span>
     <p class="time">
-      {{ post.createdAt }}<br />
+      {{ TimeFromNow(post.created) }}<br />
       <!-- Country -->
     </p>
   </li>
@@ -21,7 +21,11 @@
           <p>{{ post.post }}</p>
         </div>
         <div class="card-action">
-          <i (click)="LikePost(post)" class="material-icons">thumb_up</i>
+          <!-- if user exist in array of likes than we add the css class notLiked else we add the class liked -->
+          <!-- (click)="LikePost(post)"
+            [ngClass]="!CheclInLikesArray(post.likes, user.username) ? 'notLiked' : 'liked'"
+            class="material-icons" -->
+          <i class="material-icons">thumb_up</i>
           <span class="iconSpan">
             {{ post.totalLikes }}
           </span>
