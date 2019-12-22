@@ -2,6 +2,8 @@ import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import io from 'socket.io-client';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/services/token.service';
+import * as moment from 'moment'; //For the format of the date on posts , moment is the variable that we can directly use
 
 @Component({
   selector: 'app-posts',
@@ -10,12 +12,15 @@ import { Router } from '@angular/router';
 })
 export class PostsComponent implements OnInit {
   socket: any;
+  user: any;
   posts = []; //initializing empty array
-  constructor(private postService: PostService, private router: Router) {
+  constructor(private postService: PostService, private tokenService: TokenService, private router: Router) {
     this.socket = io('http://localhost:3000');
   }
 
   ngOnInit() {
+    this.user = this.tokenService.GetPayload(); //retreiving the user object
+
     //will be called once
     this.AllPosts();
 
@@ -44,12 +49,12 @@ export class PostsComponent implements OnInit {
   }
 
   // CheclInLikesArray(arr, username) {
-  //   return _.some(arr, { username: username });
+  //   return _.some(arr, { username: username });  //verify that username exist
   // }
 
-  // TimeFromNow(time) {
-  //   return moment(time).fromNow();
-  // }
+  TimeFromNow(time) {
+    return moment(time).fromNow();
+  }
 
   OpenCommentBox(post) {
     this.router.navigate(['post', post._id]);
