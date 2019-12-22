@@ -84,7 +84,7 @@ module.exports = {
       }
     )
       .then(() => {
-        res.status(HttpStatus.Ok).json({ message: 'You liked a post' });
+        res.status(HttpStatus.OK).json({ message: 'You liked a post' });
       })
       .catch(err =>
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when liking the post' })
