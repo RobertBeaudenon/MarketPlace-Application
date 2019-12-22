@@ -9,7 +9,7 @@ import io from 'socket.io-client';
   styleUrls: ['./post-form.component.css']
 })
 export class PostFormComponent implements OnInit {
-  socket: any;
+  socket: any; //we emit the events through socket
   postForm: FormGroup;
 
   constructor(private fb: FormBuilder, private postService: PostService) {
@@ -28,8 +28,8 @@ export class PostFormComponent implements OnInit {
 
   submitPost() {
     this.postService.addPost(this.postForm.value).subscribe(data => {
-      console.log(data);
-      this.socket.emit('refresh', {});
+      //console.log(data);
+      this.socket.emit('refresh', {}); //creating the event for the server , event name : refresh, it will listen in streams.js
       this.postForm.reset();
     });
   }

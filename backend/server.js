@@ -32,6 +32,7 @@ app.use(cookieParser());
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true });
 
+//we pass io to streams
 require('./socket/streams')(io);
 
 const auth = require('./routes/authRoutes');
