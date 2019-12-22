@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import * as moment from 'moment'; //For the format of the date on posts , moment is the variable that we can directly use
+import _ from 'lodash';
 
 @Component({
   selector: 'app-posts',
@@ -48,9 +49,9 @@ export class PostsComponent implements OnInit {
     );
   }
 
-  // CheclInLikesArray(arr, username) {
-  //   return _.some(arr, { username: username });  //verify that username exist
-  // }
+  CheckInLikesArray(arr, username) {
+    return _.some(arr, { username: username }); //verify that username exist
+  }
 
   TimeFromNow(time) {
     return moment(time).fromNow();
