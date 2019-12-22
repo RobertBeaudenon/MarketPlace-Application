@@ -56,7 +56,7 @@ module.exports = {
     try {
       const posts = await Post.find({}) //get all posts by passing an empty object //i think 'user' in populate is the user object passed in requests
         .populate('user') //If you go to the post model file in your project, you'll see that we added a property with name user and its type is mongoose schema ObjectId and a reference is set to 'User'.  The populate method is coming from mongoose and it lets you make reference to documents in other collections. So when we call the populate method and then pass in the user whose type is an ObjectId and ref is 'User" collection, the method will go to the User collection and then look for the document whose id matches the ObjectId. If it finds it, the document properties will be returned. 9http://mongoosejs.com/docs/populate.html
-        .sort({ createdAt: -1 }); //in decending order from latest to oldest
+        .sort({ created: -1 }); //in decending order from latest to oldest
 
       return res.status(HttpStatus.OK).json({ message: 'All posts', posts });
     } catch (err) {
