@@ -22,10 +22,13 @@
         </div>
         <div class="card-action">
           <!-- if user exist in array of likes than we add the css class notLiked else we add the class liked -->
-          <!-- (click)="LikePost(post)"
-            [ngClass]="!CheclInLikesArray(post.likes, user.username) ? 'notLiked' : 'liked'"
-            class="material-icons" -->
-          <i class="material-icons">thumb_up</i>
+
+          <i
+            (click)="LikePost(post)"
+            [ngClass]="!CheckInLikesArray(post.likes, user.username) ? 'notLiked' : 'liked'"
+            class="material-icons"
+            >thumb_up</i
+          >
           <span class="iconSpan">
             {{ post.totalLikes }}
           </span>
