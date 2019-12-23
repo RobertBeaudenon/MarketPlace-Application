@@ -2,16 +2,20 @@
   <div class="col s12 m4">
     <a>
       <span>MyPosts</span>
-      <p>10</p>
+      <p class="num">0</p>
     </a>
   </div>
 </div>
 
 <ul class="collection with-header">
-  <li class="collection-item">
-    <div>
-      Posts<a href="#!" class="secondary-content"><i class="material-icons">announcement</i></a>
-    </div>
+  <!-- if link active set the active class -->
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+    <!-- if it matches the URL -->
+    <a [routerLink]="['/streams']">
+      <div>
+        Posts<a href="#!" class="secondary-content"><i class="material-icons">announcement</i></a>
+      </div>
+    </a>
   </li>
   <li class="collection-item">
     <div>

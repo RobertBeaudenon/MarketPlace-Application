@@ -5,12 +5,12 @@
 }
 
 .liked {
-  color: #64b5f6 !important;
+  color: brown !important;
 }
 
 .title {
   font-weight: bold;
-  color: #64b5f6;
+  color: rgb(5, 1, 1);
 }
 
 .time {
