@@ -92,28 +92,28 @@ module.exports = {
   },
 
   /**** Comment a Post *******/
-  AddComment(req, res) {
-    // console.log(req.body);
-    // const postId = req.body._id;
-    // await Post.update(
-    //   {
-    //     _id: postId, //we find the post by the id
-    //     'likes.username': { $ne: req.user.username } //verify that the user didn't already like the post, $ne stand for not equal, so we are searching in array of likes if username is not eqaul to the username of the user that is requesting to add a like
-    //   },
-    //   {
-    //     $push: {
-    //       likes: {
-    //         username: req.user.username
-    //       }
-    //     },
-    //     $inc: { totalLikes: 1 }
-    //   }
-    // )
-    //   .then(() => {
-    //     res.status(HttpStatus.Ok).json({ message: 'You liked a post' });
-    //   })
-    //   .catch(err =>
-    //     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when liking the post' })
-    //   );
+  async AddComment(req, res) {
+    const postId = req.body.postId;
+    await Post.update(
+      {
+        _id: postId //we find the post by the id
+      },
+      {
+        $push: {
+          comments: {
+            userId: req.user._id,
+            username: req.user.username,
+            comment: req.body.comment,
+            createdAt: new Date()
+          }
+        }
+      }
+    )
+      .then(() => {
+        res.status(HttpStatus.Ok).json({ message: 'Comment added to post' });
+      })
+      .catch(err =>
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when commenting the post' })
+      );
   }
 };

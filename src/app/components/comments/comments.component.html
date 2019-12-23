@@ -14,7 +14,7 @@
               <form [formGroup]="commentForm" (ngSubmit)="AddComment()">
                 <div class="formDiv">
                   <textarea formControlName="comment" class="materialize-textarea"></textarea>
-                  <button class="btn postBtn">
+                  <button class="btn postBtn" [disabled]="!commentForm.valid">
                     Add Comment
                   </button>
                 </div>
