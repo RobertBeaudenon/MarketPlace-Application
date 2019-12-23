@@ -8,7 +8,7 @@ import { CommentsComponent } from '../components/comments/comments.component';
 
 //obj of routes
 const routes: Routes = [
-  //default route
+  //routes
   {
     path: 'streams',
     component: StreamsComponent,
@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'post/:id',
     component: CommentsComponent,
-    canActivate: [AuthGuard] //if user has a valid token he will be able to access streams page otherwise he will be redirected to login/register page
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];
 

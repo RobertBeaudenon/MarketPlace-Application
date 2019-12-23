@@ -58,6 +58,6 @@ export class PostsComponent implements OnInit {
   }
 
   OpenCommentBox(post) {
-    this.router.navigate(['post', post._id]);
+    this.router.navigate(['post', post._id]); //our new route will be 'post/id'
   }
 }
