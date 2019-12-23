@@ -21,4 +21,8 @@ export class ToolbarComponent implements OnInit {
     this.tokenService.DeleteToken(); //Delete token when user logout
     this.router.navigate(['']); //redirect user to login/register pager
   }
+
+  GoToHome() {
+    this.router.navigate(['streams']);
+  }
 }
