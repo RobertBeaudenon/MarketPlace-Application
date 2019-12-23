@@ -4,3 +4,7 @@
 body {
   background-color: #f1f1f1 !important;
 }
+
+.btn {
+  background-color: orange !important;
+}
