@@ -27,4 +27,8 @@ export class PostService {
   addComment(postId, comment): Observable<any> {
     return this.http.post(`${BASEURL}/post/add-comment`, { postId, comment });
   }
+
+  getPost(id): Observable<any> {
+    return this.http.get(`${BASEURL}/post/${id}`);
+  }
 }
