@@ -96,7 +96,7 @@ module.exports = {
     const postId = req.body.postId;
     await Post.update(
       {
-        _id: postId //we find the post by the id
+        _id: postId //we find the post by id
       },
       {
         $push: {
@@ -110,10 +110,20 @@ module.exports = {
       }
     )
       .then(() => {
-        res.status(HttpStatus.Ok).json({ message: 'Comment added to post' });
+        res.status(HttpStatus.OK).json({ message: 'Comment added to post' });
       })
-      .catch(err =>
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when commenting the post' })
-      );
+      .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured' }));
+  },
+
+  /**** Get a particular post *******/
+  async GetPost(req, res) {
+    //getting the post by id
+    await Post.findOne({ _id: req.params.id })
+      .populate('user')
+      .populate('comment.userId')
+      .then(post => {
+        res.status(HttpStatus.OK).json({ message: 'Post Found', post });
+      })
+      .catch(err => res.status(HttpStatus.NOT_FOUND).json({ message: 'Post not Found', post }));
   }
 };
