@@ -5,6 +5,7 @@ import { AuthTabsComponent } from '../components/auth-tabs/auth-tabs.component';
 import { StreamsComponent } from '../components/streams/streams.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { CommentsComponent } from '../components/comments/comments.component';
+import { PeopleComponent } from '../components/people/people.component';
 
 //obj of routes
 const routes: Routes = [
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'post/:id',
     component: CommentsComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'people',
+    component: PeopleComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];

@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommentsComponent } from '../components/comments/comments.component';
 import { RouterModule } from '@angular/router';
+import { PeopleComponent } from '../components/people/people.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
     SideComponent,
     PostFormComponent,
     PostsComponent,
-    CommentsComponent
+    CommentsComponent,
+    PeopleComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],
