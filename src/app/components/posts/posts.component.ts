@@ -33,10 +33,19 @@ export class PostsComponent implements OnInit {
 
   AllPosts() {
     //we subscribe because it resturns an observable
-    this.postService.getAllPosts().subscribe(data => {
-      console.log(data);
-      this.posts = data.posts;
-    });
+    this.postService.getAllPosts().subscribe(
+      data => {
+        console.log(data);
+        this.posts = data.posts;
+      },
+      err => {
+        if (err.error.token === null) {
+          //When token is expired we set the token to null in the backend(helpers/authHelper)
+          this.tokenService.DeleteToken();
+          this.router.navigate(['']); //redirect us to login page
+        }
+      }
+    );
   }
 
   LikePost(post) {
