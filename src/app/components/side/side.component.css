@@ -9,3 +9,23 @@ a {
 .active {
   background-color: brown !important;
 }
+
+.material-icons {
+  color: brown;
+}
+
+.active .material-icons {
+  color: #ffffff;
+}
+
+.row span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.num {
+  margin: 0 !important;
+  color: brown;
+  font-weight: bold;
+  font-size: 16px;
+}
