@@ -31,4 +31,8 @@ export class PostService {
   getPost(id): Observable<any> {
     return this.http.get(`${BASEURL}/post/${id}`);
   }
+
+  addRequest(userRequested, postId): Observable<any> {
+    return this.http.post(`${BASEURL}/add-request`, { userRequested, postId });
+  }
 }

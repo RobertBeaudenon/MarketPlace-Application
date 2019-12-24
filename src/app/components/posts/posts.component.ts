@@ -69,4 +69,10 @@ export class PostsComponent implements OnInit {
   OpenCommentBox(post) {
     this.router.navigate(['post', post._id]); //our new route will be 'post/id'
   }
+
+  AddRequest(post) {
+    this.postService.addRequest(post.user, post._id).subscribe(data => {
+      console.log(data);
+    });
+  }
 }
