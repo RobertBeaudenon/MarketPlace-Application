@@ -11,11 +11,13 @@ import { TokenService } from 'src/app/services/token.service';
 export class PeopleComponent implements OnInit {
   users = [];
   loggedInUser: any;
+  userArr = [];
 
   constructor(private usersService: UsersService, private tokenService: TokenService) {}
 
   ngOnInit() {
     this.loggedInUser = this.tokenService.GetPayload(); //get user info from payload
+    this.GetUsers();
     this.GetUsers();
   }
 
@@ -23,6 +25,12 @@ export class PeopleComponent implements OnInit {
     this.usersService.GetAllUsers().subscribe(data => {
       _.remove(data.result, { username: this.loggedInUser.username }); //go into the array of object and remove the username that is loggedin
       this.users = data.result;
+    });
+  }
+
+  GetUser() {
+    this.usersService.GetUserByID(this.loggedInUser._id).subscribe(data => {
+      console.log(data);
     });
   }
 }
