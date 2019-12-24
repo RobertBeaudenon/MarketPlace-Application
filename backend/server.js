@@ -37,10 +37,12 @@ require('./socket/streams')(io);
 
 const auth = require('./routes/authRoutes');
 const posts = require('./routes/postRoutes');
+const users = require('./routes/userRoutes');
 
 //default path /api/chatapp
 app.use('/api/chatapp', auth);
 app.use('/api/chatapp', posts);
+app.use('/api/chatapp', users);
 
 //Server running on port 3000 , we pass instead of app server to use socket.io
 server.listen(3000, () => {
