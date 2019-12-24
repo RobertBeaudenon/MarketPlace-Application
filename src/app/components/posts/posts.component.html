@@ -42,7 +42,12 @@
           <span class="iconSpan">
             {{ post.comments.length }}
           </span>
-          <button class="btn requestBtn" (click)="AddRequest(post)">
+
+          <button
+            [ngClass]="!CheckInRequestsArray(post.requests, user.username) ? 'notLiked' : 'liked'"
+            class="btn requestBtn"
+            (click)="AddRequest(post)"
+          >
             Request
           </button>
         </div>

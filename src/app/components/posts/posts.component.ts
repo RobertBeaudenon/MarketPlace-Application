@@ -1,4 +1,4 @@
-import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
+import { Component, OnInit, ModuleWithComponentFactories, AfterViewInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import io from 'socket.io-client';
 import { Router } from '@angular/router';
@@ -11,7 +11,8 @@ import _ from 'lodash';
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, AfterViewInit {
+  btnElement: any;
   socket: any;
   user: any;
   posts = []; //initializing empty array
@@ -20,6 +21,7 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.btnElement = document.querySelector('.card-action'); //selecting block of html using class name
     this.user = this.tokenService.GetPayload(); //retreiving the user object
 
     //will be called once
@@ -75,4 +77,11 @@ export class PostsComponent implements OnInit {
       console.log(data);
     });
   }
+  //class implement AfterViewInit
+
+  ngAfterViewInit() {
+    this.btnElement.style.display = 'none'; //hiding
+  }
+
+  CheckInRequestsArray(post, username) {}
 }
