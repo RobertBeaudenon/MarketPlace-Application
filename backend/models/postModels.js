@@ -21,7 +21,12 @@ const postSchema = mongoose.Schema({
       username: { type: String, default: '' } //we save the username of the user that made the like
     }
   ],
-  created: { type: Date, default: Date.now() } //when was the post created
+  created: { type: Date, default: Date.now() }, //when was the post created
+  requests: [
+    {
+      username: { type: String, default: '' }
+    }
+  ]
 });
 
 module.exports = mongoose.model('Post', postSchema); //Post is the referance related to the collection related to the postSchema

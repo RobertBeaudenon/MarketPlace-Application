@@ -125,5 +125,28 @@ module.exports = {
         res.status(HttpStatus.OK).json({ message: 'Post Found', post });
       })
       .catch(err => res.status(HttpStatus.NOT_FOUND).json({ message: 'Post not Found', post }));
+  },
+
+  /**** Add a Request on post *******/
+  async AddRequest(req, res) {
+    const postId = req.body.postId;
+    await Post.update(
+      {
+        _id: postId //we find the post by id
+      },
+      {
+        $push: {
+          requests: {
+            userId: req.user._id,
+            username: req.user.username,
+            createdAt: new Date()
+          }
+        }
+      }
+    )
+      .then(() => {
+        res.status(HttpStatus.OK).json({ message: 'Request made on Post' });
+      })
+      .catch(err => res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured Requesting' }));
   }
 };
