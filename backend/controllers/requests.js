@@ -29,7 +29,7 @@ module.exports = {
       await User.update(
         {
           _id: req.body.userRequested, //we look for the user that we want to add a request
-          'requesters.requester': { $ne: req.body.user._id } //we verify that we can only Request a Service once
+          'requesters.requester': { $ne: req.user._id } //we verify that we can only Request a Service once
         },
         {
           $push: {

@@ -56,3 +56,8 @@
 .collection-item {
   border: none !important;
 }
+
+.requestBtn {
+  float: right;
+  margin-bottom: 10px;
+}
