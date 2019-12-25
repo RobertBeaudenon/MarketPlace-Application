@@ -16,6 +16,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
   socket: any;
   user: any;
   posts = []; //initializing empty array
+
   constructor(private postService: PostService, private tokenService: TokenService, private router: Router) {
     this.socket = io('http://localhost:3000');
   }
@@ -73,15 +74,19 @@ export class PostsComponent implements OnInit, AfterViewInit {
   }
 
   AddRequest(post) {
-    this.postService.addRequest(post.user, post._id).subscribe(data => {
+    // console.log(post);
+    this.postService.addRequest(post.user, post).subscribe(data => {
       console.log(data);
+      this.socket.emit('refresh', {});
     });
   }
-  //class implement AfterViewInit
 
+  //class implement AfterViewInit
   ngAfterViewInit() {
-    this.btnElement.style.display = 'none'; //hiding
+    //this.btnElement.style.display = 'none'; //hiding
   }
 
-  CheckInRequestsArray(post, username) {}
+  CheckInRequestsArray(arr, username) {
+    return _.some(arr, { username: username });
+  }
 }
