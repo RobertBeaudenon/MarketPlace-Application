@@ -6,6 +6,7 @@ import { StreamsComponent } from '../components/streams/streams.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { CommentsComponent } from '../components/comments/comments.component';
 import { PeopleComponent } from '../components/people/people.component';
+import { RequestingComponent } from '../components/requesting/requesting.component';
 
 //obj of routes
 const routes: Routes = [
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'people',
     component: PeopleComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'people/requesting',
+    component: RequestingComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];

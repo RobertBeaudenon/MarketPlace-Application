@@ -36,15 +36,19 @@
       </div>
     </a>
   </li>
-  <li class="collection-item">
-    <div>
-      Requesting<a href="#!" class="secondary-content"><i class="material-icons">reorder</i></a>
-    </div>
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['/people', 'requesting']">
+      <div>
+        Requesting<a href="#!" class="secondary-content"><i class="material-icons">reorder</i></a>
+      </div>
+    </a>
   </li>
   <li class="collection-item">
-    <div>
-      Requesters<a href="#!" class="secondary-content"><i class="material-icons">assignment_ind</i></a>
-    </div>
+    <a>
+      <div>
+        Requesters<a href="#!" class="secondary-content"><i class="material-icons">assignment_ind</i></a>
+      </div>
+    </a>
   </li>
   <li class="collection-item">
     <div>

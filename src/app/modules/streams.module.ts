@@ -13,6 +13,7 @@ import { CommentsComponent } from '../components/comments/comments.component';
 import { RouterModule } from '@angular/router';
 import { PeopleComponent } from '../components/people/people.component';
 import { UsersService } from '../services/users.service';
+import { RequestingComponent } from '../components/requesting/requesting.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsersService } from '../services/users.service';
     PostFormComponent,
     PostsComponent,
     CommentsComponent,
-    PeopleComponent
+    PeopleComponent,
+    RequestingComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],

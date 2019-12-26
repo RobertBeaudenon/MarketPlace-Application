@@ -15,10 +15,10 @@ export class UsersService {
   }
 
   GetUserByID(id): Observable<any> {
-    return this.http.get(`${BASEURL}/users/${id}`);
+    return this.http.get(`${BASEURL}/user/${id}`);
   }
 
   GetUserByName(username): Observable<any> {
-    return this.http.get(`${BASEURL}/users/${username}`);
+    return this.http.get(`${BASEURL}/user/${username}`);
   }
 }
