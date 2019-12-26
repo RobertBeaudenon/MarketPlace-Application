@@ -7,7 +7,6 @@ import { TokenService } from 'src/app/services/token.service';
 import * as moment from 'moment'; //For the format of the date on posts , moment is the variable that we can directly use
 import _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
-import { request } from 'http';
 
 @Component({
   selector: 'app-requesting',
@@ -41,13 +40,15 @@ export class RequestingComponent implements OnInit {
     this.GetUser();
 
     //will be called all the time
-    this.socket.on('refreshPage', data => {});
+    this.socket.on('refreshPage', data => {
+      this.GetUser();
+    });
   }
 
   GetUser() {
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
-        this.requestingIds = data.result.requesting;
+        this.requestingIds = data.result.requesting.reverse();
         console.log(data.result.requesting);
         this.GetPost();
       },
