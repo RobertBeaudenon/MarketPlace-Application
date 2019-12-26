@@ -10,8 +10,7 @@ module.exports = {
       /******* Update Requesting Array in User *******/
       await User.update(
         {
-          _id: req.user._id, //We look for the logged in user id to update his requesting array
-          'requesting.userRequested': { $ne: req.body.userRequested } //we verify that we can only Request a Service once
+          _id: req.user._id //We look for the logged in user id to update his requesting array
         },
         {
           $push: {
@@ -28,8 +27,7 @@ module.exports = {
       /******* Update Requesters Array in User *******/
       await User.update(
         {
-          _id: req.body.userRequested, //we look for the user that we want to add a request
-          'requesters.requester': { $ne: req.user._id } //we verify that we can only Request a Service once
+          _id: req.body.userRequested //we look for the user that we want to add a request
         },
         {
           $push: {
