@@ -1,0 +1,44 @@
+<!-- Selector for toolbar component -->
+<app-toolbar></app-toolbar>
+
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+    <!-- small medium large devices -->
+    <div class="col s12 m4 l3">
+      <app-side></app-side>
+    </div>
+    <div class="col s12 m8 l9">
+      <!-- looping on posts array created -->
+      <ul class="collection col s12 m12 l10" *ngFor="let post of requests">
+        <li class="collection-item avatar">
+          <img src="http://placehold.it/50x50" alt="" class="circle" />
+          <span class="title">{{ post.user.username }}</span>
+          <p class="time">
+            {{ TimeFromNow(post.created) }}<br />
+            <!-- Country -->
+          </p>
+        </li>
+        <div class="row">
+          <div class="col s12">
+            <div class="card">
+              <!-- <div class="card-image">
+            <img
+              class="postImage"
+              src="https://tce-live2.s3.amazonaws.com/media/media/2b7f1364-6c18-4b8d-a208-0aac26b4f5fe.jpg"
+            />
+          </div> -->
+              <div class="card-content">
+                <p>{{ post.post }}</p>
+              </div>
+              <div class="card-action">
+                <button class="btn  requestingBtn" (click)="CancelRequest(post.user._id, post._id)">
+                  Cancel Request
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>
