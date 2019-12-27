@@ -21,4 +21,12 @@ export class UsersService {
   GetUserByName(username): Observable<any> {
     return this.http.get(`${BASEURL}/username/${username}`);
   }
+
+  //deleteValue is an optional parameter defined with '?'
+  MarkNotification(id, deleteValue?): Observable<any> {
+    return this.http.post(`${BASEURL}/mark/${id}`, {
+      id,
+      deleteValue
+    });
+  }
 }
