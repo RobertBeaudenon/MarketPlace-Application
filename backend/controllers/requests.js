@@ -123,10 +123,71 @@ module.exports = {
     //whatever is done is the async on top will be captured by this method
     CancelRequest()
       .then(() => {
-        res.status(HttpStatus.OK).json({ message: 'You Canceled a Requested' });
+        res.status(HttpStatus.OK).json({ message: 'You Canceled a Request' });
       })
       .catch(err => {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when Canceling a Request' });
+      });
+  },
+
+  /*****Cancel an Application*** */
+
+  CancelApplication(req, res) {
+    //different way of using async await
+    const CancelApplication = async () => {
+      /******* Update Requesters Array in User Logged in  *******/
+      console.log('1');
+      await User.update(
+        {
+          _id: req.user._id //We look for the logged in user id to update his requesters array
+        },
+        {
+          $pull: {
+            requesters: {
+              postId: req.body.postId //remove from the array based on postId
+            }
+          }
+        }
+      );
+
+      /******* Update Requesting Array in user that made the application *******/
+      console.log('2');
+      await User.update(
+        {
+          _id: req.body.userRequested //we look for the user that we want to add a request
+        },
+        {
+          $pull: {
+            requesting: {
+              postId: req.body.postId
+            }
+          }
+        }
+      );
+
+      /******* Update Requests Array in Post *******/
+      console.log('3');
+      await Post.update(
+        {
+          _id: req.body.postId //we find the post by id
+        },
+        {
+          $pull: {
+            requests: {
+              username: req.body.username
+            }
+          }
+        }
+      );
+    };
+    console.log('4');
+    //whatever is done is the async on top will be captured by this method
+    CancelApplication()
+      .then(() => {
+        res.status(HttpStatus.OK).json({ message: 'You Canceled an Application' });
+      })
+      .catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when Canceling an Application' });
       });
   }
 };
