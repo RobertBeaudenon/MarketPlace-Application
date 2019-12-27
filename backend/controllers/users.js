@@ -37,7 +37,7 @@ module.exports = {
         res.status(httpStatus.OK).json({ message: 'User By username', result });
       })
       .catch(err => {
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when getting a user by ID' });
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when getting a user by username' });
       });
   }
 };

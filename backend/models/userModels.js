@@ -38,8 +38,8 @@ const userSchema = mongoose.Schema({
       message: { type: String },
       viewProfile: { type: Boolean, default: false },
       created: { type: Date, default: Date.now() },
-      read: { type: Date, default: false },
-      date: { type: String, default: '' } //to add a notification once, if the user visit another user profile in one day it will show a notification once
+      read: { type: Boolean, default: false },
+      date: { type: String, default: '' } //we add it to receive a notification once, instead of 5 times if we visit a profile 5 times
     }
   ]
 });

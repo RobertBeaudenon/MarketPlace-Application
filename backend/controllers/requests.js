@@ -37,6 +37,12 @@ module.exports = {
               postId: req.body.postId,
               username: req.user.username,
               createdAt: new Date()
+            },
+            notifications: {
+              senderId: req.user._id,
+              message: `${req.user.username} is now requesting to help you.`,
+              created: new Date(),
+              viewProfile: false
             }
           }
         }

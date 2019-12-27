@@ -8,6 +8,7 @@ import { CommentsComponent } from '../components/comments/comments.component';
 import { PeopleComponent } from '../components/people/people.component';
 import { RequestingComponent } from '../components/requesting/requesting.component';
 import { RequestersComponent } from '../components/requesters/requesters.component';
+import { NotificationsComponent } from '../components/notifications/notifications.component';
 
 //obj of routes
 const routes: Routes = [
@@ -35,6 +36,11 @@ const routes: Routes = [
   {
     path: 'people/requesters',
     component: RequestersComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];
