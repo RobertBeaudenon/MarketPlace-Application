@@ -195,5 +195,29 @@ module.exports = {
       .catch(err => {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when Canceling an Application' });
       });
+  },
+
+  /***** Mark a Notification as Read ****/
+  async MarkNotification(req, res) {
+    //if the optional parameter is not present in body
+    if (!req.body.deleteValue) {
+      await User.updateOne(
+        {
+          _id: req.user._id, //first we get the concerned user
+          'notifications._id': req.params.id //then we get notification array an look to specific notification using id that is present in URL (params)
+        },
+        {
+          $set: { 'notifications.$.read': true } //we are setting value in object notification as read
+        }
+      )
+        .then(() => {
+          res.status(HttpStatus.OK).json({ message: 'Marked notification as Read' });
+        })
+        .catch(err => {
+          res
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .json({ message: 'Error Occured when Marking Notification as Read' });
+        });
+    }
   }
 };
