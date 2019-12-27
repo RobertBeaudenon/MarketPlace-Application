@@ -43,8 +43,8 @@
       </div>
     </a>
   </li>
-  <li class="collection-item">
-    <a>
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['/people', 'requesters']">
       <div>
         Requesters<a href="#!" class="secondary-content"><i class="material-icons">assignment_ind</i></a>
       </div>
