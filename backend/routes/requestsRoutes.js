@@ -6,5 +6,6 @@ const RequestCtrl = require('../controllers/requests');
 const AuthHelper = require('../Helpers/authHelper');
 
 router.post('/add-request', AuthHelper.VerifyToken, RequestCtrl.AddRequest);
+router.post('/cancel-request', AuthHelper.VerifyToken, RequestCtrl.CancelRequest);
 
 module.exports = router;
