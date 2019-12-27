@@ -199,7 +199,7 @@ module.exports = {
 
   /***** Mark a Notification as Read ****/
   async MarkNotification(req, res) {
-    //if the optional parameter is not present in body
+    //if the optional parameter is not present in body, we mark the notification as read
     if (!req.body.deleteValue) {
       await User.updateOne(
         {
@@ -217,6 +217,25 @@ module.exports = {
           res
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .json({ message: 'Error Occured when Marking Notification as Read' });
+        });
+    } else {
+      //we delete the notification, if optional var is set to true
+      await User.update(
+        {
+          _id: req.user._id,
+          'notifications._id': req.params.id
+        },
+        {
+          $pull: {
+            notifications: { _id: req.params.id }
+          }
+        }
+      )
+        .then(() => {
+          res.status(HttpStatus.OK).json({ message: 'Deleted notification' });
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when Deleting Notification ' });
         });
     }
   }
