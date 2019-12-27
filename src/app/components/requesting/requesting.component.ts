@@ -41,6 +41,7 @@ export class RequestingComponent implements OnInit {
 
     //will be called all the time
     this.socket.on('refreshPage', data => {
+      console.log('emit');
       this.GetUser();
     });
   }
@@ -57,23 +58,26 @@ export class RequestingComponent implements OnInit {
   }
 
   GetPost() {
+    this.requests = [];
     console.log('GetPost');
     var i;
     for (i = 0; i < this.requestingIds.length; i++) {
       this.postService.getPost(this.requestingIds[i].postId).subscribe(data => {
-        console.log(data.post);
         this.requests.push(data.post);
       });
     }
+    // console.log('post: ' + this.requests.length);
   }
 
   TimeFromNow(time) {
     return moment(time).fromNow();
   }
 
-  CancelRequest(postId) {
-    this.postService.cancelRequest(postId).subscribe(data => {
-      console.log(data);
+  CancelRequest(userRequested, postId) {
+    this.postService.cancelRequest(userRequested, postId).subscribe(data => {
+      // console.log(data);
+      // _.remove(this.requests, { postId: postId });
+      this.socket.emit('refresh', {});
     });
   }
 }

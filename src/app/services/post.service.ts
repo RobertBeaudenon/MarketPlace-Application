@@ -36,7 +36,7 @@ export class PostService {
     return this.http.post(`${BASEURL}/add-request`, { userRequested, postId });
   }
 
-  cancelRequest(postId): Observable<any> {
-    return this.http.post(`${BASEURL}/cancel-request`, { postId });
+  cancelRequest(userRequested, postId): Observable<any> {
+    return this.http.post(`${BASEURL}/cancel-request`, { userRequested, postId });
   }
 }
