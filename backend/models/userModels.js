@@ -31,6 +31,16 @@ const userSchema = mongoose.Schema({
       username: { type: String, default: '' },
       createdAt: { type: Date, default: Date.now() }
     }
+  ],
+  notifications: [
+    {
+      senderId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      message: { type: String },
+      viewProfile: { type: Boolean, default: false },
+      created: { type: Date, default: Date.now() },
+      read: { type: Date, default: false },
+      date: { type: String, default: '' } //to add a notification once, if the user visit another user profile in one day it will show a notification once
+    }
   ]
 });
 
