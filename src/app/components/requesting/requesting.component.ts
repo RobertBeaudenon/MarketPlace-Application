@@ -41,7 +41,6 @@ export class RequestingComponent implements OnInit {
 
     //will be called all the time
     this.socket.on('refreshPage', data => {
-      console.log('emit');
       this.GetUser();
     });
   }
@@ -50,7 +49,7 @@ export class RequestingComponent implements OnInit {
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
         this.requestingIds = data.result.requesting.reverse();
-        console.log(data.result.requesting);
+        // console.log(data.result.requesting);
         this.GetPost();
       },
       err => console.log(err)
@@ -59,7 +58,7 @@ export class RequestingComponent implements OnInit {
 
   GetPost() {
     this.requests = [];
-    console.log('GetPost');
+    //console.log('GetPost');
     var i;
     for (i = 0; i < this.requestingIds.length; i++) {
       this.postService.getPost(this.requestingIds[i].postId).subscribe(data => {
