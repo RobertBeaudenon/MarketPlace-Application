@@ -31,7 +31,7 @@
                 <p>{{ post.post }}</p>
               </div>
               <div class="card-action">
-                <button class="btn  requestingBtn">
+                <button class="btn  requestingBtn" (click)="CancelRequest(post._id)">
                   Cancel Request
                 </button>
               </div>

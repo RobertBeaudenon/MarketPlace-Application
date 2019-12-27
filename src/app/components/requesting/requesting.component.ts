@@ -70,4 +70,10 @@ export class RequestingComponent implements OnInit {
   TimeFromNow(time) {
     return moment(time).fromNow();
   }
+
+  CancelRequest(postId) {
+    this.postService.cancelRequest(postId).subscribe(data => {
+      console.log(data);
+    });
+  }
 }
