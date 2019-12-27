@@ -15,6 +15,7 @@ import { PeopleComponent } from '../components/people/people.component';
 import { UsersService } from '../services/users.service';
 import { RequestingComponent } from '../components/requesting/requesting.component';
 import { RequestersComponent } from '../components/requesters/requesters.component';
+import { NotificationsComponent } from '../components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RequestersComponent } from '../components/requesters/requesters.compone
     CommentsComponent,
     PeopleComponent,
     RequestingComponent,
-    RequestersComponent
+    RequestersComponent,
+    NotificationsComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],
