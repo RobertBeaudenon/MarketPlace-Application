@@ -38,7 +38,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
     //we subscribe because it resturns an observable
     this.postService.getAllPosts().subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.posts = data.posts;
       },
       err => {
@@ -54,7 +54,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
   LikePost(post) {
     this.postService.addLike(post).subscribe(
       data => {
-        console.log(data);
+        //console.log(data);
         this.socket.emit('refresh', {});
       },
       err => console.log(err)
@@ -76,7 +76,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
   AddRequest(post) {
     // console.log(post);
     this.postService.addRequest(post.user, post).subscribe(data => {
-      console.log(data);
+      //console.log(data);
       this.socket.emit('refresh', {});
     });
   }
