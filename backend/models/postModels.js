@@ -26,7 +26,8 @@ const postSchema = mongoose.Schema({
     {
       username: { type: String, default: '' }
     }
-  ]
+  ],
+  assigned: { type: Boolean, default: false }
 });
 
 module.exports = mongoose.model('Post', postSchema); //Post is the referance related to the collection related to the postSchema

@@ -16,6 +16,7 @@ export class PostsComponent implements OnInit, AfterViewInit {
   socket: any;
   user: any;
   posts = []; //initializing empty array
+  assigned: boolean;
 
   constructor(private postService: PostService, private tokenService: TokenService, private router: Router) {
     this.socket = io('http://localhost:3000');
@@ -35,10 +36,12 @@ export class PostsComponent implements OnInit, AfterViewInit {
   }
 
   AllPosts() {
+    this.assigned = true;
     //we subscribe because it resturns an observable
     this.postService.getAllPosts().subscribe(
       data => {
-        //console.log(data);
+        _.remove(data.posts, { assigned: this.assigned }); //remove posts that are already have someone assigned
+
         this.posts = data.posts;
       },
       err => {
