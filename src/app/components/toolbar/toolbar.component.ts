@@ -3,6 +3,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import * as M from 'materialize-css';
 import { UsersService } from 'src/app/services/users.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-toolbar',
@@ -43,5 +44,9 @@ export class ToolbarComponent implements OnInit {
     this.usersService.GetUserByID(this.user._id).subscribe(data => {
       this.notifications = data.result.notifications.reverse();
     });
+  }
+
+  TimeFromNow(time) {
+    return moment(time).fromNow();
   }
 }
