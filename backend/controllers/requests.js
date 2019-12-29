@@ -207,7 +207,7 @@ module.exports = {
           'notifications._id': req.params.id //then we get notification array an look to specific notification using id that is present in URL (params)
         },
         {
-          $set: { 'notifications.$.read': true } //we are setting value in object notification as read
+          $set: { 'notifications.$.read': true } //we are setting value in object notification as read for one element
         }
       )
         .then(() => {
@@ -238,5 +238,29 @@ module.exports = {
           res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when Deleting Notification ' });
         });
     }
+  },
+
+  /***** Mark all Notifications as Read ****/
+  async MarkAllNotifications(req, res) {
+    await User.update(
+      {
+        _id: req.user._id //retreiving the corresponding document
+      },
+      {
+        $set: { 'notification.$[elem.read]': true } //we are setting value in object notification as read for multiple element
+      },
+      {
+        arrayFilters: [{ 'elem.read': false }],
+        multi: true //All element in array that we find as false we set them as true using the set property above
+      }
+    )
+      .then(() => {
+        res.status(HttpStatus.OK).json({ message: 'All Notifications are marked as read' });
+      })
+      .catch(err => {
+        res
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json({ message: 'Error Occured when Marking all notifications as read ' });
+      });
   }
 };
