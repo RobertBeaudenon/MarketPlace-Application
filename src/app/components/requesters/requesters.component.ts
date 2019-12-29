@@ -83,9 +83,9 @@ export class RequestersComponent implements OnInit {
   }
 
   CancelApplication(userRequested, username, postId) {
-    //console.log(userRequested);
+    console.log(userRequested + ' ' + username);
     this.postService.cancelApplication(userRequested, username, postId).subscribe(data => {
-      // console.log(data);
+      console.log(data);
       // _.remove(this.requests, { postId: postId });
       this.socket.emit('refresh', {});
     });
