@@ -6,6 +6,8 @@ const userSchema = mongoose.Schema({
   username: { type: String },
   email: { type: String },
   password: { type: String },
+  major: { type: String, default: '' },
+  description: { type: String, default: '' },
   posts: [
     //we link posts related to user
     {
@@ -29,6 +31,15 @@ const userSchema = mongoose.Schema({
       requester: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //id of user that made the request will be added to the array of requests
       postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }, //id of post on which the request was made
       username: { type: String, default: '' },
+      createdAt: { type: Date, default: Date.now() }
+    }
+  ],
+  tasks: [
+    {
+      userDoingTask: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+      postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }, //id of post on which the request was made
+      username: { type: String, default: '' },
+      completed: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now() }
     }
   ],
