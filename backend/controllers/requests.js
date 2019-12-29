@@ -95,6 +95,23 @@ module.exports = {
         }
       );
 
+      /******* Send notification to user whos request was rejected *******/
+      await User.update(
+        {
+          _id: req.body.userRequested //we look for the user that was rejected
+        },
+        {
+          $push: {
+            notifications: {
+              senderId: req.user._id,
+              message: `${req.user.username} rejected your request.`,
+              created: new Date(),
+              viewProfile: false
+            }
+          }
+        }
+      );
+
       /******* Update Requesters Array in User *******/
 
       await User.update(
