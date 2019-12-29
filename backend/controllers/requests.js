@@ -247,7 +247,7 @@ module.exports = {
         _id: req.user._id //retreiving the corresponding document
       },
       {
-        $set: { 'notification.$[elem.read]': true } //we are setting value in object notification as read for multiple element
+        $set: { 'notifications.$[elem].read': true } //we are setting value in object notification as read for multiple element
       },
       {
         arrayFilters: [{ 'elem.read': false }],
