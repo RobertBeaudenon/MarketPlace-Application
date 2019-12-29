@@ -64,7 +64,7 @@ nav {
 .dropdown-content {
   margin: 0;
   display: none;
-  min-width: 350px;
+  min-width: 400px;
   max-height: 320px;
   margin-left: -1px;
   overflow-y: scroll;
