@@ -49,4 +49,11 @@ export class ToolbarComponent implements OnInit {
   TimeFromNow(time) {
     return moment(time).fromNow();
   }
+
+  //Mark all notifications as read
+  MarkAll() {
+    this.usersService.MarkAllAsRead().subscribe(data => {
+      console.log(data);
+    });
+  }
 }

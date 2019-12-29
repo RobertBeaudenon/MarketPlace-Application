@@ -12,6 +12,12 @@
               <span [ngClass]="data.read ? 'isRead' : 'unread'">{{ data.message }}</span>
               <p class="time">{{ TimeFromNow(data.created) }}</p>
             </li>
+            <li *ngIf="notifications.length <= 0">
+              <p class="test">No Notifications</p>
+            </li>
+            <p class="secondary-content">
+              <a class="markAll btn" (click)="MarkAll()">Mark All As Read</a>
+            </p>
           </ul>
         </li>
         <li><a (click)="logout()">Logout</a></li>
