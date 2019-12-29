@@ -2,19 +2,22 @@
   <div class="col s12 m4">
     <a>
       <span>MyPosts</span>
-      <p class="num">0</p>
+      <p class="num" *ngIf="userData">{{ userData.posts.length }}</p>
+      <p class="num" *ngIf="!userData">0</p>
     </a>
   </div>
   <div class="col s12 m4">
     <a>
       <span>Requesting</span>
-      <p class="num">0</p>
+      <p class="num" *ngIf="userData">{{ userData.requesting.length }}</p>
+      <p class="num" *ngIf="!userData">0</p>
     </a>
   </div>
   <div class="col s12 m4">
     <a>
       <span>Requesters</span>
-      <p class="num">0</p>
+      <p class="num" *ngIf="userData">{{ userData.requesters.length }}</p>
+      <p class="num" *ngIf="!userData">0</p>
     </a>
   </div>
 </div>
