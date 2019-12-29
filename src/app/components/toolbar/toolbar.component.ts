@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as M from 'materialize-css';
 import { UsersService } from 'src/app/services/users.service';
 import * as moment from 'moment';
+import io from 'socket.io-client';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,8 +14,11 @@ import * as moment from 'moment';
 export class ToolbarComponent implements OnInit {
   user: any;
   notifications = [];
+  socket: any;
 
-  constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {}
+  constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {
+    this.socket = io('http://localhost:3000');
+  }
 
   ngOnInit() {
     this.user = this.tokenService.GetPayload();
@@ -27,6 +31,10 @@ export class ToolbarComponent implements OnInit {
     });
 
     this.GetUser();
+
+    this.socket.on('refreshPage', () => {
+      this.GetUser();
+    });
   }
 
   /****TO LOGOUT*****/
@@ -54,6 +62,7 @@ export class ToolbarComponent implements OnInit {
   MarkAll() {
     this.usersService.MarkAllAsRead().subscribe(data => {
       console.log(data);
+      this.socket.emit('refresh', {});
     });
   }
 }
