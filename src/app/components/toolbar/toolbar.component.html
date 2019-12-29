@@ -4,8 +4,8 @@
       <a (click)="GoToHome()" class="brand-logo">HLPR Market Place</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li class="dropdown-button dropdown-trigger" data-target="dropdown">
-          <i class="material-icons badge">notifications</i>
-          <!-- <span class="nav-label-icon">2</span> -->
+          <i class="fa fa-bell fa-1x badge"></i>
+          <span class="nav-label-icon" *ngIf="count.length > 0">{{ count.length }}</span>
           <ul id="dropdown" class="dropdown-content col s12 collection">
             <li class="collection-item avatar" *ngFor="let data of notifications">
               <img src="http://placehold.it/50x50" class="circle" />
