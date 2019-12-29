@@ -1,20 +1,20 @@
 <div class="row">
-  <div class="col s12 m4">
+  <div class="col s12 m4" [routerLinkActive]="['']" [routerLinkActiveOptions]="{ exact: true }">
     <a>
       <span>MyPosts</span>
       <p class="num" *ngIf="userData">{{ userData.posts.length }}</p>
       <p class="num" *ngIf="!userData">0</p>
     </a>
   </div>
-  <div class="col s12 m4">
-    <a>
+  <div class="col s12 m4" [routerLinkActive]="['']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['/people', 'requesting']">
       <span>Requesting</span>
       <p class="num" *ngIf="userData">{{ userData.requesting.length }}</p>
       <p class="num" *ngIf="!userData">0</p>
     </a>
   </div>
-  <div class="col s12 m4">
-    <a>
+  <div class="col s12 m4" [routerLinkActive]="['']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['/people', 'requesters']">
       <span>Requesters</span>
       <p class="num" *ngIf="userData">{{ userData.requesters.length }}</p>
       <p class="num" *ngIf="!userData">0</p>
