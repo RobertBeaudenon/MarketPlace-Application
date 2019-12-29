@@ -51,11 +51,20 @@ export class ToolbarComponent implements OnInit {
 
   //display notifications
   GetUser() {
-    this.usersService.GetUserByID(this.user._id).subscribe(data => {
-      this.notifications = data.result.notifications.reverse();
-      const value = _.filter(this.notifications, ['read', false]); //check in notificatins how many are not read
-      this.count = value;
-    });
+    this.usersService.GetUserByID(this.user._id).subscribe(
+      data => {
+        this.notifications = data.result.notifications.reverse();
+        const value = _.filter(this.notifications, ['read', false]); //check in notificatins how many are not read
+        this.count = value;
+      },
+      err => {
+        if (err.error.token === null) {
+          //When token is expired we set the token to null in the backend(helpers/authHelper)
+          this.tokenService.DeleteToken();
+          this.router.navigate(['']); //redirect us to login page
+        }
+      }
+    );
   }
 
   TimeFromNow(time) {
