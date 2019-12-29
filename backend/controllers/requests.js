@@ -279,5 +279,66 @@ module.exports = {
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
           .json({ message: 'Error Occured when Marking all notifications as read ' });
       });
-  }
+  },
+
+  /******* Create a Task *******/
+  AddTask(req, res) {
+    const AddTask = async () => {
+      //We look for the logged in user id to add a new task
+      await User.update(
+        {
+          _id: req.user._id
+        },
+        {
+          $push: {
+            tasks: {
+              userDoingTask: req.body.userDoingTask,
+              postId: req.body.postId,
+              username: req.body.username,
+              createdAt: new Date()
+            }
+          }
+        }
+      );
+
+      // add task to user doing task
+      await User.update(
+        {
+          _id: req.body.userDoingTask
+        },
+        {
+          $push: {
+            tasks: {
+              userDoingTask: req.body.userDoingTask,
+              postId: req.body.postId,
+              username: req.body.username,
+              createdAt: new Date()
+            }
+          }
+        }
+      );
+
+      /******* Update Requests Array in Post *******/
+
+      await Post.update(
+        {
+          _id: req.body.postId //we find the post by id
+        },
+        {
+          $set: { assigned: true } //we are setting value in object post as assigned
+        }
+      );
+    };
+
+    //whatever is done is the async on top will be captured by this method
+    AddTask()
+      .then(() => {
+        res.status(HttpStatus.OK).json({ message: 'Added Task to both users' });
+      })
+      .catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when adding task' });
+      });
+  },
+
+  MarkTask(req, res) {}
 };
