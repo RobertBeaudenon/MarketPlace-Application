@@ -53,10 +53,12 @@
       </div>
     </a>
   </li>
-  <li class="collection-item">
-    <div>
-      Rate People<a href="#!" class="secondary-content"><i class="material-icons">poll</i></a>
-    </div>
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['/onGoingTasks']">
+      <div>
+        Tasks<a href="#!" class="secondary-content"><i class="material-icons">assignment_late</i></a>
+      </div>
+    </a>
   </li>
   <li class="collection-item">
     <div>
