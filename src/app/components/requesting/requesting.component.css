@@ -2,3 +2,11 @@
   text-align: center;
   font-size: 18px !important;
 }
+
+.collection {
+  border: none !important;
+}
+
+.collection-item {
+  border: none !important;
+}
