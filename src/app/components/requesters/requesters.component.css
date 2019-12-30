@@ -6,3 +6,11 @@
 .requestingBtn {
   float: right;
 }
+
+.collection {
+  border: none !important;
+}
+
+.collection-item {
+  border: none !important;
+}
