@@ -20,6 +20,8 @@ module.exports = {
     //returns all users in array
     await User.findOne({ _id: req.params.id })
       .populate('posts.postId')
+      .populate('tasks.userDoingTask')
+      .populate('tasks.postId')
       .then(result => {
         res.status(httpStatus.OK).json({ message: 'User By ID', result });
       })
