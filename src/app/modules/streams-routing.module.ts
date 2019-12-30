@@ -9,6 +9,7 @@ import { PeopleComponent } from '../components/people/people.component';
 import { RequestingComponent } from '../components/requesting/requesting.component';
 import { RequestersComponent } from '../components/requesters/requesters.component';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
+import { OnGoingTasksComponent } from '../components/on-going-tasks/on-going-tasks.component';
 
 //obj of routes
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: 'notifications',
     component: NotificationsComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'onGoingTasks',
+    component: OnGoingTasksComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];

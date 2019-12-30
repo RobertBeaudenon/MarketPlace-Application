@@ -16,6 +16,7 @@ import { UsersService } from '../services/users.service';
 import { RequestingComponent } from '../components/requesting/requesting.component';
 import { RequestersComponent } from '../components/requesters/requesters.component';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
+import { OnGoingTasksComponent } from '../components/on-going-tasks/on-going-tasks.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NotificationsComponent } from '../components/notifications/notification
     PeopleComponent,
     RequestingComponent,
     RequestersComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    OnGoingTasksComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],

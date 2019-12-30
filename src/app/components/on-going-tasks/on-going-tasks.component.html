@@ -1,0 +1,49 @@
+<!-- Selector for toolbar component -->
+<app-toolbar></app-toolbar>
+
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+    <!-- small medium large devices -->
+    <div class="col s12 m4 l3">
+      <app-side></app-side>
+    </div>
+    <div class="col s12 m8 l9">
+      <div class="row" *ngIf="tasks.length > 0">
+        <!-- looping on posts array created -->
+        <ul class="collection col s12 m12 l10" *ngFor="let task of tasks">
+          <li class="collection-item avatar">
+            <img src="http://placehold.it/50x50" alt="" class="circle" />
+            <span class="title">{{ task.postId.username }}</span>
+            <p class="time">
+              {{ TimeFromNow(task.createdAt) }}<br />
+              User Assigned : {{ task.userDoingTask.username }}
+            </p>
+          </li>
+          <div class="row">
+            <div class="col s12">
+              <div class="card">
+                <!-- <div class="card-image">
+            <img
+              class="postImage"
+              src="https://tce-live2.s3.amazonaws.com/media/media/2b7f1364-6c18-4b8d-a208-0aac26b4f5fe.jpg"
+            />
+          </div> -->
+                <div class="card-content">
+                  <p>{{ task.postId.post }}</p>
+                </div>
+                <div class="card-action">
+                  <button class="btn ">
+                    Task Completed
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div class="row" *ngIf="tasks.length <= 0">
+        <h3 class="test">You Have no Tasks</h3>
+      </div>
+    </div>
+  </div>
+</div>

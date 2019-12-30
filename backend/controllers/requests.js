@@ -318,7 +318,7 @@ module.exports = {
         }
       );
 
-      /******* Update Requests Array in Post *******/
+      //Setting post as assigned
 
       await Post.update(
         {

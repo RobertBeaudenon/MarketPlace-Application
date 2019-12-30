@@ -9,19 +9,19 @@ import _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-requesters',
-  templateUrl: './requesters.component.html',
-  styleUrls: ['./requesters.component.css']
+  selector: 'app-on-going-tasks',
+  templateUrl: './on-going-tasks.component.html',
+  styleUrls: ['./on-going-tasks.component.css']
 })
-export class RequestersComponent implements OnInit {
+export class OnGoingTasksComponent implements OnInit {
   btnElement: any;
   socket: any;
   user: any;
   posts = []; //initializing empty array\
   requestersIds = [];
-  requests = [];
-  requestersName = [];
-  requestersID = [];
+  tasks = [];
+  usersDoingTaskName = [];
+  usersDoingTaskId = [];
 
   post: string;
 
@@ -48,19 +48,19 @@ export class RequestersComponent implements OnInit {
   }
 
   GetUser() {
-    this.requestersName = [];
-    this.requestersID = [];
+    this.usersDoingTaskName = [];
+    this.usersDoingTaskId = [];
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
-        this.requestersIds = data.result.requesters.reverse();
+        this.tasks = data.result.tasks.reverse();
 
-        var i;
-        for (i = 0; i < this.requestersIds.length; i++) {
-          this.requestersName.push(this.requestersIds[i].username);
-          this.requestersID.push(this.requestersIds[i].requester);
-        }
-        //console.log(this.requestersID);
-        this.GetPost();
+        // var i;
+        // for (i = 0; i < this.requestersIds.length; i++) {
+        //   this.requestersName.push(this.requestersIds[i].username);
+        //   this.requestersID.push(this.requestersIds[i].requester);
+        // }
+        // //console.log(this.requestersID);
+        // this.GetPost();
       },
       err => console.log(err)
     );
