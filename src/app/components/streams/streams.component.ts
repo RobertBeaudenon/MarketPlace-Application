@@ -12,11 +12,25 @@ export class StreamsComponent implements OnInit {
   constructor(private tokenService: TokenService, private router: Router) {}
 
   token: any;
+  streamsTab = false;
+  favoriteStreamsTab = false;
 
   ngOnInit() {
-    //if sign up successfull or login we are going to retreive the token in the streams page
+    this.streamsTab = true;
     this.token = this.tokenService.GetPayload();
     const tabs = document.querySelector('.tabs');
     M.Tabs.init(tabs, {});
+  }
+
+  ChangeTabs(value) {
+    if (value === 'streams') {
+      this.streamsTab = true;
+      this.favoriteStreamsTab = false;
+    }
+
+    if (value === 'top') {
+      this.streamsTab = false;
+      this.favoriteStreamsTab = true;
+    }
   }
 }

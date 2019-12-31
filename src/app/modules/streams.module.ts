@@ -17,6 +17,7 @@ import { RequestingComponent } from '../components/requesting/requesting.compone
 import { RequestersComponent } from '../components/requesters/requesters.component';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
 import { OnGoingTasksComponent } from '../components/on-going-tasks/on-going-tasks.component';
+import { FavoritePostsComponent } from '../components/favorite-posts/favorite-posts.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OnGoingTasksComponent } from '../components/on-going-tasks/on-going-tas
     RequestingComponent,
     RequestersComponent,
     NotificationsComponent,
-    OnGoingTasksComponent
+    OnGoingTasksComponent,
+    FavoritePostsComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],
