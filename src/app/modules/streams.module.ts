@@ -16,8 +16,10 @@ import { UsersService } from '../services/users.service';
 import { RequestingComponent } from '../components/requesting/requesting.component';
 import { RequestersComponent } from '../components/requesters/requesters.component';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
-import { OnGoingTasksComponent } from '../components/on-going-tasks/on-going-tasks.component';
+import { MyTasksComponent } from '../components/my-tasks/my-tasks.component';
 import { FavoritePostsComponent } from '../components/favorite-posts/favorite-posts.component';
+import { TasksComponent } from '../components/tasks/tasks.component';
+import { TasksToBeCompletedComponent } from '../components/tasks-to-be-completed/tasks-to-be-completed.component';
 
 @NgModule({
   declarations: [
@@ -31,8 +33,10 @@ import { FavoritePostsComponent } from '../components/favorite-posts/favorite-po
     RequestingComponent,
     RequestersComponent,
     NotificationsComponent,
-    OnGoingTasksComponent,
-    FavoritePostsComponent
+    MyTasksComponent,
+    FavoritePostsComponent,
+    TasksComponent,
+    TasksToBeCompletedComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],

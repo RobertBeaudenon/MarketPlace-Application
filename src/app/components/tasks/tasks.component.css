@@ -1,0 +1,9 @@
+.tabs .active {
+  background: inherit !important;
+}
+
+.tabs a {
+  color: brown;
+  font-weight: bold;
+  font-size: 18px;
+}
