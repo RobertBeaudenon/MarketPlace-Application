@@ -36,6 +36,7 @@ const userSchema = mongoose.Schema({
   ],
   tasks: [
     {
+      taskOwner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       userDoingTask: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
       postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }, //id of post on which the request was made
       username: { type: String, default: '' },

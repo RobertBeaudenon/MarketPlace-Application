@@ -9,17 +9,18 @@ import _ from 'lodash';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-on-going-tasks',
-  templateUrl: './on-going-tasks.component.html',
-  styleUrls: ['./on-going-tasks.component.css']
+  selector: 'app-tasks-to-be-completed',
+  templateUrl: './tasks-to-be-completed.component.html',
+  styleUrls: ['./tasks-to-be-completed.component.css']
 })
-export class OnGoingTasksComponent implements OnInit {
+export class TasksToBeCompletedComponent implements OnInit {
   btnElement: any;
   socket: any;
   user: any;
   posts = []; //initializing empty array\
   requestersIds = [];
   tasks = [];
+  tasksToDo = [];
   usersDoingTaskName = [];
   usersDoingTaskId = [];
 
@@ -53,47 +54,28 @@ export class OnGoingTasksComponent implements OnInit {
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
         this.tasks = data.result.tasks.reverse();
-
-        // var i;
-        // for (i = 0; i < this.requestersIds.length; i++) {
-        //   this.requestersName.push(this.requestersIds[i].username);
-        //   this.requestersID.push(this.requestersIds[i].requester);
-        // }
-        // //console.log(this.requestersID);
-        // this.GetPost();
+        //Removing tasks that i'm not assigned to
+        var i = 0;
+        while (i < this.tasks.length) {
+          if (this.tasks[i].username !== this.user.username) {
+            this.tasks.splice(i, 1);
+          }
+          i++;
+        }
+        console.log(this.tasks);
+        this.tasksToDo = data.result.tasks.reverse();
       },
       err => console.log(err)
     );
-  }
-
-  GetPost() {
-    this.requests = [];
-    // console.log('GetPost');
-    var i;
-    for (i = 0; i < this.requestersIds.length; i++) {
-      this.postService.getPost(this.requestersIds[i].postId).subscribe(data => {
-        this.requests.push(data.post);
-      });
-    }
-    // console.log('post: ' + this.requests.length);
   }
 
   TimeFromNow(time) {
     return moment(time).fromNow();
   }
 
-  CancelApplication(userRequested, username, postId) {
+  CompleteTask(userRequested, username, postId) {
     this.postService.cancelApplication(userRequested, username, postId).subscribe(data => {
       this.socket.emit('refresh', {});
     });
-  }
-
-  AcceptApplication(userDoingTask, username, postId) {
-    this.postService.addTask(userDoingTask, username, postId).subscribe(data => {
-      this.socket.emit('refresh', {});
-    });
-
-    //Clean up the requests
-    this.CancelApplication(userDoingTask, username, postId);
   }
 }

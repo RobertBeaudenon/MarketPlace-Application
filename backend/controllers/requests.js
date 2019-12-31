@@ -292,6 +292,7 @@ module.exports = {
         {
           $push: {
             tasks: {
+              taskOwner: req.user._id,
               userDoingTask: req.body.userDoingTask,
               postId: req.body.postId,
               username: req.body.username,
@@ -309,6 +310,7 @@ module.exports = {
         {
           $push: {
             tasks: {
+              taskOwner: req.user._id,
               userDoingTask: req.body.userDoingTask,
               postId: req.body.postId,
               username: req.body.username,
@@ -340,5 +342,41 @@ module.exports = {
       });
   },
 
-  MarkTask(req, res) {}
+  /***** Mark Task as completed ****/
+
+  MarkTask(req, res) {
+    const MarkTask = async () => {
+      /******* Update Requesters Array in User Logged in  *******/
+
+      await User.updateOne(
+        {
+          _id: req.user._id, //first we get the concerned user
+          'tasks._id': req.params.id //then we get tasks array an look to specific task using id that is present in URL (params)
+        },
+        {
+          $set: { 'tasks.$.completed': true } //we are setting value in object task as completed for one element
+        }
+      );
+
+      await User.updateOne(
+        {
+          _id: req.body.userDoingTaskId, //first we get the concerned user
+          'tasks._id': req.params.id //then we get tasks array an look to specific task using id that is present in URL (params)
+        },
+        {
+          $set: { 'tasks.$.completed': true } //we are setting value in object task as completed for one element
+        }
+      );
+
+      MarkTask()
+        .then(() => {
+          res.status(HttpStatus.OK).json({ message: 'You Marked a task as Complete' });
+        })
+        .catch(err => {
+          res
+            .status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .json({ message: 'Error Occured when marking a task as complete' });
+        });
+    };
+  }
 };

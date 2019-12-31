@@ -1,0 +1,31 @@
+<!-- Selector for toolbar component -->
+<app-toolbar></app-toolbar>
+
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+    <!-- small medium large devices -->
+    <div class="col s12 m4 l3">
+      <app-side></app-side>
+    </div>
+    <div class="col s12 m8 l9">
+      <div class="row">
+        <div class="col s12 m12 l10">
+          <ul class="tabs">
+            <li class="tab col s6" (click)="ChangeTabs('myTasks')">
+              <a href="#myTasks" class="active">MyTasks</a>
+            </li>
+            <li class="tab col s6" (click)="ChangeTabs('tasksToBeCompleted')">
+              <a href="#tasksToBeCompleted">TasksToBeCompleted</a>
+            </li>
+          </ul>
+        </div>
+        <div id="streams" class="col s12" *ngIf="myTasksTab">
+          <app-my-tasks></app-my-tasks>
+        </div>
+        <div id="top" class="col s12" *ngIf="tasksToBeCompletedTab">
+          <app-tasks-to-be-completed></app-tasks-to-be-completed>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
