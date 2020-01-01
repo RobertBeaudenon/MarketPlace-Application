@@ -55,12 +55,18 @@ export class TasksToBeCompletedComponent implements OnInit {
       data => {
         this.tasks = data.result.tasks.reverse();
         //Removing tasks that i'm not assigned to
-        var i = 0;
-        while (i < this.tasks.length) {
+        var i = this.tasks.length;
+        while (i--) {
           if (this.tasks[i].userDoingTaskUsername !== this.user.username) {
             this.tasks.splice(i, 1);
           }
-          i++;
+        }
+        //Remove completed tasks
+        var i = this.tasks.length;
+        while (i--) {
+          if (this.tasks[i].taskId.completed === true) {
+            this.tasks.splice(i, 1);
+          }
         }
 
         this.tasksToDo = this.tasks;
@@ -71,11 +77,5 @@ export class TasksToBeCompletedComponent implements OnInit {
 
   TimeFromNow(time) {
     return moment(time).fromNow();
-  }
-
-  CompleteTask(userRequested, username, postId) {
-    this.postService.cancelApplication(userRequested, username, postId).subscribe(data => {
-      this.socket.emit('refresh', {});
-    });
   }
 }
