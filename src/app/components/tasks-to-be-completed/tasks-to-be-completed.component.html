@@ -4,10 +4,10 @@
     <ul class="collection col s12 m12 l10" *ngFor="let task of tasks">
       <li class="collection-item avatar">
         <img src="http://placehold.it/50x50" alt="" class="circle" />
-        <span class="title">{{ task.postId.username }}</span>
+        <span class="title">{{ task.taskOwnerUsername }}</span>
         <p class="time">
           {{ TimeFromNow(task.createdAt) }}<br />
-          User Assigned : {{ task.userDoingTask.username }}
+          You are Assigned to this tasked
         </p>
       </li>
       <div class="row">
@@ -20,13 +20,9 @@
               />
             </div> -->
             <div class="card-content">
-              <p>{{ task.postId.post }}</p>
+              <p>{{ task.taskId.postId.post }}</p>
             </div>
-            <div class="card-action">
-              <button class="btn ">
-                Task Completed
-              </button>
-            </div>
+            <div class="card-action"></div>
           </div>
         </div>
       </div>
