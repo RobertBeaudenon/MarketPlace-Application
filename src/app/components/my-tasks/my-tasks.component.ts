@@ -75,8 +75,8 @@ export class MyTasksComponent implements OnInit {
     return moment(time).fromNow();
   }
 
-  CompleteTask(taskId) {
-    this.postService.MarkTask(taskId).subscribe(data => {
+  CompleteTask(taskId, userDoingTask) {
+    this.postService.MarkTask(taskId, userDoingTask).subscribe(data => {
       this.socket.emit('refresh', {});
     });
   }

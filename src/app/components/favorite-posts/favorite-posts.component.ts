@@ -40,7 +40,6 @@ export class FavoritePostsComponent implements OnInit {
     //we subscribe because it resturns an observable
     this.postService.getAllPosts().subscribe(
       data => {
-        console.log(data);
         _.remove(data.favorites, { assigned: this.assigned }); //remove posts that are already have someone assigned
 
         this.favoritePosts = data.favorites;

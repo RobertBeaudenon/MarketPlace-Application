@@ -51,7 +51,8 @@ const userSchema = mongoose.Schema({
       read: { type: Boolean, default: false },
       date: { type: String, default: '' } //we add it to receive a notification once, instead of 5 times if we visit a profile 5 times
     }
-  ]
+  ],
+  totalTasksCompleted: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('User', userSchema); //User is the referance to the collection related to the userSchema in DB

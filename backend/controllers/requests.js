@@ -359,6 +359,15 @@ module.exports = {
           $set: { completed: true } //we are setting value in object post as assigned
         }
       );
+
+      await User.update(
+        {
+          _id: req.body.userDoingTask
+        },
+        {
+          $inc: { totalTasksCompleted: 1 }
+        }
+      );
     };
 
     MarkTask()
