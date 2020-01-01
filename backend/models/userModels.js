@@ -37,6 +37,8 @@ const userSchema = mongoose.Schema({
   tasks: [
     {
       taskId: { type: mongoose.Schema.Types.ObjectId, ref: 'Task' },
+      username: { type: String, default: '' },
+      taskOwnerUsername: { type: String, default: '' },
       createdAt: { type: Date, default: Date.now() }
     }
   ],
