@@ -48,10 +48,9 @@ export class PostService {
     return this.http.post(`${BASEURL}/add-task`, { userDoingTask, userDoingTaskUsername, postId });
   }
 
-  MarkTask(id, userDoingTaskId): Observable<any> {
+  MarkTask(id): Observable<any> {
     return this.http.post(`${BASEURL}/mark-task/${id}`, {
-      id,
-      userDoingTaskId
+      id
     });
   }
 }

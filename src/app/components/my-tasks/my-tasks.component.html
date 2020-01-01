@@ -23,7 +23,7 @@
               <p>{{ task.taskId.postId.post }}</p>
             </div>
             <div class="card-action">
-              <button class="btn " (click)="CompleteTask(task._id, task.taskId.userDoingTask)">
+              <button class="btn " (click)="CompleteTask(task.taskId._id)">
                 Task Completed
               </button>
             </div>
