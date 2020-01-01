@@ -367,16 +367,14 @@ module.exports = {
           $set: { 'tasks.$.completed': true } //we are setting value in object task as completed for one element
         }
       );
-
-      MarkTask()
-        .then(() => {
-          res.status(HttpStatus.OK).json({ message: 'You Marked a task as Complete' });
-        })
-        .catch(err => {
-          res
-            .status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .json({ message: 'Error Occured when marking a task as complete' });
-        });
     };
+
+    MarkTask()
+      .then(() => {
+        res.status(HttpStatus.OK).json({ message: 'You Marked a task as Complete' });
+      })
+      .catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when marking a task as complete' });
+      });
   }
 };

@@ -53,7 +53,6 @@ export class MyTasksComponent implements OnInit {
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
         _.remove(data.result.tasks, { username: this.user.username });
-        console.log(data.result.tasks);
         this.tasks = data.result.tasks.reverse();
       },
       err => console.log(err)
@@ -64,8 +63,9 @@ export class MyTasksComponent implements OnInit {
     return moment(time).fromNow();
   }
 
-  CompleteTask(userRequested, username, postId) {
-    this.postService.cancelApplication(userRequested, username, postId).subscribe(data => {
+  CompleteTask(taskId, userDoingTaskId) {
+    this.postService.MarkTask(taskId, userDoingTaskId).subscribe(data => {
+      console.log(data);
       this.socket.emit('refresh', {});
     });
   }

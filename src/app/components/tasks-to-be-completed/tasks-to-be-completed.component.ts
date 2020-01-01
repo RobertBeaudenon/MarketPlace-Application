@@ -62,8 +62,8 @@ export class TasksToBeCompletedComponent implements OnInit {
           }
           i++;
         }
-        console.log(this.tasks);
-        this.tasksToDo = data.result.tasks.reverse();
+
+        this.tasksToDo = this.tasks;
       },
       err => console.log(err)
     );
