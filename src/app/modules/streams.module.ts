@@ -20,6 +20,7 @@ import { MyTasksComponent } from '../components/my-tasks/my-tasks.component';
 import { FavoritePostsComponent } from '../components/favorite-posts/favorite-posts.component';
 import { TasksComponent } from '../components/tasks/tasks.component';
 import { TasksToBeCompletedComponent } from '../components/tasks-to-be-completed/tasks-to-be-completed.component';
+import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TasksToBeCompletedComponent } from '../components/tasks-to-be-completed
     MyTasksComponent,
     FavoritePostsComponent,
     TasksComponent,
-    TasksToBeCompletedComponent
+    TasksToBeCompletedComponent,
+    TasksCompletedComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],

@@ -10,6 +10,7 @@ import { RequestingComponent } from '../components/requesting/requesting.compone
 import { RequestersComponent } from '../components/requesters/requesters.component';
 import { NotificationsComponent } from '../components/notifications/notifications.component';
 import { TasksComponent } from '../components/tasks/tasks.component';
+import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
 
 //obj of routes
 const routes: Routes = [
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'tasks',
     component: TasksComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'tasksCompleted',
+    component: TasksCompletedComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];
