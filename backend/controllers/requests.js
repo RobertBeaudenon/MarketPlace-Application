@@ -351,25 +351,12 @@ module.exports = {
 
   MarkTask(req, res) {
     const MarkTask = async () => {
-      /******* Update Requesters Array in User Logged in  *******/
-
-      await User.updateOne(
+      await Task.update(
         {
-          _id: req.user._id, //first we get the concerned user
-          'tasks._id': req.params.id //then we get tasks array an look to specific task using id that is present in URL (params)
+          _id: req.params.id //we find the post by id
         },
         {
-          $set: { 'tasks.$.completed': true } //we are setting value in object task as completed for one element
-        }
-      );
-
-      await User.updateOne(
-        {
-          _id: req.body.userDoingTaskId, //first we get the concerned user
-          'tasks._id': req.params.id //then we get tasks array an look to specific task using id that is present in URL (params)
-        },
-        {
-          $set: { 'tasks.$.completed': true } //we are setting value in object task as completed for one element
+          $set: { completed: true } //we are setting value in object post as assigned
         }
       );
     };
