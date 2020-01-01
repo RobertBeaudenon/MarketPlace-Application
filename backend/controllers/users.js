@@ -1,6 +1,7 @@
 const httpStatus = require('http-status-codes');
 
 const User = require('../models/userModels');
+const Post = require('../models/postModels');
 module.exports = {
   /** Get All the USERS ***/
   async GetAllUsers(req, res) {
@@ -20,8 +21,15 @@ module.exports = {
     //returns all users in array
     await User.findOne({ _id: req.params.id })
       .populate('posts.postId')
-      .populate('tasks.userDoingTask')
-      .populate('tasks.postId')
+      .populate('tasks.taskId')
+      .populate({
+        //nested objects population
+        path: 'tasks.taskId',
+        populate: {
+          path: 'postId',
+          model: Post
+        }
+      })
       .then(result => {
         res.status(httpStatus.OK).json({ message: 'User By ID', result });
       })

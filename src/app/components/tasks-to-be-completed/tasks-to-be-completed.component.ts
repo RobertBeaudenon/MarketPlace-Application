@@ -57,7 +57,7 @@ export class TasksToBeCompletedComponent implements OnInit {
         //Removing tasks that i'm not assigned to
         var i = 0;
         while (i < this.tasks.length) {
-          if (this.tasks[i].username !== this.user.username) {
+          if (this.tasks[i].userDoingTaskUsername !== this.user.username) {
             this.tasks.splice(i, 1);
           }
           i++;

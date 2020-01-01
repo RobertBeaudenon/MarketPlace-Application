@@ -2,6 +2,7 @@ const HttpStatus = require('http-status-codes');
 
 const User = require('../models/userModels');
 const Post = require('../models/postModels');
+const Task = require('../models/taskModels');
 
 module.exports = {
   /*****Create a Request*** */
@@ -282,60 +283,64 @@ module.exports = {
   },
 
   /******* Create a Task *******/
+
   AddTask(req, res) {
-    const AddTask = async () => {
-      //We look for the logged in user id to add a new task
-      await User.update(
-        {
-          _id: req.user._id
-        },
-        {
-          $push: {
-            tasks: {
-              taskOwner: req.user._id,
-              userDoingTask: req.body.userDoingTask,
-              postId: req.body.postId,
-              username: req.body.username,
-              createdAt: new Date()
-            }
-          }
-        }
-      );
-
-      // add task to user doing task
-      await User.update(
-        {
-          _id: req.body.userDoingTask
-        },
-        {
-          $push: {
-            tasks: {
-              taskOwner: req.user._id,
-              userDoingTask: req.body.userDoingTask,
-              postId: req.body.postId,
-              username: req.body.username,
-              createdAt: new Date()
-            }
-          }
-        }
-      );
-
-      //Setting post as assigned
-
-      await Post.update(
-        {
-          _id: req.body.postId //we find the post by id
-        },
-        {
-          $set: { assigned: true } //we are setting value in object post as assigned
-        }
-      );
+    //Create new structure of object that will be inserted in DB
+    const newBody = {
+      //remember that in our request we always pass the 'user' object that contains the details
+      taskOwner: req.user._id,
+      userDoingTask: req.body.userDoingTask,
+      postId: req.body.postId,
+      created: new Date()
     };
 
-    //whatever is done is the async on top will be captured by this method
-    AddTask()
-      .then(() => {
-        res.status(HttpStatus.OK).json({ message: 'Added Task to both users' });
+    //We use the mongoose build in method to insert the taks in the DB
+    Task.create(newBody)
+      .then(async task => {
+        //When we create a new task we get the users related to that task and add that task to the array of taks related to that users, (update is form mongoose)
+
+        await User.update(
+          {
+            _id: req.user._id
+          },
+          {
+            $push: {
+              tasks: {
+                taskId: task._id,
+                userDoingTaskUsername: req.body.userDoingTaskUsername,
+                taskOwnerUsername: req.user.username,
+                createdAt: new Date()
+              }
+            }
+          }
+        );
+
+        await User.update(
+          {
+            _id: req.body.userDoingTask
+          },
+          {
+            $push: {
+              tasks: {
+                taskId: task._id,
+                userDoingTaskUsername: req.body.userDoingTaskUsername,
+                taskOwnerUsername: req.user.username,
+                createdAt: new Date()
+              }
+            }
+          }
+        );
+
+        await Post.update(
+          {
+            _id: req.body.postId //we find the post by id
+          },
+          {
+            $set: { assigned: true } //we are setting value in object post as assigned
+          }
+        );
+
+        res.status(HttpStatus.OK).json({ message: 'Added Task to both users', task });
       })
       .catch(err => {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when adding task' });

@@ -22,6 +22,7 @@ export class MyTasksComponent implements OnInit {
   tasks = [];
   usersDoingTaskName = [];
   usersDoingTaskId = [];
+  test = [];
 
   post: string;
 
@@ -52,7 +53,10 @@ export class MyTasksComponent implements OnInit {
     this.usersDoingTaskId = [];
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
-        _.remove(data.result.tasks, { username: this.user.username });
+        //console.log(data.result.tasks);
+
+        _.remove(data.result.tasks, { userDoingTaskUsername: this.user.username });
+        //console.log(data.result.tasks);
         this.tasks = data.result.tasks.reverse();
       },
       err => console.log(err)
