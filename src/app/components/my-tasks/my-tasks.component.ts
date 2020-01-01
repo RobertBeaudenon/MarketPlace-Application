@@ -53,11 +53,19 @@ export class MyTasksComponent implements OnInit {
     this.usersDoingTaskId = [];
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
-        //console.log(data.result.tasks);
-
-        _.remove(data.result.tasks, { userDoingTaskUsername: this.user.username });
-        //console.log(data.result.tasks);
         this.tasks = data.result.tasks.reverse();
+
+        //Remove tasks that we are not the owner off
+        _.remove(this.tasks, { userDoingTaskUsername: this.user.username });
+
+        //Removing tasks that are already completed
+        //llop backwards because splice causes problems
+        var i = this.tasks.length;
+        while (i--) {
+          if (this.tasks[i].taskId.completed === true) {
+            this.tasks.splice(i, 1);
+          }
+        }
       },
       err => console.log(err)
     );
@@ -69,7 +77,6 @@ export class MyTasksComponent implements OnInit {
 
   CompleteTask(taskId) {
     this.postService.MarkTask(taskId).subscribe(data => {
-      console.log(data);
       this.socket.emit('refresh', {});
     });
   }
