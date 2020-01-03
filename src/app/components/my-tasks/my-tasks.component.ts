@@ -80,4 +80,8 @@ export class MyTasksComponent implements OnInit {
       this.socket.emit('refresh', {});
     });
   }
+
+  OpenRatingBox(task) {
+    this.router.navigate(['rating', task._id]); //our new route will be 'post/id'
+  }
 }
