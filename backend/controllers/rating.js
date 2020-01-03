@@ -5,9 +5,8 @@ const Post = require('../models/postModels');
 const Task = require('../models/taskModels');
 
 module.exports = {
+  /***Adding Rating to user doing task***/
   async AddRating(req, res) {
-    console.log(req.body.id);
-    console.log(req.body.rating);
     await User.update(
       {
         _id: req.params.id
