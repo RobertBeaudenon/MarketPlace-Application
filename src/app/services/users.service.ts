@@ -35,4 +35,11 @@ export class UsersService {
       all: true
     });
   }
+
+  AddRating(userId, rating): Observable<any> {
+    return this.http.post(`${BASEURL}/add-rating/${userId}`, {
+      userId,
+      rating
+    });
+  }
 }

@@ -81,7 +81,7 @@ export class MyTasksComponent implements OnInit {
     });
   }
 
-  OpenRatingBox(task) {
-    this.router.navigate(['rating', task._id]); //our new route will be 'post/id'
+  OpenRatingBox(usersDoingTaskId) {
+    this.router.navigate(['rating', usersDoingTaskId]); //our new route will be 'post/id'
   }
 }

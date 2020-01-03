@@ -25,12 +25,7 @@ export class RequestersComponent implements OnInit {
 
   post: string;
 
-  constructor(
-    private userService: UsersService,
-    private postService: PostService,
-    private tokenService: TokenService,
-    private router: Router
-  ) {
+  constructor(private userService: UsersService, private postService: PostService, private tokenService: TokenService) {
     this.socket = io('http://localhost:3000');
   }
 
