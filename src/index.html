@@ -23,7 +23,23 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-    <!-- Importing Jquery in angualar -->
+    <!-- Importing Jquery in angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Helper to display ratings-->
+    <script src="./assets/js/jquery.raty.js"></script>
+
+    <!-- Helper to display ratings-->
+    <script>
+      $(document).ready(function() {
+        $.fn.raty.defaults.path = '/images/';
+        $('.star').raty({
+          readOnly: true,
+          score: function(data) {
+            return $(this).attr('data-score');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
