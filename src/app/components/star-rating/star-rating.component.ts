@@ -119,7 +119,7 @@ export class StarRatingComponent implements OnInit {
       }
 
       if ((valid = true)) {
-        self.AddRating(clickedValue, this.id);
+        self.AddRating(clickedValue, self.id);
       } else {
         return false;
       }
@@ -127,7 +127,8 @@ export class StarRatingComponent implements OnInit {
   }
 
   AddRating(clickedValue, id) {
-    this.userService.AddRating(clickedValue, id).subscribe(data => {
+    console.log(clickedValue + id);
+    this.userService.AddRating(id, clickedValue).subscribe(data => {
       console.log(data);
     });
   }
