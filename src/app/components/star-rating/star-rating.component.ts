@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import io from 'socket.io-client';
 
 //to use jquery selector
 declare var $: any;
@@ -12,9 +13,13 @@ declare var $: any;
   styleUrls: ['./star-rating.component.css']
 })
 export class StarRatingComponent implements OnInit {
-  constructor(private userService: UsersService, private router: Router, private route: ActivatedRoute) {}
+  socket: any;
+  constructor(private userService: UsersService, private router: Router, private route: ActivatedRoute) {
+    this.socket = io('http://localhost:3000');
+  }
   user: any;
   id: string;
+  username: any;
 
   ngOnInit() {
     //declaring self as this to memorize what this is , because get lost when invoking external function from jquery
@@ -127,15 +132,15 @@ export class StarRatingComponent implements OnInit {
   }
 
   AddRating(clickedValue, id) {
-    console.log(clickedValue + id);
     this.userService.AddRating(id, clickedValue).subscribe(data => {
-      console.log(data);
+      this.socket.emit('refresh', {});
     });
   }
 
   GetUserDoingTask(id) {
     this.userService.GetUserByID(id).subscribe(data => {
       this.user = data.result;
+      this.username = this.user.username;
     });
   }
 }
