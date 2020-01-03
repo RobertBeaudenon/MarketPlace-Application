@@ -6,6 +6,10 @@ import { UsersService } from 'src/app/services/users.service';
 import * as moment from 'moment';
 import io from 'socket.io-client';
 import _ from 'lodash';
+import { arrayAverage } from '../../../assets/js/helpers.js';
+import { StarRatingComponent } from 'ng-starrating';
+
+declare var $: any;
 
 @Component({
   selector: 'app-toolbar',
@@ -17,6 +21,7 @@ export class ToolbarComponent implements OnInit {
   notifications = [];
   socket: any;
   count = [];
+  average: any;
 
   constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {
     this.socket = io('http://localhost:3000');
@@ -33,10 +38,22 @@ export class ToolbarComponent implements OnInit {
     });
 
     this.GetUser();
+    this.average = arrayAverage(this.user.ratingNumber);
 
     this.socket.on('refreshPage', () => {
       this.GetUser();
+      this.average = arrayAverage(this.user.ratingNumber);
     });
+
+    // $(document).ready(function() {
+    //   $.fn.raty.defaults.path = '../../../assets/images/';
+    //   $('.star').raty({
+    //     readOnly: true,
+    //     score: function(data) {
+    //       return $(this).attr('data-score');
+    //     }
+    //   });
+    // });
   }
 
   /****TO LOGOUT*****/
@@ -77,5 +94,13 @@ export class ToolbarComponent implements OnInit {
       // console.log(data);
       this.socket.emit('refresh', {});
     });
+  }
+
+  //to display rating of user
+  onRate($event: { oldValue: number; newValue: number; starRating: StarRatingComponent }) {
+    alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
 }

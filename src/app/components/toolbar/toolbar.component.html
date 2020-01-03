@@ -29,6 +29,22 @@
       </div>
       <!-- Retreiving username from token.payload -->
       <h1 class="profile-name">{{ user.username }}</h1>
+      <!-- display rating of user -->
+      <div style="text-align:center">
+        <star-rating
+          value="{{ average }}"
+          totalstars="5"
+          checkedcolor="red"
+          uncheckedcolor="black"
+          size="24px"
+          readonly="true"
+        ></star-rating>
+      </div>
+
+      <p>Total Ratings: {{ user.ratingNumber.length }}</p>
+      <!-- <p><span class="star"></span></p> -->
+      <p>Average Rating: {{ average }}</p>
+
       <!-- <p class="user-text">This is my description</p> -->
     </div>
   </div>
