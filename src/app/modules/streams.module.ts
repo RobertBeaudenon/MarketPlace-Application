@@ -22,6 +22,7 @@ import { TasksComponent } from '../components/tasks/tasks.component';
 import { TasksToBeCompletedComponent } from '../components/tasks-to-be-completed/tasks-to-be-completed.component';
 import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { StarRatingComponent } from '../components/star-rating/star-rating.compo
     TasksCompletedComponent,
     StarRatingComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, RatingModule],
   exports: [StreamsComponent, ToolbarComponent],
   providers: [TokenService, PostService, UsersService]
 })
