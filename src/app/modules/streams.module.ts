@@ -21,6 +21,7 @@ import { FavoritePostsComponent } from '../components/favorite-posts/favorite-po
 import { TasksComponent } from '../components/tasks/tasks.component';
 import { TasksToBeCompletedComponent } from '../components/tasks-to-be-completed/tasks-to-be-completed.component';
 import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
+import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { TasksCompletedComponent } from '../components/tasks-completed/tasks-com
     FavoritePostsComponent,
     TasksComponent,
     TasksToBeCompletedComponent,
-    TasksCompletedComponent
+    TasksCompletedComponent,
+    StarRatingComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
   exports: [StreamsComponent, ToolbarComponent],

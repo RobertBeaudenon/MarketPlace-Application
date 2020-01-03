@@ -1,0 +1,36 @@
+<app-toolbar></app-toolbar>
+
+<div class="container" style="margin-top: 30px">
+  <div class="row">
+    <!-- small medium large devices -->
+    <div class="col s12 m4 l3">
+      <app-side></app-side>
+    </div>
+
+    <div class="col s12 m8 l9">
+      <div class="col s12 m10">
+        <div class="row">
+          <div class="card">
+            <ul class="collection">
+              <li class="collection-item">
+                <span class="post"> Please Rate {{ user.username }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="col-sm-12" id="star_rating">
+          <img id="1_star" src="../../../images/star-off.png" alt="1" title="Bad" />
+          <img id="2_star" src="../../../images/star-off.png" alt="2" title="Poor" />
+          <img id="3_star" src="../../../images/star-off.png" alt="3" title="Fair" />
+          <img id="4_star" src="../../../images/star-off.png" alt="4" title="Good" />
+          <img id="5_star" src="../../../images/star-off.png" alt="5" title="Excellent" />
+          <span id="showTitle"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
