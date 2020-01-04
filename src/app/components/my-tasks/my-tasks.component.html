@@ -23,8 +23,12 @@
               <p>{{ task.taskId.postId.post }}</p>
             </div>
             <div class="card-action">
-              <button class="btn " (click)="OpenRatingBox(task.taskId.userDoingTask)">
-                <!-- CompleteTask(task.taskId._id, task.taskId.userDoingTask); -->
+              <button
+                class="btn "
+                (click)="
+                  CompleteTask(task.taskId._id, task.taskId.userDoingTask); OpenRatingBox(task.taskId.userDoingTask)
+                "
+              >
                 Task Completed
               </button>
             </div>

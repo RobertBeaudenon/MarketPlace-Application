@@ -143,4 +143,8 @@ export class StarRatingComponent implements OnInit {
       this.username = this.user.username;
     });
   }
+
+  redirectToStreams() {
+    this.router.navigate(['streams']); //our new route will be 'post/id'
+  }
 }
