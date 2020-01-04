@@ -39,10 +39,12 @@ export class ToolbarComponent implements OnInit {
 
     this.GetUser();
     this.average = arrayAverage(this.user.ratingNumber);
+    this.average = Math.round(this.average);
 
     this.socket.on('refreshPage', () => {
       this.GetUser();
       this.average = arrayAverage(this.user.ratingNumber);
+      this.average = Math.round(this.average);
     });
 
     // $(document).ready(function() {
