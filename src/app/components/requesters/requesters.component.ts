@@ -89,6 +89,8 @@ export class RequestersComponent implements OnInit {
     });
 
     //Clean up the requests
-    this.CancelApplication(userDoingTask, username, postId);
+    this.postService.cleanWebsite(userDoingTask, username, postId).subscribe(data => {
+      this.socket.emit('refresh', {});
+    });
   }
 }
