@@ -44,6 +44,10 @@ export class PostService {
     return this.http.post(`${BASEURL}/cancel-application`, { userRequested, username, postId });
   }
 
+  cleanWebsite(userRequested, username, postId): Observable<any> {
+    return this.http.post(`${BASEURL}/clean-website`, { userRequested, username, postId });
+  }
+
   addTask(userDoingTask, userDoingTaskUsername, postId): Observable<any> {
     return this.http.post(`${BASEURL}/add-task`, { userDoingTask, userDoingTaskUsername, postId });
   }

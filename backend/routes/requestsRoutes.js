@@ -12,5 +12,6 @@ router.post('/mark/:id', AuthHelper.VerifyToken, RequestCtrl.MarkNotification);
 router.post('/mark-all', AuthHelper.VerifyToken, RequestCtrl.MarkAllNotifications);
 router.post('/add-task', AuthHelper.VerifyToken, RequestCtrl.AddTask);
 router.post('/mark-task/:id', AuthHelper.VerifyToken, RequestCtrl.MarkTask);
+router.post('/clean-website', AuthHelper.VerifyToken, RequestCtrl.CleanWebsite);
 
 module.exports = router;

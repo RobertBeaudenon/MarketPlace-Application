@@ -215,6 +215,67 @@ module.exports = {
       });
   },
 
+  /*****Clean website when user accept an application*** */
+
+  CleanWebsite(req, res) {
+    //different way of using async await
+    const CleanWebsite = async () => {
+      /******* Update Requesters Array in User Logged in  *******/
+
+      await User.update(
+        {
+          _id: req.user._id //We look for the logged in user id to update his requesters array
+        },
+        {
+          $pull: {
+            requesters: {
+              postId: req.body.postId //remove from the array based on postId
+            }
+          }
+        }
+      );
+
+      /******* Update Requesting Array in user that made the application *******/
+
+      await User.update(
+        {
+          _id: req.body.userRequested //we look for the user that we want to add a request
+        },
+        {
+          $pull: {
+            requesting: {
+              postId: req.body.postId
+            }
+          }
+        }
+      );
+
+      /******* Update Requests Array in Post *******/
+
+      await Post.update(
+        {
+          _id: req.body.postId //we find the post by id
+        },
+        {
+          $pull: {
+            requests: {
+              username: req.body.username
+            }
+          }
+        }
+      );
+    };
+
+    //whatever is done is the async on top will be captured by this method
+    CleanWebsite()
+      .then(() => {
+        res.status(HttpStatus.OK).json({ message: 'You Cleaned the Application' });
+      })
+      .catch(err => {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when Cleaning the application' });
+      });
+  },
+
   /***** Mark a Notification as Read ****/
   async MarkNotification(req, res) {
     //if the optional parameter is not present in body, we mark the notification as read
@@ -326,6 +387,12 @@ module.exports = {
                 userDoingTaskUsername: req.body.userDoingTaskUsername,
                 taskOwnerUsername: req.user.username,
                 createdAt: new Date()
+              },
+              notifications: {
+                senderId: req.user._id,
+                message: `Congrats, ${req.user.username} has accepted your application! You've been assigned to the task.`,
+                created: new Date(),
+                viewProfile: false
               }
             }
           }
@@ -366,6 +433,23 @@ module.exports = {
         },
         {
           $inc: { totalTasksCompleted: 1 }
+        }
+      );
+
+      /******* Send notification to user whos request was rejected *******/
+      await User.update(
+        {
+          _id: req.body.userDoingTask //we look for the user that was rejected
+        },
+        {
+          $push: {
+            notifications: {
+              senderId: req.user._id,
+              message: `${req.user.username} has marked the task as complete.`,
+              created: new Date(),
+              viewProfile: false
+            }
+          }
         }
       );
     };
