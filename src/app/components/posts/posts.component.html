@@ -45,6 +45,7 @@
 
           <button
             *ngIf="!CheckInRequestsArray(post.requests, user.username)"
+            [ngClass]="post.username === user.username ? 'disabled' : ''"
             class="btn requestBtn"
             (click)="AddRequest(post)"
           >
