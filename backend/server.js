@@ -41,6 +41,7 @@ const posts = require('./routes/postRoutes');
 const users = require('./routes/userRoutes');
 const requests = require('./routes/requestsRoutes');
 const ratings = require('./routes/ratingRoutes');
+const message = require('./routes/messageRoutes');
 
 //default path /api/chatapp
 app.use('/api/chatapp', auth);
@@ -48,6 +49,7 @@ app.use('/api/chatapp', posts);
 app.use('/api/chatapp', users);
 app.use('/api/chatapp', requests);
 app.use('/api/chatapp', ratings);
+app.use('/api/chatapp', message);
 
 //Server running on port 3000 , we pass instead of app server to use socket.io
 server.listen(3000, () => {
