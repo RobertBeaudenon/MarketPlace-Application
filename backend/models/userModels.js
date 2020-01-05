@@ -52,6 +52,13 @@ const userSchema = mongoose.Schema({
       date: { type: String, default: '' } //we add it to receive a notification once, instead of 5 times if we visit a profile 5 times
     }
   ],
+  //to keep track of how many users a particular user is chatting with
+  chatList: [
+    {
+      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //id of receiver
+      msgId: { type: mongoose.Schema.Types.ObjectId, ref: 'Message' }
+    }
+  ],
   totalTasksCompleted: { type: Number, default: 0 },
   ratingNumber: [Number],
   ratingSum: { type: Number, default: 0 }
