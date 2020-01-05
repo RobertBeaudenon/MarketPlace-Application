@@ -12,6 +12,7 @@ import { NotificationsComponent } from '../components/notifications/notification
 import { TasksComponent } from '../components/tasks/tasks.component';
 import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
+import { ChatComponent } from '../components/chat/chat.component';
 
 //obj of routes
 const routes: Routes = [
@@ -59,6 +60,11 @@ const routes: Routes = [
   {
     path: 'rating/:id',
     component: StarRatingComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'chat/:name',
+    component: ChatComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   }
 ];
