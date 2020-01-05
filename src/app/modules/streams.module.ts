@@ -25,6 +25,7 @@ import { StarRatingComponent } from '../components/star-rating/star-rating.compo
 import { RatingModule } from 'ng-starrating';
 import { ChatComponent } from '../components/chat/chat.component';
 import { MessageComponent } from '../components/message/message.component';
+import { MessageService } from '../services/message.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,6 @@ import { MessageComponent } from '../components/message/message.component';
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, RatingModule],
   exports: [StreamsComponent, ToolbarComponent],
-  providers: [TokenService, PostService, UsersService]
+  providers: [TokenService, PostService, UsersService, MessageService]
 })
 export class StreamsModule {}

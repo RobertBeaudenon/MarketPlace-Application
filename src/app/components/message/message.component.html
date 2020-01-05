@@ -43,9 +43,9 @@
     <div class="row">
       <div class="card" style="height:55px;">
         <div class="inputRow">
-          <form>
+          <form (ngSubmit)="sendMessage()">
             <div class="input-field inputField col s10">
-              <textarea name="message" class="materialize-textarea inputBox"></textarea>
+              <textarea name="message" [(ngModel)]="message" class="materialize-textarea inputBox"></textarea>
             </div>
             <div class="input-field col s1 emojiDiv">
               <button class="emojiBtn">emoji</button>
