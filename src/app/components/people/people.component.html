@@ -19,7 +19,7 @@
               <h3 class="card-title">{{ user.username }}</h3>
               <p>Country</p>
               <button class="btn">Profile</button>
-              <a class="secondary-content">
+              <a class="secondary-content" [routerLink]="['/chat', user.username]">
                 <i class="material-icons">chat</i>
               </a>
             </div>
