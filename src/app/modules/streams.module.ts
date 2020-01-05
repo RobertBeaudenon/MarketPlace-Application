@@ -23,6 +23,8 @@ import { TasksToBeCompletedComponent } from '../components/tasks-to-be-completed
 import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 import { RatingModule } from 'ng-starrating';
+import { ChatComponent } from '../components/chat/chat.component';
+import { MessageComponent } from '../components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { RatingModule } from 'ng-starrating';
     TasksComponent,
     TasksToBeCompletedComponent,
     TasksCompletedComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    ChatComponent,
+    MessageComponent
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, RatingModule],
   exports: [StreamsComponent, ToolbarComponent],
