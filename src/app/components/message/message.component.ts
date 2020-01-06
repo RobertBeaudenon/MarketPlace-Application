@@ -14,6 +14,7 @@ export class MessageComponent implements OnInit {
   user: any;
   message: String; //whatever is typed in textarea of chat with the use of ngModel ="message" it will be retreived form the html into this var
   receiverData: any;
+  messages = [];
 
   constructor(
     private tokenService: TokenService,
@@ -34,14 +35,26 @@ export class MessageComponent implements OnInit {
   GetUserByUsername(name) {
     this.usersService.GetUserByName(name).subscribe(data => {
       this.receiverData = data.result;
+
+      this.getMessages(this.user._id, this.receiverData._id);
+    });
+  }
+
+  getMessages(senderId, receiverId) {
+    this.msgService.GetAllMessages(senderId, receiverId).subscribe(data => {
+      this.messages = data.messages.message;
     });
   }
 
   sendMessage() {
-    this.msgService
-      .SendMessage(this.user._id, this.receiverData._id, this.receiverData.username, this.message)
-      .subscribe(data => {
-        console.log(data);
-      });
+    //prevent of sending empty messages
+    if (this.message) {
+      this.msgService
+        .SendMessage(this.user._id, this.receiverData._id, this.receiverData.username, this.message)
+        .subscribe(data => {
+          console.log(data);
+          this.message = '';
+        });
+    }
   }
 }
