@@ -11,5 +11,9 @@ module.exports = function(io) {
       //we are only displaying the istyping in the receiver chat room, we are forwarding to receiver data so that we can know when the sender is typing on keypress
       io.to(data.receiver).emit('is_typing', data);
     });
+
+    socket.on('stop_typing', data => {
+      io.to(data.receiver).emit('has_stopped_typing', data);
+    });
   });
 };
