@@ -20,6 +20,28 @@ module.exports = {
       async (err, result) => {
         //a conversation exist between both users
         if (result.length > 0) {
+          await Message.update(
+            {
+              conversationId: result[0]._id
+            },
+            {
+              $push: {
+                message: {
+                  senderId: req.user._id,
+                  receiverId: req.params.receiver_Id,
+                  senderName: req.user.username,
+                  receiverName: req.body.receiverName,
+                  body: req.body.message
+                }
+              }
+            }
+          )
+            .then(() => res.status(HttpStatus.OK).json({ message: 'Message sent to conversation that already exist' }))
+            .catch(err =>
+              res
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .json({ message: 'Error occurend when sending a message to a conversation that already exist' })
+            );
         } else {
           //this else statement will only be executed once to initilaize conversation between the two users
           //we create a new instance of conversation and push both values in array
