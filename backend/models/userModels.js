@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema({
   //to keep track of how many users a particular user is chatting with
   chatList: [
     {
-      userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //id of receiver
+      receiverId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //id of receiver
       msgId: { type: mongoose.Schema.Types.ObjectId, ref: 'Message' }
     }
   ],
