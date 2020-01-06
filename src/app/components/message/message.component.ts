@@ -3,6 +3,7 @@ import { TokenService } from 'src/app/services/token.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import io from 'socket.io-client';
 
 @Component({
   selector: 'app-message',
@@ -15,13 +16,16 @@ export class MessageComponent implements OnInit {
   message: String; //whatever is typed in textarea of chat with the use of ngModel ="message" it will be retreived form the html into this var
   receiverData: any;
   messages = [];
+  socket: any;
 
   constructor(
     private tokenService: TokenService,
     private msgService: MessageService,
     private route: ActivatedRoute,
     private usersService: UsersService
-  ) {}
+  ) {
+    this.socket = io('http://localhost:3000');
+  }
 
   ngOnInit() {
     this.user = this.tokenService.GetPayload();
@@ -29,6 +33,10 @@ export class MessageComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.receiver = params.name;
       this.GetUserByUsername(this.receiver);
+
+      this.socket.on('refreshPage', () => {
+        this.GetUserByUsername(this.receiver);
+      });
     });
   }
 
@@ -53,7 +61,7 @@ export class MessageComponent implements OnInit {
       this.msgService
         .SendMessage(this.user._id, this.receiverData._id, this.receiverData.username, this.message)
         .subscribe(data => {
-          console.log(data);
+          this.socket.emit('refresh', {});
           this.message = '';
         });
     }
