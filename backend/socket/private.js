@@ -5,8 +5,11 @@ module.exports = function(io) {
     socket.on('join chat', params => {
       socket.join(params.room1);
       socket.join(params.room2);
-      console.log(params);
+      //console.log(params);
     });
-    //console.log('user connected');
+    socket.on('start_typing', data => {
+      //we are only displaying the istyping in the receiver chat room, we are forwarding to receiver data so that we can know when the sender is typing on keypress
+      io.to(data.receiver).emit('is_typing', data);
+    });
   });
 };
