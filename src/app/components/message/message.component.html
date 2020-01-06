@@ -35,6 +35,12 @@
 
           <div class="cf"></div>
         </div>
+        <!-- When typing is set to true it's going to show the message is typing -->
+        <div class="left" *ngIf="typing">
+          <div class="chat-bubble left slide-left">
+            <div class="message">{{ receiver }} is typing...</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
