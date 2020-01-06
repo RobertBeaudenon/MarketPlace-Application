@@ -47,6 +47,12 @@ export class MessageComponent implements OnInit, AfterViewInit {
         this.typing = true;
       }
     });
+
+    this.socket.on('has_stopped_typing', data => {
+      if (data.sender === this.receiver) {
+        this.typing = false;
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -91,5 +97,17 @@ export class MessageComponent implements OnInit, AfterViewInit {
       sender: this.user.username,
       receiver: this.receiver
     });
+
+    if (this.typingMessage) {
+      clearTimeout(this.typingMessage);
+    }
+
+    //if the user stops typing for 500ms then it's going to emit that event
+    this.typingMessage = setTimeout(() => {
+      this.socket.emit('stop_typing', {
+        sender: this.user.username,
+        receiver: this.receiver
+      });
+    }, 500);
   }
 }
