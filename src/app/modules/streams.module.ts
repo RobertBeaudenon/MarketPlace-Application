@@ -26,6 +26,7 @@ import { RatingModule } from 'ng-starrating';
 import { ChatComponent } from '../components/chat/chat.component';
 import { MessageComponent } from '../components/message/message.component';
 import { MessageService } from '../services/message.service';
+import { NgxAutoScrollModule } from 'ngx-auto-scroll';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,15 @@ import { MessageService } from '../services/message.service';
     ChatComponent,
     MessageComponent
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, RatingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule,
+    RatingModule,
+    NgxAutoScrollModule
+  ],
   exports: [StreamsComponent, ToolbarComponent],
   providers: [TokenService, PostService, UsersService, MessageService]
 })
