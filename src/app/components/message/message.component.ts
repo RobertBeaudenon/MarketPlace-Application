@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import io from 'socket.io-client';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, AfterViewInit {
   receiver: String;
   user: any;
   message: String; //whatever is typed in textarea of chat with the use of ngModel ="message" it will be retreived form the html into this var
@@ -38,6 +38,15 @@ export class MessageComponent implements OnInit {
         this.GetUserByUsername(this.receiver);
       });
     });
+  }
+
+  ngAfterViewInit() {
+    const params = {
+      room1: this.user.username,
+      room2: this.receiver
+    };
+
+    this.socket.emit('join chat', params);
   }
 
   GetUserByUsername(name) {
