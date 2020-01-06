@@ -42,6 +42,7 @@ export class MessageComponent implements OnInit {
 
   getMessages(senderId, receiverId) {
     this.msgService.GetAllMessages(senderId, receiverId).subscribe(data => {
+      console.log(data);
       this.messages = data.messages.message;
     });
   }
