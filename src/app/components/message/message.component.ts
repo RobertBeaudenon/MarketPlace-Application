@@ -42,8 +42,9 @@ export class MessageComponent implements OnInit, AfterViewInit {
     });
 
     this.socket.on('is_typing', data => {
+      //we double verify that we are displaying the isTyping event to the receiver
       if (data.sender === this.receiver) {
-        console.log(data);
+        this.typing = true;
       }
     });
   }
@@ -84,6 +85,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
     }
   }
 
+  //on keypress in textarea we emit the event to the server by passing the sender and receiver
   IsTyping() {
     this.socket.emit('start_typing', {
       sender: this.user.username,
