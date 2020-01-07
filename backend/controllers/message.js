@@ -3,6 +3,7 @@ const HttpStatus = require('http-status-codes');
 const Message = require('../models/messageModels');
 const Conversation = require('../models/conversationModels');
 const User = require('../models/userModels');
+const Helper = require('../Helpers/helper');
 
 module.exports = {
   /***Get messages**/
@@ -40,6 +41,9 @@ module.exports = {
       async (err, result) => {
         //a conversation exist between both users
         if (result.length > 0) {
+          //holds the object becaue we use findone
+          const msg = await Message.findOne({ conversationId: result[0]._id });
+          Helper.updateChatList(req, msg);
           await Message.update(
             {
               conversationId: result[0]._id
