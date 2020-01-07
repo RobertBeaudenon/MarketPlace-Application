@@ -7,6 +7,8 @@ const cors = require('cors'); //cross origin resource sharing (since backend and
 //instance of express
 const app = express();
 
+//cross origin resource sharing
+//setting headers for application with allowed operations
 app.use(cors());
 
 const dbConfig = require('./config/secret');
@@ -14,15 +16,6 @@ const dbConfig = require('./config/secret');
 //Creating real time update on website without refreshing the page using socket.io
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
-
-//setting headers for application with allowed operations
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET', 'POST', 'DELETE', 'PUT', 'OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  next();
-});
 
 app.use(express.json({ limit: '50mb' })); //we specify that we are returning or sending our data in the JSON format with a limit size of data
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
