@@ -147,4 +147,11 @@ export class ToolbarComponent implements OnInit {
       this.socket.emit('refresh', {});
     });
   }
+
+  MarkAllMessages() {
+    console.log('asdfghjk');
+    this.msgService.MarkAllMessages().subscribe(data => {});
+    this.socket.emit('refresh', {});
+    this.msgNumber = 0;
+  }
 }

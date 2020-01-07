@@ -167,5 +167,32 @@ module.exports = {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when messages marked as read' });
       }
     }
+  },
+
+  async MarkAllMessages(req, res) {
+    //agregate returns an array
+    const msg = await Message.aggregate([
+      { $match: { 'message.receiverName': req.user.username } },
+      { $unwind: '$message' },
+      { $match: { 'message.receiverName': req.user.username } }
+    ]);
+
+    if (msg.length > 0) {
+      try {
+        msg.forEach(async value => {
+          await Message.update(
+            {
+              'message._id': value.message._id
+            },
+            { $set: { 'message.$.isRead': true } }
+          );
+        });
+        res.status(HttpStatus.OK).json({ message: 'All Messages marked as read' });
+      } catch (err) {
+        res
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json({ message: 'Error occured when all messages marked as read' });
+      }
+    }
   }
 };
