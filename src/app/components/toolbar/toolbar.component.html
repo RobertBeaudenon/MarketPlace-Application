@@ -30,7 +30,7 @@
             <li
               class="collection-item avatar"
               *ngFor="let chat of chatList"
-              [routerLink]="['/chat', chat.receiverId.username]"
+              (click)="GoToChatPage(chat.receiverId.username)"
             >
               <img src="http://placehold.it/50x50" class="circle" />
               <span class="title"

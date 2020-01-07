@@ -138,5 +138,34 @@ module.exports = {
         }
       }
     );
+  },
+
+  async MarkReceiverMessages(req, res) {
+    const { sender, receiver } = req.params;
+    //agregate returns an array
+    const msg = await Message.aggregate([
+      //unwind is used to transfrom the output of the array which are [objects] into their content
+      { $unwind: '$message' },
+      {
+        $match: {
+          $and: [{ 'message.senderName': receiver, 'message.receiverName': sender }]
+        }
+      }
+    ]);
+    if (msg.length > 0) {
+      try {
+        msg.forEach(async value => {
+          await Message.update(
+            {
+              'message._id': value.message._id
+            },
+            { $set: { 'message.$.isRead': true } }
+          );
+        });
+        res.status(HttpStatus.OK).json({ message: 'Messages marked as read' });
+      } catch (err) {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured when messages marked as read' });
+      }
+    }
   }
 };

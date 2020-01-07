@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 import _ from 'lodash';
 import { arrayAverage } from '../../../assets/js/helpers.js';
 import { StarRatingComponent } from 'ng-starrating';
+import { MessageService } from 'src/app/services/message.service.js';
 
 declare var $: any;
 
@@ -25,7 +26,12 @@ export class ToolbarComponent implements OnInit {
   chatList = [];
   msgNumber = 0;
 
-  constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {
+  constructor(
+    private tokenService: TokenService,
+    private router: Router,
+    private usersService: UsersService,
+    private msgService: MessageService
+  ) {
     this.socket = io('http://localhost:3000');
   }
 
@@ -132,5 +138,13 @@ export class ToolbarComponent implements OnInit {
         }
       }
     }
+  }
+
+  GoToChatPage(name) {
+    this.router.navigate(['chat', name]);
+    this.msgService.MarkMessages(this.user.username, name).subscribe(data => {
+      console.log(data);
+      this.socket.emit('refresh', {});
+    });
   }
 }
