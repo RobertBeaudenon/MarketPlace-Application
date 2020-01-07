@@ -25,7 +25,7 @@
         <!-- Dropdown for messages notifications -->
         <li class="dropdown-button dropdown-trigger1" data-target="dropdown1">
           <i class="fa fa-globe fa-1x badge"></i>
-          <span class="nav-label-icon" *ngIf="count.length > 0">{{ count.length }}</span>
+          <span class="nav-label-icon" *ngIf="msgNumber > 0">{{ msgNumber }}</span>
           <ul id="dropdown1" class="dropdown-content col s12 collection">
             <li class="collection-item avatar" *ngFor="let chat of chatList">
               <img src="http://placehold.it/50x50" class="circle" />
@@ -38,10 +38,10 @@
               <p>
                 <!-- Display only last message received -->
                 {{ chat.msgId.message[chat.msgId.message.length - 1].body }}
-                <a class="secondary-content">
+                <a class="secondary-content" *ngIf="!chat.msgId.message[chat.msgId.message.length - 1].isRead">
                   <i class="material-icons">brightness_1</i>
                 </a>
-                <a class="secondary-content">
+                <a class="secondary-content" *ngIf="chat.msgId.message[chat.msgId.message.length - 1].isRead">
                   <i class="material-icons">panorama_fish_eye</i>
                 </a>
               </p>

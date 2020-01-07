@@ -23,6 +23,7 @@ export class ToolbarComponent implements OnInit {
   count = [];
   average: any;
   chatList = [];
+  msgNumber = 0;
 
   constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {
     this.socket = io('http://localhost:3000');
@@ -74,7 +75,8 @@ export class ToolbarComponent implements OnInit {
         const value = _.filter(this.notifications, ['read', false]); //check in notificatins how many are not read
         this.count = value;
         this.chatList = data.result.chatList;
-        //console.log(this.chatList);
+        this.CheckIfLastMessageIsRead(this.chatList);
+        console.log(this.msgNumber);
       },
       err => {
         if (err.error.token === null) {
@@ -113,5 +115,22 @@ export class ToolbarComponent implements OnInit {
       lastWeek: 'DD/MM/YYYY',
       SameElse: 'DD/MM/YYYY'
     });
+  }
+
+  CheckIfLastMessageIsRead(arr) {
+    const checkArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      //get last message for each user
+      const receiver = arr[i].msgId.message[arr[i].msgId.message.length - 1];
+
+      //If the user has not the chatbox opened then we display a notification else we don't
+      if (this.router.url !== `/chat/${receiver.sendername}`) {
+        if (receiver.isRead === false && receiver.receiverName === this.user.username) {
+          //to update the notification counter of unread messages
+          checkArr.push(1);
+          this.msgNumber = _.sum(checkArr);
+        }
+      }
+    }
   }
 }
