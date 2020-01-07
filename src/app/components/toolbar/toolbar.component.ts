@@ -22,6 +22,7 @@ export class ToolbarComponent implements OnInit {
   socket: any;
   count = [];
   average: any;
+  chatList = [];
 
   constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {
     this.socket = io('http://localhost:3000');
@@ -30,8 +31,15 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
     this.user = this.tokenService.GetPayload();
 
-    const dropDownElement = document.querySelector('.dropdown-trigger');
+    const dropDownElement = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(dropDownElement, {
+      alignment: 'right',
+      hover: true,
+      coverTrigger: false
+    });
+
+    const dropDownElementTwo = document.querySelectorAll('.dropdown-trigger1');
+    M.Dropdown.init(dropDownElementTwo, {
       alignment: 'right',
       hover: true,
       coverTrigger: false
@@ -46,16 +54,6 @@ export class ToolbarComponent implements OnInit {
       this.average = arrayAverage(this.user.ratingNumber);
       this.average = Math.round(this.average);
     });
-
-    // $(document).ready(function() {
-    //   $.fn.raty.defaults.path = '../../../assets/images/';
-    //   $('.star').raty({
-    //     readOnly: true,
-    //     score: function(data) {
-    //       return $(this).attr('data-score');
-    //     }
-    //   });
-    // });
   }
 
   /****TO LOGOUT*****/
@@ -75,6 +73,8 @@ export class ToolbarComponent implements OnInit {
         this.notifications = data.result.notifications.reverse();
         const value = _.filter(this.notifications, ['read', false]); //check in notificatins how many are not read
         this.count = value;
+        this.chatList = data.result.chatList;
+        //console.log(this.chatList);
       },
       err => {
         if (err.error.token === null) {
@@ -104,5 +104,14 @@ export class ToolbarComponent implements OnInit {
       New Value: ${$event.newValue}, 
       Checked Color: ${$event.starRating.checkedcolor}, 
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+  }
+
+  MessageDate(date) {
+    return moment(date).calendar(null, {
+      sameDay: '[Today]',
+      lastDay: '[Yesterday]',
+      lastWeek: 'DD/MM/YYYY',
+      SameElse: 'DD/MM/YYYY'
+    });
   }
 }

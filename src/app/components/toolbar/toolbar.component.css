@@ -117,3 +117,17 @@ nav {
 li.dropdown-button {
   margin-left: 20px !important;
 }
+
+.material-icons {
+  color: brown !important;
+  margin-right: 10px;
+}
+
+.time {
+  margin-bottom: 10px !important;
+  font-style: italic;
+}
+
+li.dropdown-button {
+  margin-left: 20px !important;
+}

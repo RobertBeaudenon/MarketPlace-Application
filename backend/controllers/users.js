@@ -8,6 +8,8 @@ module.exports = {
     //returns all users in array
     await User.find({})
       .populate('posts.postId')
+      .populate('chatList.receiverId')
+      .populate('chatList.msgId')
       .then(result => {
         res.status(httpStatus.OK).json({ message: 'All users', result });
       })
@@ -22,6 +24,8 @@ module.exports = {
     await User.findOne({ _id: req.params.id })
       .populate('posts.postId')
       .populate('tasks.taskId')
+      .populate('chatList.receiverId')
+      .populate('chatList.msgId')
       .populate({
         //nested objects population
         path: 'tasks.taskId',
@@ -43,6 +47,8 @@ module.exports = {
     //returns all users in array
     await User.findOne({ username: req.params.username })
       .populate('posts.postId')
+      .populate('chatList.receiverId')
+      .populate('chatList.msgId')
       .then(result => {
         res.status(httpStatus.OK).json({ message: 'User By username', result });
       })
