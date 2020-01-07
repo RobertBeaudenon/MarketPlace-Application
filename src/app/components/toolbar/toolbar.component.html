@@ -42,7 +42,13 @@
               <p>
                 <!-- Display only last message received -->
                 {{ chat.msgId.message[chat.msgId.message.length - 1].body }}
-                <a class="secondary-content" *ngIf="!chat.msgId.message[chat.msgId.message.length - 1].isRead">
+                <a
+                  class="secondary-content"
+                  *ngIf="
+                    !chat.msgId.message[chat.msgId.message.length - 1].isRead &&
+                    chat.receiverId.username !== chat.msgId.message[chat.msgId.message.length - 1].receiverName
+                  "
+                >
                   <i class="material-icons">brightness_1</i>
                 </a>
                 <a class="secondary-content" *ngIf="chat.msgId.message[chat.msgId.message.length - 1].isRead">
