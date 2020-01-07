@@ -20,7 +20,7 @@ module.exports = {
       {
         $pull: {
           chatList: {
-            receiverId: req.params.receiver_id
+            receiverId: req.params.receiver_Id
           }
         }
       }
@@ -52,7 +52,7 @@ module.exports = {
                 msgId: message._id
               }
             ],
-            $postion: 0
+            $position: 0
           }
         }
       }
@@ -71,7 +71,7 @@ module.exports = {
                 msgId: message._id
               }
             ],
-            $postion: 0
+            $position: 0
           }
         }
       }
