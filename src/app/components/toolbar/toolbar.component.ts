@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import * as M from 'materialize-css';
@@ -17,7 +17,7 @@ declare var $: any;
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, AfterViewInit {
   user: any;
   notifications = [];
   socket: any;
@@ -62,6 +62,13 @@ export class ToolbarComponent implements OnInit {
       this.GetUser();
       this.average = arrayAverage(this.user.ratingNumber);
       this.average = Math.round(this.average);
+    });
+  }
+
+  ngAfterViewInit() {
+    //listen for the usersonline event, will return an array of the names of the users that are online
+    this.socket.on('usersOnline', data => {
+      console.log(data);
     });
   }
 
