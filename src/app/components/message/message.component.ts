@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import io from 'socket.io-client';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit, AfterViewInit {
+export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   //using thw input operator because we are sending data from the parent component to the child one in this case from Chat component to message component
   @Input() users;
 
@@ -22,7 +22,6 @@ export class MessageComponent implements OnInit, AfterViewInit {
   socket: any;
   typingMessage;
   typing = false;
-  usersArray = [];
 
   constructor(
     private tokenService: TokenService,
@@ -45,9 +44,6 @@ export class MessageComponent implements OnInit, AfterViewInit {
       });
     });
 
-    this.usersArray = this.users;
-    console.log(this.usersArray);
-
     this.socket.on('is_typing', data => {
       //we double verify that we are displaying the isTyping event to the receiver
       if (data.sender === this.receiver) {
@@ -60,6 +56,14 @@ export class MessageComponent implements OnInit, AfterViewInit {
         this.typing = false;
       }
     });
+  }
+
+  //keeps track of changes in values in vars,  is the interface that represents all input changes as object for a component,has the key as input property names and values are the instances of class
+  ngOnChanges(changes: SimpleChanges) {
+    //do not print the previous values when the array was empty, but only after change
+    if (changes.users.currentValue.length > 0) {
+      console.log(changes.users.currentValue);
+    }
   }
 
   ngAfterViewInit() {
