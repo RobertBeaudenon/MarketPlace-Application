@@ -4,6 +4,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-message',
@@ -22,6 +23,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   socket: any;
   typingMessage;
   typing = false;
+  isOnline = false;
 
   constructor(
     private tokenService: TokenService,
@@ -62,7 +64,15 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     //do not print the previous values when the array was empty, but only after change
     if (changes.users.currentValue.length > 0) {
-      console.log(changes.users.currentValue);
+      //returns index of wanted value in the array, returns -1 if not found
+      const result = _.indexOf(changes.users.currentValue, this.receiver);
+
+      //If the user that receive the message is found in the loggedin users array that he is online
+      if (result > -1) {
+        this.isOnline = true;
+      } else {
+        this.isOnline = false;
+      }
     }
   }
 
