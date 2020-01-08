@@ -91,7 +91,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
         this.count = value;
         this.chatList = data.result.chatList;
         this.CheckIfLastMessageIsRead(this.chatList);
-        console.log(this.msgNumber);
+        //console.log(this.msgNumber);
       },
       err => {
         if (err.error.token === null) {
