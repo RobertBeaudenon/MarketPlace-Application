@@ -71,7 +71,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     //listen for the usersonline event, will return an array of the names of the users that are online
     this.socket.on('usersOnline', data => {
-      console.log(data);
+      //console.log(data);
       //emit is not from socket in that case but for the transfer of data between components
       this.onlineUsers.emit(data);
     });
@@ -157,13 +157,13 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   GoToChatPage(name) {
     this.router.navigate(['chat', name]);
     this.msgService.MarkMessages(this.user.username, name).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.socket.emit('refresh', {});
     });
   }
 
   MarkAllMessages() {
-    console.log('asdfghjk');
+    //console.log('asdfghjk');
     this.msgService.MarkAllMessages().subscribe(data => {});
     this.socket.emit('refresh', {});
     this.msgNumber = 0;
