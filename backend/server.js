@@ -3,6 +3,7 @@ const mongoose = require('mongoose'); //Will allow to handle connection to Mongo
 const cookieParser = require('cookie-parser'); //to save our token in the cookie
 const cors = require('cors'); //cross origin resource sharing (since backend and frontend are from different origin from each other, so this will allow front end to consume backend API)
 //const logger = require('morgan'); //will allow us to log REST operation with status
+const _ = require('lodash');
 
 //instance of express
 const app = express();
@@ -29,7 +30,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url, { useUnifiedTopology: true, useNewUrlParser: true });
 
 //we pass io to streams
-require('./socket/streams')(io);
+require('./socket/streams')(io, User, _);
 require('./socket/private')(io);
 
 const auth = require('./routes/authRoutes');

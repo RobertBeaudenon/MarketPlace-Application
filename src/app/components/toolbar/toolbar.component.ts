@@ -52,6 +52,8 @@ export class ToolbarComponent implements OnInit {
       coverTrigger: false
     });
 
+    this.socket.emit('online', { room: 'global', user: this.user.username });
+
     this.GetUser();
     this.average = arrayAverage(this.user.ratingNumber);
     this.average = Math.round(this.average);
