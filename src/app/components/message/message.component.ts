@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,6 +11,9 @@ import io from 'socket.io-client';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit, AfterViewInit {
+  //using thw input operator because we are sending data from the parent component to the child one in this case from Chat component to message component
+  @Input() users;
+
   receiver: String;
   user: any;
   message: String; //whatever is typed in textarea of chat with the use of ngModel ="message" it will be retreived form the html into this var
@@ -19,6 +22,7 @@ export class MessageComponent implements OnInit, AfterViewInit {
   socket: any;
   typingMessage;
   typing = false;
+  usersArray = [];
 
   constructor(
     private tokenService: TokenService,
@@ -40,6 +44,9 @@ export class MessageComponent implements OnInit, AfterViewInit {
         this.GetUserByUsername(this.receiver);
       });
     });
+
+    this.usersArray = this.users;
+    console.log(this.usersArray);
 
     this.socket.on('is_typing', data => {
       //we double verify that we are displaying the isTyping event to the receiver
