@@ -17,4 +17,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.tabElement.style.display = 'none';
   }
+
+  online(event) {
+    console.log(event);
+  }
 }
