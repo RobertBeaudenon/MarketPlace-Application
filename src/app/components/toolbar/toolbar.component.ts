@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import * as M from 'materialize-css';
@@ -18,6 +18,9 @@ declare var $: any;
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit, AfterViewInit {
+  //to send data from toolbar component to chat compoenent
+  @Output() onlineUsers = new EventEmitter();
+
   user: any;
   notifications = [];
   socket: any;
@@ -69,6 +72,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     //listen for the usersonline event, will return an array of the names of the users that are online
     this.socket.on('usersOnline', data => {
       console.log(data);
+      //emit is not from socket in that case but for the transfer of data between components
+      this.onlineUsers.emit(data);
     });
   }
 
