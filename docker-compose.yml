@@ -1,0 +1,22 @@
+version: '3'
+services:
+  frontend:
+    container_name: angular
+    build: ./
+    ports:
+      - '80:4200'
+    links:
+      - node
+  node:
+    container_name: node
+    restart: always #container will always restart
+    build: ./backend/ #looks in the current directory for Dockerfile and builds the image
+    ports:
+      - '3000:3000' #will map port 80 of our machine to port 3000 of docker container
+    links:
+      - mongo #to link our app service/container to our mongo service/container
+  mongo:
+    container_name: mongo
+    image: mongo #will pull the image from dockerhub
+    ports:
+      - '27017:27017'
