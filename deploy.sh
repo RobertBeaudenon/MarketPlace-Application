@@ -1,3 +1,3 @@
 #!/bin/bash
-ng build 
+ng build --outputPath=./dist
 aws s3 cp ./dist s3://hlprfrontend --recursive
