@@ -9,6 +9,8 @@ body {
   background-color: black !important;
 }
 
+/* scroll bar styling */
+
 ::-webkit-scrollbar {
   width: 5px;
 }
