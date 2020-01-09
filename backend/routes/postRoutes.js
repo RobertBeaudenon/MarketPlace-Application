@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router(); //allows us to create the routes
 
 const PostCtrl = require('../controllers/posts');
-const AuthHelper = require('../helpers/authHelper');
+const AuthHelper = require('../Helpers/authHelper');
 
 router.get('/posts', AuthHelper.VerifyToken, PostCtrl.GetAllPosts);
 router.get('/post/:id', AuthHelper.VerifyToken, PostCtrl.GetPost); //get a single post
