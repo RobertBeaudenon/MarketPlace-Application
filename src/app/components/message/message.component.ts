@@ -62,6 +62,8 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
 
   //keeps track of changes in values in vars,  is the interface that represents all input changes as object for a component,has the key as input property names and values are the instances of class
   ngOnChanges(changes: SimpleChanges) {
+    const title = document.querySelector('.nameCol');
+
     //do not print the previous values when the array was empty, but only after change
     if (changes.users.currentValue.length > 0) {
       //returns index of wanted value in the array, returns -1 if not found
@@ -70,8 +72,10 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
       //If the user that receive the message is found in the loggedin users array that he is online
       if (result > -1) {
         this.isOnline = true;
+        (title as HTMLElement).style.marginTop = '10px';
       } else {
         this.isOnline = false;
+        (title as HTMLElement).style.marginTop = '20px';
       }
     }
   }

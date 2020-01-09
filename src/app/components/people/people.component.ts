@@ -12,6 +12,7 @@ export class PeopleComponent implements OnInit {
   users = [];
   loggedInUser: any;
   userArr = [];
+  onlineusers = [];
 
   constructor(private usersService: UsersService, private tokenService: TokenService) {}
 
@@ -32,5 +33,19 @@ export class PeopleComponent implements OnInit {
     this.usersService.GetUserByID(this.loggedInUser._id).subscribe(data => {
       console.log(data);
     });
+  }
+
+  online(event) {
+    this.onlineusers = event;
+  }
+
+  CheckIfOnline(name) {
+    const result = _.indexOf(this.onlineusers, name);
+
+    if (result > -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
