@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi'); //Will help us validate the data that we are getting from the frontend before sending it to the db
 const HttpStatus = require('http-status-codes'); //instead of writing 200 we wirte HttpStatus.GOOD_REQUEST
 const User = require('../models/userModels');
-const Helpers = require('../helpers/helper');
+const Helpers = require('../Helpers/helper');
 const bcrypt = require('bcryptjs'); //to encrypt passwords
 const jwt = require('jsonwebtoken'); //tokens for authentication
 const dbConfig = require('../config/secret');
