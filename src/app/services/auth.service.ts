@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //Connection with the backend
-const BASEURL = 'http://docker-node-mongo:3000/api/chatapp';
+const BASEURL = 'http://localhost:3000/api/chatapp';
 
 @Injectable({
   providedIn: 'root'
