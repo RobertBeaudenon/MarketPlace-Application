@@ -81,6 +81,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   logout() {
     this.tokenService.DeleteToken(); //Delete token when user logout
     this.router.navigate(['']); //redirect user to login/register pager
+
+    this.socket.disconnect(); //remove user from list of online users
   }
 
   GoToHome() {
