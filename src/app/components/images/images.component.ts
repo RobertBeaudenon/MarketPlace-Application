@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+import { UsersService } from 'src/app/services/users.service';
 
 const URL = 'http://localhost:3000/api/chatapp/upload-image';
 
@@ -16,11 +17,12 @@ export class ImagesComponent implements OnInit {
 
   selectedFile: any;
 
-  constructor() {}
+  constructor(private usersService: UsersService) {}
 
   ngOnInit() {}
 
   onFileSelected(event) {
+    //event is an array that will contain the image as one of its input
     const file: File = event[0];
 
     this.ReadAsBase64(file)
@@ -31,7 +33,19 @@ export class ImagesComponent implements OnInit {
   }
 
   upload() {
-    console.log(this.selectedFile);
+    //Clear field of image uploaded name
+    const filePath = <HTMLInputElement>document.getElementById('filePath');
+    filePath.value = '';
+
+    //verify that the file is not empty, prohibiting user to click on upload with adding any file
+    if (this.selectedFile) {
+      this.usersService.AddImage(this.selectedFile).subscribe(
+        data => {
+          console.log(data);
+        },
+        err => console.log(err)
+      );
+    }
   }
 
   ReadAsBase64(file): Promise<any> {
