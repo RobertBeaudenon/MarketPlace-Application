@@ -21,7 +21,7 @@ const io = require('socket.io').listen(server);
 const { User } = require('./Helpers/UserClass');
 
 app.use(express.json({ limit: '50mb' })); //we specify that we are returning or sending our data in the JSON format with a limit size of data
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' })); //carefull on upload of large image size they can be rejected
 app.use(cookieParser());
 app.use(express.static('public'));
 //app.use(logger('dev'));
