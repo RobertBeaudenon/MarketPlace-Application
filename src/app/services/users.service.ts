@@ -42,4 +42,10 @@ export class UsersService {
       rating
     });
   }
+
+  AddImage(image): Observable<any> {
+    return this.http.post(`${BASEURL}/upload-image`, {
+      image
+    });
+  }
 }
