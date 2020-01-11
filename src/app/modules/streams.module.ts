@@ -27,6 +27,7 @@ import { ChatComponent } from '../components/chat/chat.component';
 import { MessageComponent } from '../components/message/message.component';
 import { MessageService } from '../services/message.service';
 import { NgxAutoScrollModule } from 'ngx-auto-scroll';
+import { ImagesComponent } from '../components/images/images.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { NgxAutoScrollModule } from 'ngx-auto-scroll';
     TasksCompletedComponent,
     StarRatingComponent,
     ChatComponent,
-    MessageComponent
+    MessageComponent,
+    ImagesComponent
   ],
   imports: [
     CommonModule,

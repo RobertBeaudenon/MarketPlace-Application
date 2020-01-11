@@ -13,6 +13,7 @@ import { TasksComponent } from '../components/tasks/tasks.component';
 import { TasksCompletedComponent } from '../components/tasks-completed/tasks-completed.component';
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 import { ChatComponent } from '../components/chat/chat.component';
+import { ImagesComponent } from '../components/images/images.component';
 
 //obj of routes
 const routes: Routes = [
@@ -66,6 +67,15 @@ const routes: Routes = [
     path: 'chat/:name',
     component: ChatComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'images/:name',
+    component: ImagesComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: '**', //redirect any route that user type that doesnt exist, to streams route
+    redirectTo: 'streams'
   }
 ];
 
