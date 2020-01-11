@@ -28,6 +28,7 @@ import { MessageComponent } from '../components/message/message.component';
 import { MessageService } from '../services/message.service';
 import { NgxAutoScrollModule } from 'ngx-auto-scroll';
 import { ImagesComponent } from '../components/images/images.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ImagesComponent } from '../components/images/images.component';
     HttpClientModule,
     RouterModule,
     RatingModule,
-    NgxAutoScrollModule
+    NgxAutoScrollModule,
+    FileUploadModule
   ],
   exports: [StreamsComponent, ToolbarComponent],
   providers: [TokenService, PostService, UsersService, MessageService]
