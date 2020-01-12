@@ -28,6 +28,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   average: any;
   chatList = [];
   msgNumber = 0;
+  imageKey: any;
 
   constructor(
     private tokenService: TokenService,
@@ -93,6 +94,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   GetUser() {
     this.usersService.GetUserByID(this.user._id).subscribe(
       data => {
+        this.imageKey = data.result.picS3Key;
         this.notifications = data.result.notifications.reverse();
         const value = _.filter(this.notifications, ['read', false]); //check in notificatins how many are not read
         this.count = value;
