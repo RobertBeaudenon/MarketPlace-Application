@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { UsersService } from 'src/app/services/users.service';
+import { TokenService } from 'src/app/services/token.service';
 
 const URL = 'http://localhost:3000/api/chatapp/upload-image';
 
@@ -15,11 +16,25 @@ export class ImagesComponent implements OnInit {
     disableMultipart: true //to upload only one file at a time
   });
 
+  user: any;
   selectedFile: any;
+  images = [];
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private tokenService: TokenService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user = this.tokenService.GetPayload();
+    this.GetUser();
+  }
+
+  GetUser() {
+    this.usersService.GetUserByID(this.user._id).subscribe(
+      data => {
+        this.images = data.result.images;
+      },
+      err => console.log(err)
+    );
+  }
 
   onFileSelected(event) {
     //event is an array that will contain the image as one of its input

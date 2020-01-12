@@ -31,9 +31,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col s12 m6 l4">
+        <div class="col s12 m6 l4" *ngFor="let image of images">
           <div class="ite img wrap imgDiv">
-            <img src="http://placehold.it/50x50" alt="img" class="imgCircle" />
+            <img
+              src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ image.imgS3Key }}"
+              alt="img"
+              class="imgCircle"
+            />
             <button class="btn imgBtn">Set As profile</button>
           </div>
         </div>
