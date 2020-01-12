@@ -93,4 +93,13 @@ export class ImagesComponent implements OnInit {
     });
     return fileValue;
   }
+
+  SetProfileImage(image) {
+    this.usersService.SetDefaultImage(image.imgS3Key).subscribe(
+      data => {
+        this.socket.emit('refresh', {});
+      },
+      err => console.log(err)
+    );
+  }
 }
