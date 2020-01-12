@@ -1,5 +1,4 @@
 const HttpStatus = require('http-status-codes');
-const upload = require('../services/file-upload');
 
 const config = require('../config/secret');
 
@@ -11,25 +10,47 @@ AWS.config.update({
 });
 const s3Bucket = new AWS.S3({ params: { Bucket: config.S3_BUCKET } });
 
+const User = require('../models/userModels');
+
 module.exports = {
-  UploadImage(req, res) {
+  async UploadImage(req, res) {
     //Uploading base64 encoded image to AWS S#
     buf = new Buffer(req.body.image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+    const type = req.body.image.split(';')[0].split('/')[1];
+    console.log(type);
     const data = {
       Key: Date.now().toString(),
       Body: buf,
       ContentEncoding: 'base64',
-      ContentType: 'image/jpeg',
+      ContentType: `image/${type}`,
       ACL: 'public-read' //allows public access of image stored in S3 through url
     };
 
-    s3Bucket.putObject(data, function(err, data) {
-      if (err) {
-        console.log(err);
-        console.log('Error uploading data: ', data);
-      } else {
-        console.log('succesfully uploaded the image!', data);
+    let location = '';
+    let key = '';
+    try {
+      const { Location, Key } = await s3Bucket.upload(data).promise();
+      location = Location;
+      key = Key;
+    } catch (error) {
+      console.log(error);
+    }
+
+    await User.update(
+      {
+        _id: req.user._id
+      },
+      {
+        $push: {
+          images: {
+            imgS3Key: key
+          }
+        }
       }
-    });
+    )
+      .then(() => res.status(HttpStatus.OK).json({ message: 'Image uploaded to AWS S3', location, key }))
+      .catch(err =>
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when uploading image to AWS S3' })
+      );
   }
 };
