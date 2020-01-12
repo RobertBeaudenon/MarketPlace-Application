@@ -48,4 +48,8 @@ export class UsersService {
       image
     });
   }
+
+  SetDefaultImage(imageS3Key): Observable<any> {
+    return this.http.get(`${BASEURL}/set-default-image?key=${imageS3Key}`);
+  }
 }
