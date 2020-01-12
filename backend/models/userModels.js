@@ -61,7 +61,15 @@ const userSchema = mongoose.Schema({
   ],
   totalTasksCompleted: { type: Number, default: 0 },
   ratingNumber: [Number],
-  ratingSum: { type: Number, default: 0 }
+  ratingSum: { type: Number, default: 0 },
+  picVersion: { type: String, default: '' },
+  picS3Key: { type: String, default: '' },
+  images: [
+    {
+      imgS3Key: { type: String, default: '' },
+      imgS3URL: { type: String, default: '' }
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', userSchema); //User is the referance to the collection related to the userSchema in DB
