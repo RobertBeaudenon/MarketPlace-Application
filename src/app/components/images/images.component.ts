@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { UsersService } from 'src/app/services/users.service';
 import { TokenService } from 'src/app/services/token.service';
+import io from 'socket.io-client';
 
 const URL = 'http://localhost:3000/api/chatapp/upload-image';
 
@@ -19,12 +20,19 @@ export class ImagesComponent implements OnInit {
   user: any;
   selectedFile: any;
   images = [];
+  socket: any;
 
-  constructor(private usersService: UsersService, private tokenService: TokenService) {}
+  constructor(private usersService: UsersService, private tokenService: TokenService) {
+    this.socket = io('http://localhost:3000');
+  }
 
   ngOnInit() {
     this.user = this.tokenService.GetPayload();
     this.GetUser();
+
+    this.socket.on('refreshPage', () => {
+      this.GetUser();
+    });
   }
 
   GetUser() {
@@ -48,14 +56,14 @@ export class ImagesComponent implements OnInit {
   }
 
   upload() {
-    //Clear field of image uploaded name
-    const filePath = <HTMLInputElement>document.getElementById('filePath');
-    filePath.value = '';
-
     //verify that the file is not empty, prohibiting user to click on upload with adding any file
     if (this.selectedFile) {
       this.usersService.AddImage(this.selectedFile).subscribe(
         data => {
+          this.socket.emit('refresh', {});
+          //Clear field of image uploaded name
+          const filePath = <HTMLInputElement>document.getElementById('filePath');
+          filePath.value = '';
           console.log(data);
         },
         err => console.log(err)
