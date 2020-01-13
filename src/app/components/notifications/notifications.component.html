@@ -10,7 +10,11 @@
     <div class="col s12 m8 l9">
       <ul class="collection col s12 m10" *ngIf="notifications.length > 0">
         <li class="collection-item avatar" *ngFor="let data of notifications">
-          <img class="circle" src="http://placehold.it/50x50" alt="image" />
+          <img
+            class="circle"
+            src="https://***REMOVED***.s3.ca-central-1.amazonaws.com/{{ data.senderId.picS3Key }}"
+            alt="image"
+          />
           <span class="title">{{ data.message }}</span>
           <a href="" class="secondary-content">
             <i *ngIf="!data.read" class="material-icons">brightness_1</i>
