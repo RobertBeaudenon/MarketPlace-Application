@@ -9,7 +9,10 @@
           <span class="nav-label-icon" *ngIf="count.length > 0">{{ count.length }}</span>
           <ul id="dropdown" class="dropdown-content col s12 collection">
             <li class="collection-item avatar" *ngFor="let data of notifications">
-              <img src="http://placehold.it/50x50" class="circle" />
+              <img
+                src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ data.senderId.picS3Key }}"
+                class="circle"
+              />
               <span [ngClass]="data.read ? 'isRead' : 'unread'">{{ data.message }}</span>
               <p class="time">{{ TimeFromNow(data.created) }}</p>
             </li>
@@ -32,7 +35,10 @@
               *ngFor="let chat of chatList"
               (click)="GoToChatPage(chat.receiverId.username)"
             >
-              <img src="http://placehold.it/50x50" class="circle" />
+              <img
+                src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ chat.receiverId.picS3Key }}"
+                class="circle"
+              />
               <span class="title"
                 >{{ chat.receiverId.username }}
                 <a class="secondary-content">{{
