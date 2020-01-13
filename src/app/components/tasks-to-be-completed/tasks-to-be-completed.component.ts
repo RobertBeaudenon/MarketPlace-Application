@@ -23,6 +23,7 @@ export class TasksToBeCompletedComponent implements OnInit {
   tasksToDo = [];
   usersDoingTaskName = [];
   usersDoingTaskId = [];
+  profilePicTaskOwner = [];
 
   post: string;
 
@@ -51,6 +52,8 @@ export class TasksToBeCompletedComponent implements OnInit {
   GetUser() {
     this.usersDoingTaskName = [];
     this.usersDoingTaskId = [];
+    this.profilePicTaskOwner = [];
+
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
         this.tasks = data.result.tasks.reverse();

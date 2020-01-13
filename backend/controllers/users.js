@@ -2,6 +2,7 @@ const httpStatus = require('http-status-codes');
 
 const User = require('../models/userModels');
 const Post = require('../models/postModels');
+const Task = require('../models/taskModels');
 module.exports = {
   /** Get All the USERS ***/
   async GetAllUsers(req, res) {
@@ -10,6 +11,7 @@ module.exports = {
       .populate('posts.postId')
       .populate('chatList.receiverId')
       .populate('chatList.msgId')
+      .populate('notifications.senderId')
       .then(result => {
         res.status(httpStatus.OK).json({ message: 'All users', result });
       })
@@ -26,12 +28,21 @@ module.exports = {
       .populate('tasks.taskId')
       .populate('chatList.receiverId')
       .populate('chatList.msgId')
+      .populate('notifications.senderId')
       .populate({
         //nested objects population
         path: 'tasks.taskId',
         populate: {
           path: 'postId',
           model: Post
+        }
+      })
+      .populate({
+        //nested objects population
+        path: 'tasks.taskId',
+        populate: {
+          path: 'taskOwner',
+          model: Task
         }
       })
       .then(result => {
@@ -49,6 +60,7 @@ module.exports = {
       .populate('posts.postId')
       .populate('chatList.receiverId')
       .populate('chatList.msgId')
+      .populate('notifications.senderId')
       .then(result => {
         res.status(httpStatus.OK).json({ message: 'User By username', result });
       })

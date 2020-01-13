@@ -22,6 +22,7 @@ export class MyTasksComponent implements OnInit {
   tasks = [];
   usersDoingTaskName = [];
   usersDoingTaskId = [];
+  profilePic: any;
   test = [];
 
   post: string;
@@ -51,9 +52,11 @@ export class MyTasksComponent implements OnInit {
   GetUser() {
     this.usersDoingTaskName = [];
     this.usersDoingTaskId = [];
+
     this.userService.GetUserByID(this.user._id).subscribe(
       data => {
         this.tasks = data.result.tasks.reverse();
+        this.profilePic = data.result.picS3Key;
 
         //Remove tasks that we are not the owner off
         _.remove(this.tasks, { userDoingTaskUsername: this.user.username });
