@@ -1,0 +1,13 @@
+.DS_STORE
+
+node_modules
+
+./backend/node_modules
+./backend/config/secret.js
+
+.prettierrc
+
+awscli-bundle.zip
+./awscli-bundle
+
+./dist
