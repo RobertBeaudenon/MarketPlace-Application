@@ -9,7 +9,7 @@
     </div>
     <div class="col s12 m8 l9">
       <div class="row">
-        <div class="col s12 m6 l4 cardDiv" *ngFor="let user of users">
+        <div class="col s12 m6 l4 cardDiv" *ngFor="let user of users" (click)="ViewUserProfile(user)">
           <div class="card">
             <a
               ><div class="card-image imgDiv">
@@ -26,7 +26,7 @@
               </h3>
 
               <p>Country</p>
-              <button class="btn">Profile</button>
+              <button (click)="ViewUserProfile(user)" class="btn">Profile</button>
               <a class="secondary-content" [routerLink]="['/chat', user.username]">
                 <i class="material-icons">chat</i>
               </a>

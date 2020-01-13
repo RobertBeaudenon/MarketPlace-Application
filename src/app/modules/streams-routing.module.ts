@@ -14,6 +14,7 @@ import { TasksCompletedComponent } from '../components/tasks-completed/tasks-com
 import { StarRatingComponent } from '../components/star-rating/star-rating.component';
 import { ChatComponent } from '../components/chat/chat.component';
 import { ImagesComponent } from '../components/images/images.component';
+import { ViewUserProfileComponent } from '../components/view-user-profile/view-user-profile.component';
 
 //obj of routes
 const routes: Routes = [
@@ -74,6 +75,12 @@ const routes: Routes = [
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
   },
   {
+    path: ':name',
+    component: ViewUserProfileComponent,
+    canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    //keep this route at the end because when it's going to verify the routes its going from top to bottom
     path: '**', //redirect any route that user type that doesnt exist, to streams route
     redirectTo: 'streams'
   }

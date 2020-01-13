@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import _ from 'lodash';
 import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-people',
@@ -14,7 +15,7 @@ export class PeopleComponent implements OnInit {
   userArr = [];
   onlineusers = [];
 
-  constructor(private usersService: UsersService, private tokenService: TokenService) {}
+  constructor(private usersService: UsersService, private tokenService: TokenService, private router: Router) {}
 
   ngOnInit() {
     this.loggedInUser = this.tokenService.GetPayload(); //get user info from payload
@@ -47,5 +48,9 @@ export class PeopleComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  ViewUserProfile(user) {
+    this.router.navigate([user.username]);
   }
 }

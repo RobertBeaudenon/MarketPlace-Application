@@ -29,6 +29,7 @@ import { MessageService } from '../services/message.service';
 import { NgxAutoScrollModule } from 'ngx-auto-scroll';
 import { ImagesComponent } from '../components/images/images.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ViewUserProfileComponent } from '../components/view-user-profile/view-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     StarRatingComponent,
     ChatComponent,
     MessageComponent,
-    ImagesComponent
+    ImagesComponent,
+    ViewUserProfileComponent
   ],
   imports: [
     CommonModule,
