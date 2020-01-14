@@ -8,6 +8,8 @@ import * as M from 'materialize-css';
 })
 export class ViewUserProfileComponent implements OnInit, AfterViewInit {
   tabElement: any;
+  profileTab = true;
+  postsTab = false;
 
   constructor() {}
 
@@ -19,5 +21,18 @@ export class ViewUserProfileComponent implements OnInit, AfterViewInit {
     const tabs = document.querySelector('.tabs');
     M.Tabs.init(tabs, {});
     this.tabElement.style.display = 'none';
+  }
+
+  ChangeTab(value) {
+    //display posts tab
+    if (value === 'posts') {
+      this.postsTab = true;
+      this.profileTab = false;
+    }
+    //display profile tab
+    if (value === 'profile') {
+      this.postsTab = false;
+      this.profileTab = true;
+    }
   }
 }

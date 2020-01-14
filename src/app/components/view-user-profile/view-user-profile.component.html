@@ -2,21 +2,21 @@
 <div class="container">
   <div class="col s12 m12 l10">
     <ul class="tabs">
-      <li class="tab col s4">
+      <li class="tab col s4" (click)="ChangeTab('profile')">
         <a href="#" class="active">
+          Profile
+        </a>
+      </li>
+      <li class="tab col s4" (click)="ChangeTab('posts')">
+        <a href="#">
           Posts
         </a>
       </li>
-      <li class="tab col s4">
-        <a href="#">
-          Posts2
-        </a>
-      </li>
-      <li class="tab col s4">
+      <!-- <li class="tab col s4">
         <a href="#">
           Posts3
         </a>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>
@@ -35,7 +35,7 @@
     <div class="col s12 m8 l9" style="background: white;">
       <div class="row">
         <div class="col s12">
-          <div class="row">
+          <div class="row" *ngIf="postsTab">
             <ul class="collection col s12 m12 l10">
               <li class="collection-item avatar">
                 <img class="circle" src="http://placehold.it/100x100" />
@@ -71,7 +71,7 @@
           </div>
 
           <div class="row">
-            <div class="col s12 m4 l4">
+            <div class="col s12 m4 l4" *ngIf="profileTab">
               <div class="card">
                 <div class="card-image imgDiv">
                   <img class="imgCircle" src="http://placehold.it/100x100" />
@@ -84,7 +84,7 @@
             </div>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col s12 m4 l4">
               <div class="card">
                 <div class="card-image imgDiv">
@@ -96,7 +96,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
