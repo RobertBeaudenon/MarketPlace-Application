@@ -3,6 +3,7 @@ import * as M from 'materialize-css';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { arrayAverage } from '../../../assets/js/helpers.js';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-view-user-profile',
@@ -55,12 +56,16 @@ export class ViewUserProfileComponent implements OnInit, AfterViewInit {
     this.usersService.GetUserByName(name).subscribe(
       data => {
         console.log(data.result);
-        this.posts = data.result.posts;
+        this.posts = data.result.posts.reverse();
         this.user = data.result;
         this.average = arrayAverage(this.user.ratingNumber);
         //this.average = Math.round(this.average);
       },
       err => console.log(err)
     );
+  }
+
+  TimeFromNow(time) {
+    return moment(time).fromNow();
   }
 }
