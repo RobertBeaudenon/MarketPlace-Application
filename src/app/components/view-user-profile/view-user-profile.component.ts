@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { arrayAverage } from '../../../assets/js/helpers.js';
 import * as moment from 'moment';
+import { TokenService } from 'src/app/services/token.service.js';
 
 @Component({
   selector: 'app-view-user-profile',
@@ -20,9 +21,14 @@ export class ViewUserProfileComponent implements OnInit, AfterViewInit {
   user: any;
   name: any;
 
-  constructor(private route: ActivatedRoute, private usersService: UsersService) {}
+  userLoggedIn: any;
+  flag: boolean;
+
+  constructor(private route: ActivatedRoute, private usersService: UsersService, private token: TokenService) {}
 
   ngOnInit() {
+    this.flag = false;
+    this.userLoggedIn = this.token.GetPayload();
     this.profileTab = true;
     this.tabElement = document.querySelector('.nav-content');
     const tabs = document.querySelector('.tabs');
@@ -37,6 +43,9 @@ export class ViewUserProfileComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.tabElement.style.display = 'none';
+    if (this.user.username === this.userLoggedIn.username) {
+      this.flag = true;
+    }
   }
 
   ChangeTab(value) {
