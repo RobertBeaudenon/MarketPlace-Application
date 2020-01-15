@@ -16,8 +16,9 @@
               src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ post.user.picS3Key }}"
               alt=""
               class="circle"
+              (click)="ViewUserProfile(post.user)"
             />
-            <span class="title">{{ post.user.username }}</span>
+            <span (click)="ViewUserProfile(post.user)" class="title">{{ post.user.username }}</span>
             <p class="time">
               {{ TimeFromNow(requestingIds[i].createdAt) }}<br />
               <!-- Country -->

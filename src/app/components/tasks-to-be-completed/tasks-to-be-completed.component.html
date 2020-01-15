@@ -3,8 +3,8 @@
     <!-- looping on posts array created -->
     <ul class="collection col s12 m12 l10" *ngFor="let task of tasks">
       <li class="collection-item avatar">
-        <img src="http://placehold.it/50x50" alt="" class="circle" />
-        <span class="title">{{ task.taskOwnerUsername }}</span>
+        <img (click)="ViewUserProfile(task.taskOwnerUsername)" src="http://placehold.it/50x50" alt="" class="circle" />
+        <span (click)="ViewUserProfile(task.taskOwnerUsername)" class="title">{{ task.taskOwnerUsername }}</span>
         <p class="time">
           {{ TimeFromNow(task.createdAt) }}<br />
           You are Assigned to this tasked
