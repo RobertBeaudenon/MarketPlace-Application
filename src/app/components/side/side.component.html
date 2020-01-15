@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col s12 m4" [routerLinkActive]="['']" [routerLinkActiveOptions]="{ exact: true }">
-    <a>
+    <a [routerLink]="['', userData.username]">
       <span>MyPosts</span>
       <p class="num" *ngIf="userData">{{ userData.posts.length }}</p>
       <p class="num" *ngIf="!userData">0</p>
@@ -78,6 +78,13 @@
     <a [routerLink]="['/notifications']">
       <div>
         Notifications<a href="#!" class="secondary-content"><i class="material-icons">alarm</i></a>
+      </div>
+    </a>
+  </li>
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">
+    <a [routerLink]="['', userData.username]">
+      <div>
+        Profile<a href="#!" class="secondary-content"><i class="material-icons">accessibility</i></a>
       </div>
     </a>
   </li>
