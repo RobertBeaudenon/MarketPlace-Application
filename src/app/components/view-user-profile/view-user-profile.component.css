@@ -67,3 +67,13 @@
 .collection-item {
   border: none !important;
 }
+
+#element1 {
+  float: left;
+}
+#element2 {
+  float: right;
+  padding-right: 600px;
+  padding-top: 4px;
+  font-size: 20px;
+}

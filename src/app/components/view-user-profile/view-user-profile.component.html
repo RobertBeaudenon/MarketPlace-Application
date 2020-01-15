@@ -26,8 +26,32 @@
     <div class="col s12 m4 l3">
       <div class="row">
         <div class="col s12">
-          <span class="title">{{ name }}</span>
-          <h2 class="cityName">Country</h2>
+          <!-- <span class="title">{{ name }}</span>
+          <h2 class="cityName">Country</h2> -->
+          <div class="card">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img
+                class="activator"
+                src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ user.picS3Key }}"
+              />
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4"
+                >{{ name }}
+                <!-- <i class="material-icons right">more_vert</i> -->
+
+                <a *ngIf="!flag" class="secondary-content" [routerLink]="['/chat', user.username]">
+                  <i class="material-icons">chat</i>
+                </a>
+              </span>
+            </div>
+            <!-- <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"
+                >Card Title<i class="material-icons right">close</i></span
+              >
+              <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -38,7 +62,10 @@
           <div class="row" *ngIf="postsTab">
             <ul class="collection col s12 m12 l10" *ngFor="let post of posts">
               <li class="collection-item avatar">
-                <img class="circle" src="http://placehold.it/100x100" />
+                <img
+                  class="circle"
+                  src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ user.picS3Key }}"
+                />
                 <span class="post">{{ post.postId.username }}</span>
                 <p class="time">
                   {{ TimeFromNow(post.created) }} <br />
@@ -72,13 +99,54 @@
 
           <div class="row">
             <div class="col s12 m4 l4" *ngIf="profileTab">
-              <div class="card">
-                <div class="card-image imgDiv">
-                  <img class="imgCircle" src="http://placehold.it/100x100" />
+              <!-- <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img
+                    class="activator"
+                    src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ user.picS3Key }}"
+                  />
+                </div>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4"
+                    >Card Title<i class="material-icons right">more_vert</i></span
+                  >
+                  <p><a href="#">This is a link</a></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"
+                    >Card Title<i class="material-icons right">close</i></span
+                  >
+                  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                </div>
+              </div> -->
+              <div class="card " style="width:800px; height: 1000px;">
+                <div class="card-content " style="width:800px; height: 100px;">
+                  <span class="card-title">Rating</span>
+                  <!-- <div style="text-align:center"> -->
+                  <star-rating
+                    value="{{ average }}"
+                    totalstars="5"
+                    checkedcolor="red"
+                    uncheckedcolor="black"
+                    size="24px"
+                    readonly="true"
+                    id="element1"
+                  ></star-rating>
+                  <p id="element2">{{ average }}</p>
+
+                  <!-- </div> -->
                 </div>
                 <div class="card-action">
-                  <h3 class="card-title">Following</h3>
-                  <p>Country</p>
+                  <span class="card-title">Description</span>
+                  <p>{{ user.description }}</p>
+                  <br />
+                  <span class="card-title">Major</span>
+                  <p>{{ user.major }}</p>
+                  <br />
+
+                  <span class="card-title">Total Tasks Completed</span>
+                  <p>{{ user.totalTasksCompleted }}</p>
+                  <br />
                 </div>
               </div>
             </div>
