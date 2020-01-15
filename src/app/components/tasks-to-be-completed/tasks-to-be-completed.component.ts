@@ -81,4 +81,8 @@ export class TasksToBeCompletedComponent implements OnInit {
   TimeFromNow(time) {
     return moment(time).fromNow();
   }
+
+  ViewUserProfile(username) {
+    this.router.navigate([username]);
+  }
 }

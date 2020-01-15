@@ -25,7 +25,12 @@ export class RequestersComponent implements OnInit {
 
   post: string;
 
-  constructor(private userService: UsersService, private postService: PostService, private tokenService: TokenService) {
+  constructor(
+    private userService: UsersService,
+    private postService: PostService,
+    private tokenService: TokenService,
+    private router: Router
+  ) {
     this.socket = io('http://localhost:3000');
   }
 
@@ -92,5 +97,9 @@ export class RequestersComponent implements OnInit {
     this.postService.cleanWebsite(userDoingTask, username, postId).subscribe(data => {
       this.socket.emit('refresh', {});
     });
+  }
+
+  ViewUserProfile(user) {
+    this.router.navigate([user.username]);
   }
 }

@@ -79,4 +79,7 @@ export class RequestingComponent implements OnInit {
       this.socket.emit('refresh', {});
     });
   }
+  ViewUserProfile(user) {
+    this.router.navigate([user.username]);
+  }
 }

@@ -172,4 +172,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     this.socket.emit('refresh', {});
     this.msgNumber = 0;
   }
+
+  ViewUserProfile(user) {
+    this.router.navigate([user.username]);
+  }
 }
