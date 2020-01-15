@@ -92,4 +92,8 @@ export class PostsComponent implements OnInit, AfterViewInit {
   CheckInRequestsArray(arr, username) {
     return _.some(arr, { username: username });
   }
+
+  ViewUserProfile(user) {
+    this.router.navigate([user.username]);
+  }
 }
