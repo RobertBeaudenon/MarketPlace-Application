@@ -30,6 +30,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   msgNumber = 0;
   imageKey: any;
 
+  toolbarElement: any;
+
   constructor(
     private tokenService: TokenService,
     private router: Router,
@@ -40,6 +42,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.toolbarElement = document.querySelector('.nav-content'); //selecting block of html using class name
     this.user = this.tokenService.GetPayload();
 
     const dropDownElement = document.querySelectorAll('.dropdown-trigger');
@@ -76,6 +79,8 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
       //emit is not from socket in that case but for the transfer of data between components
       this.onlineUsers.emit(data);
     });
+
+    this.toolbarElement.style.display = 'none'; //hiding yhr '.nav-content' block
   }
 
   /****TO LOGOUT*****/
