@@ -13,7 +13,7 @@
         <ul class="collection col s12 m12 l10" *ngFor="let post of requests; let i = index">
           <li class="collection-item avatar">
             <img
-              src="https://***REMOVED***.s3.ca-central-1.amazonaws.com/{{ post.user.picS3Key }}"
+              src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ post.user.picS3Key }}"
               alt=""
               class="circle"
               (click)="ViewUserProfile(post.user)"

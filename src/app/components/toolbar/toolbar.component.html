@@ -10,7 +10,7 @@
           <ul id="dropdown" class="dropdown-content col s12 collection">
             <li class="collection-item avatar" *ngFor="let data of notifications">
               <img
-                src="https://***REMOVED***.s3.ca-central-1.amazonaws.com/{{ data.senderId.picS3Key }}"
+                src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ data.senderId.picS3Key }}"
                 class="circle"
               />
               <span [ngClass]="data.read ? 'isRead' : 'unread'">{{ data.message }}</span>
@@ -36,7 +36,7 @@
               (click)="GoToChatPage(chat.receiverId.username)"
             >
               <img
-                src="https://***REMOVED***.s3.ca-central-1.amazonaws.com/{{ chat.receiverId.picS3Key }}"
+                src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ chat.receiverId.picS3Key }}"
                 class="circle"
               />
               <span class="title"
@@ -78,7 +78,7 @@
       <div class="nav-div">
         <img
           class="circle responsive-img"
-          src="https://***REMOVED***.s3.ca-central-1.amazonaws.com/{{ imageKey }}"
+          src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ imageKey }}"
           alt="img"
         />
       </div>

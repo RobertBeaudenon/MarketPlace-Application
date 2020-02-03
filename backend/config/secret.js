@@ -2,9 +2,9 @@
 //chat app is the db name
 module.exports = {
   url: 'mongodb://localhost:27017/chatapp',
-  secret: '***REMOVED***',
-  AWS_SECRET_ACCESS: '***REMOVED***',
-  AWS_ACCESS_KEY: '***REMOVED***',
-  S3_BUCKET: '***REMOVED***',
-  TEST: '***REMOVED***'
+  secret: 'myjsonsecret',
+  AWS_SECRET_ACCESS: 'wAsah834yUpzvc6Dg+0iUjtg7Gjs4SNae5qQit+b',
+  AWS_ACCESS_KEY: 'AKIAXTWJDTP4DIMCJSWO',
+  S3_BUCKET: 'hlpr-marketplace-images',
+  TEST: 'jdkbejkcnxejkcnx'
 };

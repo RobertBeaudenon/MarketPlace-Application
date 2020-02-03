@@ -7,7 +7,7 @@
             <!-- ngIf here prevents loading th data if they don't exist yet in receiverData else it will throw an error saying that it's not found -->
             <img
               *ngIf="receiverData"
-              src="https://***REMOVED***.s3.ca-central-1.amazonaws.com/{{ receiverData.picS3Key }}"
+              src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ receiverData.picS3Key }}"
               class="imgCircle"
             />
           </div>

@@ -69,7 +69,7 @@ import { MapComponent } from '../components/map/map.component';
     RatingModule,
     NgxAutoScrollModule,
     FileUploadModule,
-    AgmCoreModule.forRoot({ apiKey: '***REMOVED***' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCM9LIMROScmhgAEJB_BJIwxOKA6IV9PEA' }),
     NgbModule
   ],
   exports: [StreamsComponent, ToolbarComponent],

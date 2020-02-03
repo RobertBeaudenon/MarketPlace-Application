@@ -28,7 +28,7 @@ const upload = multer({
   fileFilter: fileFilter, //if the image is not .jpeg or .png
   storage: multerS3({
     s3: s3,
-    bucket: '***REMOVED***',
+    bucket: 'hlpr-marketplace-images',
     acl: 'public-read', //allows public access of image stored in S3 through url
 
     metadata: function(req, file, cb) {
