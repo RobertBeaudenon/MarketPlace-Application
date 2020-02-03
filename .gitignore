@@ -3,9 +3,11 @@ src/.DS_STORE
 dist/out-tsc/
 
 node_modules/
+node_modules
 
 backend/node_modules/
-backend/config/secret.js
+backend/node_modules
+./backend/config/secret.js
 
 .prettierrc
 
