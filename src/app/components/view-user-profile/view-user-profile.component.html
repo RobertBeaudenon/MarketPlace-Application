@@ -35,12 +35,13 @@
                 src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ user.picS3Key }}"
               />
             </div>
+
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4"
                 >{{ name }}
                 <!-- <i class="material-icons right">more_vert</i> -->
 
-                <a *ngIf="!flag" class="secondary-content" [routerLink]="['/chat', user.username]">
+                <a class="secondary-content" [routerLink]="['/chat', user.username]">
                   <i class="material-icons">chat</i>
                 </a>
               </span>
