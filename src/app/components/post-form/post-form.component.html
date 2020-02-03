@@ -3,6 +3,7 @@
     <div class="card postDiv">
       <div class="card-content">
         <form [formGroup]="postForm" novalidate (ngSubmit)="submitPost()">
+          <app-map></app-map>
           <div class="formDiv">
             <textarea formControlName="post" class="materialize-textarea"></textarea>
             <div class="file-field input-field">

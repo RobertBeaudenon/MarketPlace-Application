@@ -31,6 +31,11 @@ import { ImagesComponent } from '../components/images/images.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { ViewUserProfileComponent } from '../components/view-user-profile/view-user-profile.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+
+import { MapComponent } from '../components/map/map.component';
+
 @NgModule({
   declarations: [
     StreamsComponent,
@@ -52,7 +57,8 @@ import { ViewUserProfileComponent } from '../components/view-user-profile/view-u
     ChatComponent,
     MessageComponent,
     ImagesComponent,
-    ViewUserProfileComponent
+    ViewUserProfileComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
@@ -62,9 +68,11 @@ import { ViewUserProfileComponent } from '../components/view-user-profile/view-u
     RouterModule,
     RatingModule,
     NgxAutoScrollModule,
-    FileUploadModule
+    FileUploadModule,
+    AgmCoreModule.forRoot({ apiKey: '***REMOVED***' }),
+    NgbModule
   ],
   exports: [StreamsComponent, ToolbarComponent],
-  providers: [TokenService, PostService, UsersService, MessageService]
+  providers: [TokenService, PostService, UsersService, MessageService, GoogleMapsAPIWrapper]
 })
 export class StreamsModule {}
