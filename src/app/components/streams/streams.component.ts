@@ -14,6 +14,7 @@ export class StreamsComponent implements OnInit {
   token: any;
   streamsTab = false;
   favoriteStreamsTab = false;
+  addPostTab = false;
 
   ngOnInit() {
     this.streamsTab = true;
@@ -26,11 +27,19 @@ export class StreamsComponent implements OnInit {
     if (value === 'streams') {
       this.streamsTab = true;
       this.favoriteStreamsTab = false;
+      this.addPostTab = false;
     }
 
     if (value === 'top') {
       this.streamsTab = false;
       this.favoriteStreamsTab = true;
+      this.addPostTab = false;
+    }
+
+    if (value === 'addPost') {
+      this.streamsTab = false;
+      this.favoriteStreamsTab = false;
+      this.addPostTab = true;
     }
   }
 }

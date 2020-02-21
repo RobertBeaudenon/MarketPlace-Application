@@ -11,20 +11,25 @@
       <div class="row">
         <div class="col s12 m12 l10">
           <ul class="tabs">
-            <li class="tab col s6" (click)="ChangeTabs('streams')">
+            <li class="tab col s4" (click)="ChangeTabs('streams')">
               <a href="#streams" class="active">Posts</a>
             </li>
-            <li class="tab col s6" (click)="ChangeTabs('top')">
+            <li class="tab col s4" (click)="ChangeTabs('top')">
               <a href="#top">Favorite Posts</a>
+            </li>
+            <li class="tab col s4" (click)="ChangeTabs('addPost')">
+              <a href="#addPost">Create a Post</a>
             </li>
           </ul>
         </div>
         <div id="streams" class="col s12" *ngIf="streamsTab">
-          <app-post-form></app-post-form>
           <app-posts></app-posts>
         </div>
         <div id="top" class="col s12" *ngIf="favoriteStreamsTab">
           <app-favorite-posts></app-favorite-posts>
+        </div>
+        <div id="addPost" class="col s12" *ngIf="addPostTab">
+          <app-post-form></app-post-form>
         </div>
       </div>
     </div>
