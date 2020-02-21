@@ -77,3 +77,9 @@
   padding-top: 4px;
   font-size: 20px;
 }
+
+h6 {
+  padding-top: 10px;
+  font-style: italic;
+  font-weight: bold;
+}

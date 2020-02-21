@@ -80,7 +80,12 @@
                       <img class="postImage" src="http://placehold.it/100x100" />
                     </div>
                     <div class="card-content">
-                      <p>{{ post.post }}</p>
+                      <h6>Description</h6>
+                      <p>{{ post.postId.post }}</p>
+                      <h6>Compensation</h6>
+                      <p>{{ post.postId.compensation }}</p>
+                      <h6>Estimated Time</h6>
+                      <p>{{ post.postId.time }}</p>
                     </div>
                     <div class="card-action">
                       <i class="material-icons">thumb_up</i>
