@@ -4,10 +4,15 @@
       <div class="card-content">
         <form [formGroup]="postForm" novalidate (ngSubmit)="submitPost()">
           <div class="map">
-            <app-map></app-map>
+            <!-- <app-map></app-map> -->
           </div>
           <div class="formDiv">
+            <h6>Description (200 words):</h6>
             <textarea formControlName="post" class="materialize-textarea"></textarea>
+            <h6>Compensation:</h6>
+            <textarea formControlName="compensation" class="materialize-textarea"></textarea>
+            <h6>Estimated Time:</h6>
+            <textarea formControlName="time" class="materialize-textarea"></textarea>
             <div class="file-field input-field">
               <div class="row">
                 <div class="col s6">

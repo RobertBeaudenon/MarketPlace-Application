@@ -6,24 +6,30 @@ const User = require('../models/userModels');
 module.exports = {
   /****  Add a POST  ****/
   AddPost(req, res) {
+    console.log('before before');
     //Joi validation on input
     const schema = Joi.object({
-      post: Joi.string().required() //must be a string,shouldn't be empty
+      post: Joi.string().required(), //must be a string,shouldn't be empty
+      compensation: Joi.string().required(),
+      time: Joi.string().required()
     });
     const { error, value } = schema.validate(req.body);
     if (error && error.details) {
+      console.log(error.details);
       return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details });
     }
-
+    console.log('before');
     //Create new structure of object that will be inserted in DB
     const newBody = {
       //remember that in our request we always pass the 'user' object that contains the details
       user: req.user._id,
       username: req.user.username,
       post: req.body.post,
+      compensation: req.body.compensation,
+      time: req.body.time,
       created: new Date()
     };
-
+    console.log(newBody);
     //We use the mongoose build in method to insert the post in the DB
     Post.create(newBody)
       .then(async post => {

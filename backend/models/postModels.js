@@ -5,6 +5,8 @@ const postSchema = mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //we save the autrogenerated id of the user and make reference to the user collection so that we can link that post to the user concerned
   username: { type: String, default: '' }, //we save the username of the user
   post: { type: String, default: '' }, //represent the post of the user
+  compensation: { type: String, default: '' },
+  time: { type: String, default: '' },
   comments: [
     //is the array of comments related to that particular post
     {

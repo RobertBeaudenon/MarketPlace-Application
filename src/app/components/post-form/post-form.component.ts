@@ -22,11 +22,14 @@ export class PostFormComponent implements OnInit {
 
   init() {
     this.postForm = this.fb.group({
-      post: ['', Validators.required]
+      post: ['', Validators.required],
+      compensation: ['', Validators.required],
+      time: ['', Validators.required]
     });
   }
 
   submitPost() {
+    console.log(this.postForm);
     this.postService.addPost(this.postForm.value).subscribe(data => {
       //console.log(data);
       this.socket.emit('refresh', {}); //creating the event for the server , event name : refresh, it will listen in streams.js

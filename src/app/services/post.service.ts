@@ -13,6 +13,7 @@ export class PostService {
   constructor(private http: HttpClient) {}
 
   addPost(body): Observable<any> {
+    console.log(body);
     return this.http.post(`${BASEURL}/post/add-post`, body);
   }
 
