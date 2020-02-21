@@ -72,7 +72,10 @@
         </li>
 
         <li><a (click)="logout()">Logout</a></li>
+        <!-- Retreiving username from token.payload -->
+        <li style="font-style: italic; font-weight: bold;">Welcome, {{ user.username }}!</li>
       </ul>
+      <img src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ imageKey }}" alt="" class="circle" />
     </div>
     <div class="nav-content">
       <div class="nav-div">
@@ -82,8 +85,7 @@
           alt="img"
         />
       </div>
-      <!-- Retreiving username from token.payload -->
-      <h1 class="profile-name">{{ user.username }}</h1>
+
       <!-- display rating of user -->
       <div style="text-align:center">
         <star-rating
