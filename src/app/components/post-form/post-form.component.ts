@@ -6,11 +6,14 @@ import io from 'socket.io-client';
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
+
   styleUrls: ['./post-form.component.css']
 })
 export class PostFormComponent implements OnInit {
   socket: any; //we emit the events through socket
   postForm: FormGroup;
+  latitude: string;
+  longitude: string;
 
   constructor(private fb: FormBuilder, private postService: PostService) {
     this.socket = io('http://localhost:3000');
@@ -35,5 +38,15 @@ export class PostFormComponent implements OnInit {
       this.socket.emit('refresh', {}); //creating the event for the server , event name : refresh, it will listen in streams.js
       this.postForm.reset();
     });
+  }
+
+  getLatitude($event) {
+    this.latitude = $event;
+    console.log(this.latitude);
+  }
+
+  getLongitude($event) {
+    this.longitude = $event;
+    console.log(this.longitude);
   }
 }

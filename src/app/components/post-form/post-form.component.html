@@ -4,7 +4,7 @@
       <div class="card-content">
         <form [formGroup]="postForm" novalidate (ngSubmit)="submitPost()">
           <div class="map">
-            <!-- <app-map></app-map> -->
+            <app-map (latitude)="getLatitude($event)" (longitude)="getLongitude($event)"></app-map>
           </div>
           <div class="formDiv">
             <h6>Description (200 words):</h6>

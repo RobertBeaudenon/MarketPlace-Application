@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild, NgZone, OnInit } from '@angular/core';
+import { Component, Input, ViewChild, NgZone, OnInit, Output, EventEmitter } from '@angular/core';
 import { MapsAPILoader, AgmMap } from '@agm/core';
 import { GoogleMapsAPIWrapper } from '@agm/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 declare var google: any;
 
@@ -31,6 +32,11 @@ interface Location {
 })
 export class MapComponent implements OnInit {
   circleRadius: number = 5000;
+
+  //to pass var from child component to parent component
+  @Output() latitude = new EventEmitter<string>();
+  @Output() longitude = new EventEmitter<string>();
+
   constructor(public mapsApiLoader: MapsAPILoader, private zone: NgZone, private wrapper: GoogleMapsAPIWrapper) {
     this.mapsApiLoader = mapsApiLoader;
     this.zone = zone;
@@ -94,6 +100,13 @@ export class MapComponent implements OnInit {
           }
 
           if (results[0].geometry.location) {
+            //console.log(results[0].geometry.location.lat());
+
+            //transfering data to parent child
+            this.latitude.emit(results[0].geometry.location.lat());
+            this.longitude.emit(results[0].geometry.location.lng());
+
+            this.longitude = results[0].geometry.location.lng();
             this.location.lat = results[0].geometry.location.lat();
             this.location.lng = results[0].geometry.location.lng();
             this.location.marker.lat = results[0].geometry.location.lat();
