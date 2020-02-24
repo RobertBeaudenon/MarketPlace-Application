@@ -33,7 +33,9 @@ export class PostFormComponent implements OnInit {
 
   submitPost() {
     console.log(this.postForm);
-    this.postService.addPost(this.postForm.value).subscribe(data => {
+    console.log(this.latitude);
+    console.log(this.longitude);
+    this.postService.addPost(this.postForm.value, this.latitude, this.longitude).subscribe(data => {
       //console.log(data);
       this.socket.emit('refresh', {}); //creating the event for the server , event name : refresh, it will listen in streams.js
       this.postForm.reset();

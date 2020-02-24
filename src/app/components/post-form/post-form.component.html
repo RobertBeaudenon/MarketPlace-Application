@@ -2,10 +2,10 @@
   <div class="col s12 m12 l10">
     <div class="card postDiv">
       <div class="card-content">
+        <div class="map">
+          <app-map (latitude)="getLatitude($event)" (longitude)="getLongitude($event)"></app-map>
+        </div>
         <form [formGroup]="postForm" novalidate (ngSubmit)="submitPost()">
-          <div class="map">
-            <app-map (latitude)="getLatitude($event)" (longitude)="getLongitude($event)"></app-map>
-          </div>
           <div class="formDiv">
             <h6>Description (200 words):</h6>
             <textarea formControlName="post" class="materialize-textarea"></textarea>

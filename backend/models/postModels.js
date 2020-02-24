@@ -7,6 +7,8 @@ const postSchema = mongoose.Schema({
   post: { type: String, default: '' }, //represent the post of the user
   compensation: { type: String, default: '' },
   time: { type: String, default: '' },
+  latitude: { type: String, default: '' },
+  longitude: { type: String, default: '' },
   comments: [
     //is the array of comments related to that particular post
     {

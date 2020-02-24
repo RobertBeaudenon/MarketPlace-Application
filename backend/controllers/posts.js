@@ -7,26 +7,33 @@ module.exports = {
   /****  Add a POST  ****/
   AddPost(req, res) {
     console.log('before before');
+    console.log(req.body.body.post);
+    console.log(req.body.body.compensation);
+    console.log(req.body.body.time);
+    console.log(req.body.latitude);
+    console.log(req.body.longitude);
     //Joi validation on input
     const schema = Joi.object({
       post: Joi.string().required(), //must be a string,shouldn't be empty
       compensation: Joi.string().required(),
       time: Joi.string().required()
     });
-    const { error, value } = schema.validate(req.body);
+    const { error, value } = schema.validate(req.body.body);
     if (error && error.details) {
       console.log(error.details);
       return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details });
     }
-    console.log('before');
+    console.log(req.latitude + req.longitude);
     //Create new structure of object that will be inserted in DB
     const newBody = {
       //remember that in our request we always pass the 'user' object that contains the details
       user: req.user._id,
       username: req.user.username,
-      post: req.body.post,
-      compensation: req.body.compensation,
-      time: req.body.time,
+      post: req.body.body.post,
+      compensation: req.body.body.compensation,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      time: req.body.body.time,
       created: new Date()
     };
     console.log(newBody);
@@ -43,7 +50,7 @@ module.exports = {
             $push: {
               posts: {
                 postId: post._id,
-                post: req.body.post,
+                post: req.body.body.post,
                 created: new Date()
               }
             }

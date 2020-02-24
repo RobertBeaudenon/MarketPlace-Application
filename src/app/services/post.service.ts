@@ -12,9 +12,9 @@ const BASEURL = 'http://localhost:3000/api/chatapp';
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  addPost(body): Observable<any> {
-    console.log(body);
-    return this.http.post(`${BASEURL}/post/add-post`, body);
+  addPost(body, latitude, longitude): Observable<any> {
+    console.log(body + latitude + longitude);
+    return this.http.post(`${BASEURL}/post/add-post`, { body, latitude, longitude });
   }
 
   getAllPosts(): Observable<any> {
