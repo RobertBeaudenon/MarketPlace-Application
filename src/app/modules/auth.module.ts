@@ -6,11 +6,12 @@ import { AuthTabsComponent } from '../components/auth-tabs/auth-tabs.component';
 import { LoginComponent } from '../components/login/login.component';
 import { SignupComponent } from '../components/signup/signup.component';
 import { AuthService } from '../services/auth.service';
+import { FirstPageComponent } from '../components/first-page/first-page.component';
 
 @NgModule({
-  declarations: [AuthTabsComponent, LoginComponent, SignupComponent],
+  declarations: [AuthTabsComponent, LoginComponent, SignupComponent, FirstPageComponent],
   imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
-  exports: [AuthTabsComponent, LoginComponent, SignupComponent], //allows auth-tabs, login and register compoent to see each other
+  exports: [AuthTabsComponent, LoginComponent, SignupComponent, FirstPageComponent], //allows auth-tabs, login and register compoent to see each other
   providers: [AuthService] //connect to AuthService which will provide data from the backend
 })
 export class AuthModule {}
