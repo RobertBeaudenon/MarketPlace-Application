@@ -12,8 +12,8 @@ import io from 'socket.io-client';
 export class PostFormComponent implements OnInit {
   socket: any; //we emit the events through socket
   postForm: FormGroup;
-  latitude: string;
-  longitude: string;
+  latitude: any;
+  longitude: any;
 
   constructor(private fb: FormBuilder, private postService: PostService) {
     this.socket = io('http://localhost:3000');
