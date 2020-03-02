@@ -31,8 +31,9 @@ module.exports = {
       username: req.user.username,
       post: req.body.body.post,
       compensation: req.body.body.compensation,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
+      // location: req.body.latitude,
+      // longitude: req.body.longitude,
+      geometry: { type: 'point', coordinates: [req.body.latitude, req.body.longitude] },
       time: req.body.body.time,
       created: new Date()
     };

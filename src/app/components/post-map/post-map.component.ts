@@ -47,7 +47,7 @@ export class PostMapComponent implements OnInit {
   geocoder: any;
 
   public location: Location = {
-    lat: 1234,
+    lat: this.latitude,
     lng: this.longitude,
     marker: {
       lat: this.latitude,
@@ -62,7 +62,7 @@ export class PostMapComponent implements OnInit {
   ngOnInit() {
     this.location.marker.draggable = true;
 
-    console.log(typeof this.location.lng);
+    console.log(this.latitude + this.longitude);
     // if (this.location.lat && this.location.lng) {
     //   this.flag = true;
     // }

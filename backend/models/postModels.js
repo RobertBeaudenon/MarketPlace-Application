@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const GeoSchema = mongoose.Schema({
+  type: {
+    type: String,
+    defualt: 'Point'
+  },
+  coordinates: {
+    type: [Number],
+    index: '2dsphere'
+  }
+});
+
 //structure of post info in DB
 const postSchema = mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //we save the autrogenerated id of the user and make reference to the user collection so that we can link that post to the user concerned
@@ -7,8 +18,7 @@ const postSchema = mongoose.Schema({
   post: { type: String, default: '' }, //represent the post of the user
   compensation: { type: String, default: '' },
   time: { type: String, default: '' },
-  latitude: { type: String, default: '' },
-  longitude: { type: String, default: '' },
+  geometry: GeoSchema,
   comments: [
     //is the array of comments related to that particular post
     {
