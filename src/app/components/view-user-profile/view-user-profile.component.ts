@@ -66,7 +66,7 @@ export class ViewUserProfileComponent implements OnInit, AfterViewInit {
       data => {
         console.log(data.result);
         this.posts = data.result.posts.reverse();
-
+        console.log(this.posts);
         this.user = data.result;
         this.average = arrayAverage(this.user.ratingNumber);
         //this.average = Math.round(this.average);
