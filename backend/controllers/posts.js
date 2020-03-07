@@ -1,6 +1,16 @@
 const Joi = require('@hapi/joi'); //Will help us validate the data that we are getting from the frontend before sending it to the db
 const HttpStatus = require('http-status-codes'); //instead of writing 200 we wirte HttpStatus.GOOD_REQUEST
 
+const config = require('../config/secret');
+
+const AWS = require('aws-sdk');
+AWS.config.update({
+  accessKeyId: config.AWS_ACCESS_KEY,
+  secretAccessKey: config.AWS_SECRET_ACCESS,
+  region: 'ca-central-1'
+});
+const s3Bucket = new AWS.S3({ params: { Bucket: config.S3_BUCKET } });
+
 const Post = require('../models/postModels');
 const User = require('../models/userModels');
 module.exports = {
@@ -10,14 +20,17 @@ module.exports = {
     console.log(req.body.body.post);
     console.log(req.body.body.compensation);
     console.log(req.body.body.time);
-    console.log(req.body.latitude);
-    console.log(req.body.longitude);
+    console.log(req.body.body);
+    //console.log(req.longitude);
     //Joi validation on input
     const schema = Joi.object({
       post: Joi.string().required(), //must be a string,shouldn't be empty
       compensation: Joi.string().required(),
-      time: Joi.string().required()
+      time: Joi.string().required(),
+      latitude: Joi.number().required(),
+      longitude: Joi.number().required()
     });
+
     const { error, value } = schema.validate(req.body.body);
     if (error && error.details) {
       console.log(error.details);
@@ -31,37 +44,116 @@ module.exports = {
       username: req.user.username,
       post: req.body.body.post,
       compensation: req.body.body.compensation,
-      // location: req.body.latitude,
-      // longitude: req.body.longitude,
-      geometry: { type: 'point', coordinates: [req.body.latitude, req.body.longitude] },
+      geometry: { type: 'point', coordinates: [req.body.body.latitude, req.body.body.longitude] },
       time: req.body.body.time,
       created: new Date()
     };
-    console.log(newBody);
-    //We use the mongoose build in method to insert the post in the DB
-    Post.create(newBody)
-      .then(async post => {
-        //When we create a new post we get the user related to that post and add that post to the array of posts related to that user, (update is form mongoose)
 
-        await User.update(
-          {
-            _id: req.user._id
-          },
-          {
-            $push: {
-              posts: {
-                postId: post._id,
-                post: req.body.body.post,
-                created: new Date()
+    //if no images in the post
+    if (req.body.body.post && !req.body.body.image) {
+      //We use the mongoose build in method to insert the post in the DB
+      Post.create(newBody)
+        .then(async post => {
+          //When we create a new post we get the user related to that post and add that post to the array of posts related to that user, (update is form mongoose)
+
+          await User.update(
+            {
+              _id: req.user._id
+            },
+            {
+              $push: {
+                posts: {
+                  postId: post._id,
+                  post: req.body.body.post,
+                  created: new Date()
+                }
               }
             }
-          }
-        );
-        res.status(HttpStatus.OK).json({ message: 'Post created', post });
-      })
-      .catch(err => {
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured fromhere' });
-      });
+          );
+          res.status(HttpStatus.OK).json({ message: 'Post created', post });
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured fromhere' });
+        });
+    }
+
+    //if images in the post
+    if (req.body.body.post && req.body.body.image) {
+      //Uploading base64 encoded image to AWS S#
+      buf = new Buffer(req.body.body.image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
+      const type = req.body.body.image.split(';')[0].split('/')[1];
+
+      const data = {
+        Key: Date.now().toString(),
+        Body: buf,
+        ContentEncoding: 'base64',
+        ContentType: `image/${type}`,
+        ACL: 'public-read' //allows public access of image stored in S3 through url
+      };
+
+      let location = '';
+      let key = '';
+      try {
+        const { Location, Key } = s3Bucket.upload(data).promise();
+        location = Location;
+        key = Key;
+      } catch (error) {
+        console.log(error);
+      }
+
+      const reqBody = {
+        //remember that in our request we always pass the 'user' object that contains the details
+        user: req.user._id,
+        username: req.user.username,
+        post: req.body.body.post,
+        compensation: req.body.body.compensation,
+        geometry: { type: 'point', coordinates: [req.body.body.latitude, req.body.body.longitude] },
+        time: req.body.body.time,
+        created: new Date(),
+        picS3Key: key
+      };
+
+      // await User.update(
+      //   {
+      //     _id: req.user._id
+      //   },
+      //   {
+      //     $push: {
+      //       images: {
+      //         imgS3Key: key
+      //       }
+      //     }
+      //   }
+      // )
+      //   .then(() => res.status(HttpStatus.OK).json({ message: 'Image uploaded to AWS S3', location, key }))
+      //   .catch(err =>
+      //     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error Occured when uploading image to AWS S3' })
+      //   );
+      //We use the mongoose build in method to insert the post in the DB
+      Post.create(reqBody)
+        .then(async post => {
+          //When we create a new post we get the user related to that post and add that post to the array of posts related to that user, (update is form mongoose)
+
+          await User.update(
+            {
+              _id: req.user._id
+            },
+            {
+              $push: {
+                posts: {
+                  postId: post._id,
+                  post: req.body.body.post,
+                  created: new Date()
+                }
+              }
+            }
+          );
+          res.status(HttpStatus.OK).json({ message: 'Post created', post });
+        })
+        .catch(err => {
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured fromhere' });
+        });
+    }
   },
 
   /****Get all the POSTS *******/

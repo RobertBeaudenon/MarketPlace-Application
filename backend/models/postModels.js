@@ -19,6 +19,12 @@ const postSchema = mongoose.Schema({
   compensation: { type: String, default: '' },
   time: { type: String, default: '' },
   geometry: GeoSchema,
+  picS3Key: { type: String, default: '' },
+  images: [
+    {
+      imgS3Key: { type: String, default: '' }
+    }
+  ],
   comments: [
     //is the array of comments related to that particular post
     {
