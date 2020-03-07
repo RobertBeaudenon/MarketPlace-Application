@@ -24,7 +24,16 @@
             />
           </div> -->
             <div class="card-content">
+              <h6>Compensation</h6>
               <p>{{ task.taskId.postId.post }}</p>
+              <h6>Compensation</h6>
+              <p>{{ task.taskId.postId.compensation }}</p>
+              <h6>Estimated Time</h6>
+              <p>{{ task.taskId.postId.time }}</p>
+              <app-post-map
+                [latitude]="task.taskId.postId.geometry.coordinates[0]"
+                [longitude]="task.taskId.postId.geometry.coordinates[1]"
+              ></app-post-map>
             </div>
             <div class="card-action">
               <button

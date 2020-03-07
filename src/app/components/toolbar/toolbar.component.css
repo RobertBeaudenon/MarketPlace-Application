@@ -15,6 +15,10 @@ nav {
   height: 250px;
 }
 
+img {
+  height: 10px;
+}
+
 .nav-div {
   width: 300px;
   height: auto;

@@ -34,7 +34,16 @@
             />
           </div> -->
                 <div class="card-content">
+                  <h6>Description</h6>
                   <p>{{ post.post }}</p>
+                  <h6>Compensation</h6>
+                  <p>{{ post.compensation }}</p>
+                  <h6>Estimated Time</h6>
+                  <p>{{ post.time }}</p>
+                  <app-post-map
+                    [latitude]="post.geometry.coordinates[0]"
+                    [longitude]="post.geometry.coordinates[1]"
+                  ></app-post-map>
                 </div>
                 <div class="card-action">
                   <button class="btn  requestingBtn" (click)="CancelRequest(post.user._id, post._id)">

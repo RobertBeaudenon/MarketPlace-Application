@@ -10,3 +10,8 @@
   text-align: center;
   font-size: 18px !important;
 }
+
+h6 {
+  font-style: italic;
+  font-weight: bold;
+}
