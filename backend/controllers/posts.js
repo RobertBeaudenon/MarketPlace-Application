@@ -15,12 +15,12 @@ const Post = require('../models/postModels');
 const User = require('../models/userModels');
 module.exports = {
   /****  Add a POST  ****/
-  AddPost(req, res) {
-    console.log('before before');
-    console.log(req.body.body.post);
-    console.log(req.body.body.compensation);
-    console.log(req.body.body.time);
-    console.log(req.body.body);
+  async AddPost(req, res) {
+    //console.log('before before');
+    // console.log(req.body.body.post);
+    //console.log(req.body.body.compensation);
+    //console.log(req.body.body.time);
+    //console.log(req.body.body);
     //console.log(req.longitude);
     //Joi validation on input
     const schema = Joi.object({
@@ -28,7 +28,8 @@ module.exports = {
       compensation: Joi.string().required(),
       time: Joi.string().required(),
       latitude: Joi.number().required(),
-      longitude: Joi.number().required()
+      longitude: Joi.number().required(),
+      image: Joi.optional()
     });
 
     const { error, value } = schema.validate(req.body.body);
@@ -79,6 +80,7 @@ module.exports = {
 
     //if images in the post
     if (req.body.body.post && req.body.body.image) {
+      //console.log(req.body.body.image);
       //Uploading base64 encoded image to AWS S#
       buf = new Buffer(req.body.body.image.replace(/^data:image\/\w+;base64,/, ''), 'base64');
       const type = req.body.body.image.split(';')[0].split('/')[1];
@@ -93,13 +95,16 @@ module.exports = {
 
       let location = '';
       let key = '';
+
       try {
-        const { Location, Key } = s3Bucket.upload(data).promise();
+        const { Location, Key } = await s3Bucket.upload(data).promise();
         location = Location;
         key = Key;
       } catch (error) {
         console.log(error);
       }
+
+      console.log('Key' + key);
 
       const reqBody = {
         //remember that in our request we always pass the 'user' object that contains the details
