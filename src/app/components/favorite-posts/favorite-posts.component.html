@@ -15,23 +15,14 @@
   <div class="row">
     <div class="col s12">
       <div class="card">
-        <div class="card-image" *ngIf="post.picS3Key">
-          <img
-            class="postImage"
-            src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ post.picS3Key }}"
-          />
-        </div>
+        <!-- <div class="card-image">
+            <img
+              class="postImage"
+              src="https://tce-live2.s3.amazonaws.com/media/media/2b7f1364-6c18-4b8d-a208-0aac26b4f5fe.jpg"
+            />
+          </div> -->
         <div class="card-content">
-          <h6>Description</h6>
           <p>{{ post.post }}</p>
-          <h6>Compensation</h6>
-          <p>{{ post.compensation }}</p>
-          <h6>Estimated Time</h6>
-          <p>{{ post.time }}</p>
-          <app-post-map
-            [latitude]="post.geometry.coordinates[0]"
-            [longitude]="post.geometry.coordinates[1]"
-          ></app-post-map>
         </div>
         <div class="card-action">
           <!-- if user exist in array of likes than we add the css class notLiked else we add the class liked -->
