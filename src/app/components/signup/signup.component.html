@@ -47,6 +47,28 @@
             </span>
           </div>
         </div>
+        <div class="row">
+          <div class="input-field inline col s12">
+            <input id="descr_iption" type="text" formControlName="description" />
+            <label for="description">Description</label>
+            <span
+              class="error"
+              *ngIf="!signupForm.controls['description'].valid && signupForm.controls['description'].touched"
+              ><!-- Handeling error -->
+              Description is required
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field inline col s12">
+            <input id="major" type="text" formControlName="major" />
+            <label for="major">Major</label>
+            <span class="error" *ngIf="!signupForm.controls['major'].valid && signupForm.controls['major'].touched"
+              ><!-- Handeling error -->
+              Major is required
+            </span>
+          </div>
+        </div>
         <button class="btn waves-effect" id="signupbtn" [disabled]="!signupForm.valid">Sign Up</button
         ><!-- if checks throws error then do not send data -->
       </form>

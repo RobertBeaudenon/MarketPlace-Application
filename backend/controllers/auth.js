@@ -25,7 +25,9 @@ module.exports = {
         .required(), //check that it's an email
       password: Joi.string()
         .min(5)
-        .required()
+        .required(),
+      description: Joi.string().required(),
+      major: Joi.string().required()
     });
 
     //testing body against predefined schema and logging the error
@@ -56,7 +58,9 @@ module.exports = {
       const newBody = {
         username: Helpers.firstUpper(value.username),
         email: Helpers.lowerCase(value.email),
-        password: hash
+        password: hash,
+        description: value.description,
+        major: value.description
       };
 
       //We use the mongoose build in method to insert the object in the DB
