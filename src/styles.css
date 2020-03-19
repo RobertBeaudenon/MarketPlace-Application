@@ -33,3 +33,7 @@ body {
 ::-webkit-scrollbar-thumb:window-inactive {
   background-color: red;
 }
+
+body {
+  font-family: Georgia, serif;
+}
