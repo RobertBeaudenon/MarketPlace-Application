@@ -71,3 +71,8 @@
   margin-bottom: 10px;
   color: brown !important;
 }
+
+h6 {
+  font-style: italic;
+  font-weight: bold;
+}
