@@ -20,8 +20,11 @@ module.exports = {
         .min(5) //between 5 and 10 caharcters
         .max(10)
         .required(), //shouldn't be empty
-      email: Joi.string()
-        .email()
+      email: Joi.alternatives()
+        .try(
+          Joi.string().regex(/^[A-Za-z0-9._%+-]+@mail.mcgill.ca$/),
+          Joi.string().regex(/^[A-Za-z0-9._%+-]+@mcgill.ca$/)
+        )
         .required(), //check that it's an email
       password: Joi.string()
         .min(5)
