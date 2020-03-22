@@ -6,6 +6,16 @@
     <!-- small medium large devices -->
     <div class="col s12 m4 l3">
       <app-side></app-side>
+      <form class="col s12" [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="user-name" type="text" formControlName="username" />
+            <label for="user-name">feedback</label>
+          </div>
+        </div>
+
+        <button class="btn waves-effect">Submit</button>
+      </form>
     </div>
     <div class="col s12 m8 l9">
       <div class="row">

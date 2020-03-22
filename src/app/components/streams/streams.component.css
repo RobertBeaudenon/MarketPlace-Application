@@ -7,3 +7,11 @@
   font-weight: bold;
   font-size: 18px;
 }
+
+.input-field {
+  width: 50px;
+}
+
+.row .col.s6 {
+  width: 100%;
+}
