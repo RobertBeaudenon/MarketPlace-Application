@@ -37,7 +37,8 @@ module.exports = {
       console.log(error.details);
       return res.status(HttpStatus.BAD_REQUEST).json({ msg: error.details });
     }
-    console.log(req.latitude + req.longitude);
+    console.log('here');
+
     //Create new structure of object that will be inserted in DB
     const newBody = {
       //remember that in our request we always pass the 'user' object that contains the details
@@ -49,10 +50,11 @@ module.exports = {
       time: req.body.body.time,
       created: new Date()
     };
-
+    console.log(newBody);
     //if no images in the post
     if (req.body.body.post && !req.body.body.image) {
       //We use the mongoose build in method to insert the post in the DB
+      console.log('here no image');
       Post.create(newBody)
         .then(async post => {
           //When we create a new post we get the user related to that post and add that post to the array of posts related to that user, (update is form mongoose)
@@ -74,7 +76,7 @@ module.exports = {
           res.status(HttpStatus.OK).json({ message: 'Post created', post });
         })
         .catch(err => {
-          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured fromhere' });
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured from here no image' });
         });
     }
 
@@ -156,7 +158,7 @@ module.exports = {
           res.status(HttpStatus.OK).json({ message: 'Post created', post });
         })
         .catch(err => {
-          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured fromhere' });
+          res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Error occured from here 2' });
         });
     }
   },

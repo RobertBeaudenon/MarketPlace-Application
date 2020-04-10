@@ -7,6 +7,10 @@ nav {
   font-size: 30px;
 }
 
+.brand-logo:hover {
+  cursor: pointer;
+}
+
 .navDiv {
   color: orange;
 }

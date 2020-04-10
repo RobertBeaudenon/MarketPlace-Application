@@ -36,6 +36,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 import { MapComponent } from '../components/map/map.component';
 
+import { PostMapComponent } from '../components/post-map/post-map.component';
+
 @NgModule({
   declarations: [
     StreamsComponent,
@@ -58,7 +60,8 @@ import { MapComponent } from '../components/map/map.component';
     MessageComponent,
     ImagesComponent,
     ViewUserProfileComponent,
-    MapComponent
+    MapComponent,
+    PostMapComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +72,7 @@ import { MapComponent } from '../components/map/map.component';
     RatingModule,
     NgxAutoScrollModule,
     FileUploadModule,
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyCM9LIMROScmhgAEJB_BJIwxOKA6IV9PEA' }),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyAG575AXnec5szkiHo2htihw_QNtuBIrT8' }),
     NgbModule
   ],
   exports: [StreamsComponent, ToolbarComponent],

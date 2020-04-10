@@ -17,8 +17,7 @@ module.exports = {
     //Joi validation on input
     const schema = Joi.object({
       username: Joi.string() //must be a string,
-        .min(5) //between 5 and 10 caharcters
-        .max(10)
+        .min(5) //between 5
         .required(), //shouldn't be empty
       email: Joi.alternatives()
         .try(

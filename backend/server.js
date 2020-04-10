@@ -50,7 +50,8 @@ app.use('/api/chatapp', ratings);
 app.use('/api/chatapp', message);
 app.use('/api/chatapp', image);
 
+const PORT = process.env.PORT || 8080;
 //Server running on port 3000 , we pass instead of app server to use socket.io
 server.listen(3000, () => {
-  console.log('Running on port 3000');
+  //console.log('Running on port 3000');
 });
