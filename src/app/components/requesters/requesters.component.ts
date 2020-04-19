@@ -102,4 +102,8 @@ export class RequestersComponent implements OnInit {
   ViewUserProfile(user) {
     this.router.navigate([user.username]);
   }
+
+  Pay() {
+    this.router.navigate(['payment']);
+  }
 }

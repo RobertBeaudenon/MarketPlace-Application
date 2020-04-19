@@ -15,6 +15,7 @@ import { StarRatingComponent } from '../components/star-rating/star-rating.compo
 import { ChatComponent } from '../components/chat/chat.component';
 import { ImagesComponent } from '../components/images/images.component';
 import { ViewUserProfileComponent } from '../components/view-user-profile/view-user-profile.component';
+import { PaymentComponent } from '../components/payment/payment.component';
 
 //obj of routes
 const routes: Routes = [
@@ -43,6 +44,11 @@ const routes: Routes = [
     path: 'people/requesters',
     component: RequestersComponent,
     canActivate: [AuthGuard] //if user has a valid token he will be able to access comment page
+  },
+  {
+    path: 'payment',
+    component: PaymentComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'notifications',
