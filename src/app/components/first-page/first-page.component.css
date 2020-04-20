@@ -1,9 +1,9 @@
 nav {
-  background-color: brown;
+  background-color: #9A3246;
 }
 
 #home {
-  background-image: url('../../../assets/images/image.jpg');
+  background-image: url('https://www.concordia.ca/content/shared/en/news/encs/2019/10/08/macleans-2020-rankings.img.png/1570633873565.jpg');
 }
 
 .brand-logo {
@@ -123,7 +123,7 @@ li.dropdown-button {
 }
 
 .material-icons {
-  color: brown !important;
+  color: #9A3246 !important;
   margin-right: 10px;
 }
 
@@ -156,18 +156,22 @@ li.dropdown-button {
 
 #title {
   position: absolute;
-  left: 300px;
-  top: 100px;
+  left: 400px;
+  top: 200px;
+  color: #9A3246;
+  stroke: #000;
+  text-shadow: 2px 2px #000;
 }
 
 .card2 {
-  width: 500px;
-  height: 300px;
+  width: 625px;
+  height: 250px;
   position: absolute;
-  left: 300px;
-  top: 400px;
-  background-color: rgba(245, 245, 245, 1);
+  left: 400px;
+  top: 325px;
+  background-color: #ee6e73;
   opacity: 0.8;
+  text-align: justify;
 }
 
 .card3 {
@@ -198,7 +202,7 @@ li.dropdown-button {
 
 #home-cover {
   height: 1000px;
-  background-image: url('../../../assets/images/image.jpg');
+  background-image: url('https://www.concordia.ca/content/shared/en/news/encs/2019/10/08/macleans-2020-rankings.img.png/1570633873565.jpg');
 }
 
 #home-content-box {

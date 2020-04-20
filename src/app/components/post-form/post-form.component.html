@@ -2,17 +2,15 @@
   <div class="col s12 m12 l10">
     <div class="card postDiv">
       <div class="card-content">
-        <div class="map">
-          <app-map (latitude)="getLatitude($event)" (longitude)="getLongitude($event)"></app-map>
-        </div>
         <form [formGroup]="postForm" novalidate (ngSubmit)="submitPost()">
           <div class="formDiv">
-            <h6>Description (200 words):</h6>
-            <textarea formControlName="post" class="materialize-textarea"></textarea>
-            <h6>Compensation:</h6>
-            <textarea formControlName="compensation" class="materialize-textarea"></textarea>
-            <h6>Estimated Time:</h6>
-            <textarea formControlName="time" class="materialize-textarea"></textarea>
+            <mat-label>Description</mat-label>
+            <input matInput #message maxlength="256" placeholder="Ex. I need help with..." formControlName="post">
+            <mat-label>Compensation</mat-label>
+            <input formControlName="compensation" type="text" matInput placeholder="Ex. 20$...">
+            <mat-label>Estimated Time</mat-label>
+            <input formControlName="time" type="text" matInput placeholder="Ex. 20min...">
+            <!-- <textarea formControlName="time" class="materialize-textarea"></textarea> -->
             <div class="file-field input-field">
               <div class="row">
                 <div class="col s6">

@@ -21,8 +21,8 @@ module.exports = {
         .required(), //shouldn't be empty
       email: Joi.alternatives()
         .try(
-          Joi.string().regex(/^[A-Za-z0-9._%+-]+@mail.mcgill.ca$/),
-          Joi.string().regex(/^[A-Za-z0-9._%+-]+@mcgill.ca$/)
+          Joi.string().regex(/^[A-Za-z0-9._%+-]+@mail.concordia.ca$/),
+          Joi.string().regex(/^[A-Za-z0-9._%+-]+@concordia.ca$/)
         )
         .required(), //check that it's an email
       password: Joi.string()

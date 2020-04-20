@@ -37,6 +37,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { MapComponent } from '../components/map/map.component';
 
 import { PostMapComponent } from '../components/post-map/post-map.component';
+import { PaymentComponent } from '../components/payment/payment.component';
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { PostMapComponent } from '../components/post-map/post-map.component';
     ImagesComponent,
     ViewUserProfileComponent,
     MapComponent,
-    PostMapComponent
+    PostMapComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
@@ -72,8 +75,9 @@ import { PostMapComponent } from '../components/post-map/post-map.component';
     RatingModule,
     NgxAutoScrollModule,
     FileUploadModule,
-    AgmCoreModule.forRoot({ apiKey: 'AIzaSyAG575AXnec5szkiHo2htihw_QNtuBIrT8' }),
-    NgbModule
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyC1NEYsdhy_Pv-vvnEQMYfzuR3UWlsukz4' }),
+    NgbModule,
+    MatInputModule
   ],
   exports: [StreamsComponent, ToolbarComponent],
   providers: [TokenService, PostService, UsersService, MessageService, GoogleMapsAPIWrapper]

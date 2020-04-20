@@ -5,7 +5,7 @@
 }
 
 .liked {
-  color: brown !important;
+  color: #9A3246 !important;
 }
 
 .title {
@@ -69,7 +69,7 @@
 .requestingBtn {
   float: right;
   margin-bottom: 10px;
-  color: brown !important;
+  color: #9A3246 !important;
 }
 
 h6 {

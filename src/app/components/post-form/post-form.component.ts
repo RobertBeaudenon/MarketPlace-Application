@@ -49,8 +49,8 @@ export class PostFormComponent implements OnInit {
         post: this.postForm.value.post,
         compensation: this.postForm.value.compensation,
         time: this.postForm.value.time,
-        latitude: this.latitude,
-        longitude: this.longitude
+        latitude: 45.8848,
+        longitude: -74.54292
       };
     } else {
       body = {
