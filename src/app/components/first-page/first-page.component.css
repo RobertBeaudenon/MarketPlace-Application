@@ -3,7 +3,7 @@ nav {
 }
 
 #home {
-  background-image: url('https://www.concordia.ca/content/shared/en/news/encs/2019/10/08/macleans-2020-rankings.img.png/1570633873565.jpg');
+  background-image: url('https://scontent.fymy1-1.fna.fbcdn.net/v/t1.15752-9/94259992_226712768397591_1484548994821521408_n.jpg?_nc_cat=102&_nc_sid=b96e70&_nc_ohc=ZqMZqRHz-DUAX_IsWre&_nc_ht=scontent.fymy1-1.fna&oh=7862495e23c7f0c919a6698d6e7b714c&oe=5EC3099A');
 }
 
 .brand-logo {
@@ -163,6 +163,14 @@ li.dropdown-button {
   text-shadow: 2px 2px #000;
 }
 
+#sub-title {
+  position: absolute;
+  top: 350px;
+  color: #9A3246;
+  stroke: #000;
+  text-shadow: 2px 2px #000;
+}
+
 .card2 {
   width: 625px;
   height: 250px;
@@ -202,7 +210,7 @@ li.dropdown-button {
 
 #home-cover {
   height: 1000px;
-  background-image: url('https://www.concordia.ca/content/shared/en/news/encs/2019/10/08/macleans-2020-rankings.img.png/1570633873565.jpg');
+  background-image: url('https://scontent.fymy1-1.fna.fbcdn.net/v/t1.15752-9/94259992_226712768397591_1484548994821521408_n.jpg?_nc_cat=102&_nc_sid=b96e70&_nc_ohc=ZqMZqRHz-DUAX_IsWre&_nc_ht=scontent.fymy1-1.fna&oh=7862495e23c7f0c919a6698d6e7b714c&oe=5EC3099A');
 }
 
 #home-content-box {

@@ -38,7 +38,7 @@ import { MapComponent } from '../components/map/map.component';
 
 import { PostMapComponent } from '../components/post-map/post-map.component';
 import { PaymentComponent } from '../components/payment/payment.component';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,8 @@ import { MatInputModule } from '@angular/material';
     FileUploadModule,
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyC1NEYsdhy_Pv-vvnEQMYfzuR3UWlsukz4' }),
     NgbModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   exports: [StreamsComponent, ToolbarComponent],
   providers: [TokenService, PostService, UsersService, MessageService, GoogleMapsAPIWrapper]
