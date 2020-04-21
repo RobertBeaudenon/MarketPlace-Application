@@ -1,17 +1,18 @@
-::ng-deep .mat-raised-button{
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
     color: white;
-    background-color:  #3b7bbf;
+    background-color: #66CD00;
 }
 
-.jure{
-    color: white;
-    background-color:  black;
+.example-card {
+    height: 140px;
 }
 
 .title {
     font-weight: 700;
     margin-top: 0;
     color: #2e2e2e;
+    margin-left: 35%;
   }
 
 /* Payment Method */

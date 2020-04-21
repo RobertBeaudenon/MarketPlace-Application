@@ -38,7 +38,7 @@ import { MapComponent } from '../components/map/map.component';
 
 import { PostMapComponent } from '../components/post-map/post-map.component';
 import { PaymentComponent } from '../components/payment/payment.component';
-import { MatInputModule, MatButtonModule, MatFormFieldModule, MatRadioModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatFormFieldModule, MatRadioModule, MatSelectModule, MatCardModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -81,7 +81,9 @@ import { MatInputModule, MatButtonModule, MatFormFieldModule, MatRadioModule, Ma
     MatButtonModule,
     MatFormFieldModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule
   ],
   exports: [StreamsComponent, ToolbarComponent],
   providers: [TokenService, PostService, UsersService, MessageService, GoogleMapsAPIWrapper]

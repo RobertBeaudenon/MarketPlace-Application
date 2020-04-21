@@ -1,12 +1,6 @@
 <!-- looping on posts array created -->
 <ul class="collection col s12 m12 l10" *ngFor="let post of posts">
   <li class="collection-item avatar">
-    <img
-      src="https://hlpr-marketplace-images.s3.ca-central-1.amazonaws.com/{{ post.user.picS3Key }}"
-      alt=""
-      class="circle"
-      (click)="ViewUserProfile(post.user)"
-    />
     <span (click)="ViewUserProfile(post.user)" class="title">{{ post.username }}</span>
     <p class="time">
       {{ TimeFromNow(post.created) }}<br />
@@ -25,7 +19,7 @@
         <div class="card-content">
           <h6>Description</h6>
           <p>{{ post.post }}</p>
-          <h6>Compensation</h6>
+          <h6>Amount</h6>
           <p>{{ post.compensation }}</p>
           <h6>Estimated Time</h6>
           <p>{{ post.time }}</p>
