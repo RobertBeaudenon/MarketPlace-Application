@@ -1,0 +1,51 @@
+::ng-deep .mat-raised-button{
+    color: white;
+    background-color:  #3b7bbf;
+}
+
+.jure{
+    color: white;
+    background-color:  black;
+}
+
+.title {
+    font-weight: 700;
+    margin-top: 0;
+    color: #2e2e2e;
+  }
+
+/* Payment Method */
+.payment-method {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+  }
+  
+  .method {
+    display: flex;
+    flex-direction: column;
+    width: 382px;
+    padding-bottom: 25px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  
+  .card-logos {
+    display: flex;
+    width: 150px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .radio-input {
+    margin-top: 20px;
+  }
+  
+  input[type='radio'] {
+    display: inline-block;
+  }

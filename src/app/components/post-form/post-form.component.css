@@ -36,3 +36,7 @@ h6 {
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.mat-form-field-infix {
+  width: 800px !important;
+}

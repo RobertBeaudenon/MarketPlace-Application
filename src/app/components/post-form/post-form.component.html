@@ -6,23 +6,14 @@
           <div class="formDiv">
             <mat-label>Description</mat-label>
             <input matInput #message maxlength="256" placeholder="Ex. I need help with..." formControlName="post">
-            <mat-label>Compensation</mat-label>
+            <mat-label>Amount</mat-label>
             <input formControlName="compensation" type="text" matInput placeholder="Ex. 20$...">
             <mat-label>Estimated Time</mat-label>
             <input formControlName="time" type="text" matInput placeholder="Ex. 20min...">
             <!-- <textarea formControlName="time" class="materialize-textarea"></textarea> -->
             <div class="file-field input-field">
               <div class="row">
-                <div class="col s6">
-                  <div class="btn">
-                    <span> <i class="material-icons">image</i> Image</span>
-                    <input type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)" />
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" />
-                  </div>
-                </div>
-                <div class="col s6">
+                <div class="col s12">
                   <button class="btn postBtn">
                     Post
                   </button>
