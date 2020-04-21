@@ -2,6 +2,16 @@
     color: white;
     background-color:  #3b7bbf;
 }
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: white;
+    background-color: #66CD00;
+}
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: white;
+    background-color: #66CD00;
+}
 
 .jure{
     color: white;

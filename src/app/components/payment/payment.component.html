@@ -59,7 +59,10 @@
                       <input type="number" id="cvc" name="cvc" maxlength="3" placeholder="357">
                   </div>
               </div>
-              <input type="submit" value="confirm" class="btn">
+              <div>
+                  <button mat-raised-button color="warn" (click)="goBack()">CANCEL</button>
+                  <button mat-button color="success" style="margin-left: 20px;">CONFIRM</button>
+              </div>
           </form>
 
           <form *ngIf="show == 'Paypal'">
@@ -67,6 +70,10 @@
                   <div class="col s4">
                       <button mat-raised-button>Connect to Paypal</button>
                   </div>
+              </div>
+              <div>
+                  <button mat-raised-button color="warn" (click)="goBack()">CANCEL</button>
+                  <button mat-button color="success" style="margin-left: 20px;">CONFIRM</button>
               </div>
           </form>
 
@@ -76,6 +83,10 @@
                       <button mat-raised-button>Connect to Apple Pay</button>
                   </div>
               </div>
+              <div>
+                  <button mat-raised-button color="warn" (click)="goBack()">CANCEL</button>
+                  <button mat-button color="success" style="margin-left: 20px;">CONFIRM</button>
+              </div>
           </form>
 
           <form *ngIf="show == 'Cash'">
@@ -84,7 +95,10 @@
                       Meet the person & give cash in-hand.
                   </div>
               </div>
-              <input type="submit" value="confirm" class="btn">
+              <div>
+                  <button mat-raised-button color="warn" (click)="goBack()">CANCEL</button>
+                  <button mat-button color="success" style="margin-left: 20px;">CONFIRM</button>
+              </div>
           </form>
     </div>
         

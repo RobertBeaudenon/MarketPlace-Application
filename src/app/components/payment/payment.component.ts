@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -40,7 +41,9 @@ export class PaymentComponent implements OnInit {
   chosenItem = 0;
   show = "";
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.list = [
@@ -63,6 +66,10 @@ export class PaymentComponent implements OnInit {
     } else {
       this.show = "Apple Pay"
     }
+  }
+
+  goBack() {
+    this.router.navigate(['streams']);
   }
 
 }
