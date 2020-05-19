@@ -1,6 +1,4 @@
-# UniMarket
-
-### Deploy UniMarket for SOEN357 Corrector
+### Deploy App
 
 <h4>Step 1 - Clone Repository</h4>
 
@@ -10,13 +8,12 @@ enter the following commands in a directory where you want to project to be stor
     git clone --recursive https://github.com/RobertBeaudenon/MarketPlace-Application.git
     cd MarketPlace-Application
     git submodule update --remote
-   
 
 <h4>Step 2 - Use correct branch</h4>
 For the first version of the website:
 
     git checkout payment-service
-    
+
 For the second version of the website:
 
     git checkout payment-service-experiment
@@ -68,7 +65,6 @@ Navigate in 'bin' folder and run: (cd bin)
 
 At this point, the server should be running on port 4200, and
 you should be able to view the webserver on port 4200.
-
 
 <h2>Prerequisites</h2>
     
